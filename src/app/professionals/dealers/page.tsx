@@ -33,7 +33,6 @@ export default function DealersPage() {
   return (
     <>
       <Breadcrumb items={[
-        { label: "Home", href: "/" },
         { label: "For Professionals", href: "/professionals" },
         { label: "Dealers & Installers" },
       ]} />

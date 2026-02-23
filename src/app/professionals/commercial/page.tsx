@@ -33,7 +33,6 @@ export default function CommercialPage() {
   return (
     <>
       <Breadcrumb items={[
-        { label: "Home", href: "/" },
         { label: "For Professionals", href: "/professionals" },
         { label: "Commercial Projects" },
       ]} />

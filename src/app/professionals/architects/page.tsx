@@ -33,7 +33,6 @@ export default function ArchitectsPage() {
   return (
     <>
       <Breadcrumb items={[
-        { label: "Home", href: "/" },
         { label: "For Professionals", href: "/professionals" },
         { label: "Architects & Designers" },
       ]} />
