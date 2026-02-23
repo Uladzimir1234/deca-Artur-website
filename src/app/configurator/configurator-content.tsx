@@ -623,16 +623,33 @@ function StepSummary({ config, price }: { config: Config; price: number }) {
   const handle = HANDLES.find((h) => h.id === config.handle)!;
   const grid = GRIDS.find((g) => g.id === config.grid)!;
 
+  const materialLabel = config.material === "upvc" ? `uPVC — GEALAN ${config.profile.toUpperCase()}` : "Aluminum — Thermal Break";
+  const glazingLabel = config.glazing === "triple" ? "Triple Pane" : "Double Pane";
+
   const rows = [
     ["Product", product.label],
     ["Dimensions", `${config.width}" × ${config.height}"`],
-    ["Material", config.material === "upvc" ? `uPVC — GEALAN ${config.profile.toUpperCase()}` : "Aluminum — Thermal Break"],
-    ["Glazing", config.glazing === "triple" ? "Triple Pane" : "Double Pane"],
+    ["Material", materialLabel],
+    ["Glazing", glazingLabel],
     ["Interior Color", colorIn.label],
     ["Exterior Color", colorOut.label],
     ["Handle", handle.label],
     ["Grid", grid.label],
   ];
+
+  // Build config string for quote page: [product] Key: Value | Key: Value
+  const configString = `[${config.product}] ` + [
+    `Size: ${config.width}"×${config.height}"`,
+    `Material: ${materialLabel}`,
+    `Glazing: ${glazingLabel}`,
+    `Interior: ${colorIn.label}`,
+    `Exterior: ${colorOut.label}`,
+    `Handle: ${handle.label}`,
+    `Grid: ${grid.label}`,
+    `Estimate: $${price.toLocaleString()}`,
+  ].join(" | ");
+
+  const quoteUrl = `/quote?config=${encodeURIComponent(configString)}`;
 
   return (
     <div>
@@ -666,7 +683,7 @@ function StepSummary({ config, price }: { config: Config; price: number }) {
       </div>
 
       <Link
-        href="/quote"
+        href={quoteUrl}
         className="group relative overflow-hidden w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 text-white transition-all duration-500 hover:shadow-lg hover:shadow-[#e8873a]/30"
         style={{ background: "linear-gradient(135deg, #d94e1a 0%, #f47b2b 40%, #e8873a 100%)" }}
       >
