@@ -57,7 +57,7 @@ export default function MaterialsSection({
             className="group bg-white rounded-2xl border border-border overflow-hidden hover:shadow-xl hover:border-blue-accent/20 transition-all duration-300"
           >
             {/* Image */}
-            <div className="relative h-80 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex items-end justify-center">
+            <div className="relative h-96 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex items-end justify-center">
               <img
                 src={m.image}
                 alt={`${m.name} door profile by DECA Windows`}
