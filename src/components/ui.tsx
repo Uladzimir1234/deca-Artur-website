@@ -13,7 +13,7 @@ export function AnimatedCTA({ href, children, className = "", size = "md", id, v
   return (
     <Link
       href={href}
-      className={`group relative overflow-hidden rounded font-semibold inline-flex items-center gap-2 transition-all duration-500 bg-white ${textColor} hover:text-white hover:shadow-lg ${hoverShadow} ${pad} ${className}`}
+      className={`group relative overflow-hidden rounded font-semibold inline-flex items-center gap-2 transition-all duration-500 bg-white border border-blue-accent/30 ${textColor} hover:text-white hover:border-transparent hover:shadow-lg ${hoverShadow} ${pad} ${className}`}
     >
       <span className="absolute inset-0 bg-white transition-opacity duration-500 group-hover:opacity-0" />
       <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: hoverGradient }} />
