@@ -1,701 +1,864 @@
 "use client";
 
 import React, { useState, useMemo, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui";
 
 /* ═══════════════════════════════════════════════════════════
-   DATA / TYPES
+   CDN & CONSTANTS
    ═══════════════════════════════════════════════════════════ */
+const CDN = "https://assets.brogawindows.com";
 
-type ProductType = "tilt-turn" | "fixed" | "casement" | "entry-door" | "french-door" | "sliding-door";
-type Material = "upvc" | "aluminum";
-type Profile = "s9000" | "s8000";
-type Glazing = "double" | "triple";
-type GridPattern = "none" | "colonial" | "prairie" | "heritage";
-type HandleStyle = "line" | "quadro" | "dublin";
-
+/* ═══════════════════════════════════════════════════════════
+   TYPES
+   ═══════════════════════════════════════════════════════════ */
 interface Config {
-  product: ProductType;
-  width: number;
-  height: number;
-  material: Material;
-  profile: Profile;
-  glazing: Glazing;
+  tagNumber: string;
+  frameType: string;
   colorInside: string;
   colorOutside: string;
-  handle: HandleStyle;
-  grid: GridPattern;
+  glassPaneType: string;
+  glassPane: string;
+  spacerBar: string;
+  glassType: string;
+  grid: string;
+  hinges: string;
+  handleModel: string;
+  handleColor: string;
 }
 
-const PRODUCTS: { id: ProductType; label: string; icon: string; base: number }[] = [
-  { id: "tilt-turn", label: "Tilt & Turn", icon: "↗", base: 480 },
-  { id: "fixed", label: "Fixed Window", icon: "□", base: 290 },
-  { id: "casement", label: "Casement", icon: "⊞", base: 420 },
-  { id: "entry-door", label: "Entry Door", icon: "🚪", base: 950 },
-  { id: "french-door", label: "French Door", icon: "⊟", base: 1150 },
-  { id: "sliding-door", label: "Sliding Door", icon: "⇔", base: 1350 },
+/* ═══════════════════════════════════════════════════════════
+   DATA
+   ═══════════════════════════════════════════════════════════ */
+
+const FRAME_TYPES = [
+  {
+    id: "elegance",
+    label: "Elegance",
+    prefix: "el",
+    warranty: 2,
+    chambers: 3,
+    soundProof: 6,
+    energyEfficiency: 6,
+    blowProtection: 6,
+    description: "Classical approach to window and door design. Elegant profiles with proven reliability for residential applications.",
+    basePrice: 656.77,
+    profileImg: `${CDN}/nomenclature/profile-upvc/elegance_casement.webp`,
+    warrantyBadge: `${CDN}/images/shared/warranty/label-2.svg`,
+  },
+  {
+    id: "power",
+    label: "Power",
+    prefix: "pw",
+    warranty: 5,
+    chambers: 5,
+    soundProof: 8,
+    energyEfficiency: 8,
+    blowProtection: 8,
+    description: "Enhanced thermal and acoustic performance. 5-chamber profile system with superior insulation for demanding climates.",
+    basePrice: 798.50,
+    profileImg: `${CDN}/nomenclature/profile-upvc/power_casement.webp`,
+    warrantyBadge: `${CDN}/images/shared/warranty/label-5.svg`,
+  },
+  {
+    id: "premium",
+    label: "Premium",
+    prefix: "pr",
+    warranty: 5,
+    chambers: 6,
+    soundProof: 10,
+    energyEfficiency: 10,
+    blowProtection: 10,
+    description: "The ultimate in window technology. 6-chamber system delivers maximum energy efficiency and soundproofing.",
+    basePrice: 945.20,
+    profileImg: `${CDN}/nomenclature/profile-upvc/premium_casement.webp`,
+    warrantyBadge: `${CDN}/images/shared/warranty/label-5.svg`,
+  },
 ];
 
-const COLORS: { id: string; label: string; hex: string; textureUrl?: string; price: number }[] = [
-  { id: "white", label: "White", hex: "#F5F5F0", price: 0 },
-  { id: "anthracite", label: "Anthracite Gray", hex: "#3C3C3C", price: 45 },
-  { id: "jet-black", label: "Jet Black", hex: "#1A1A1A", price: 45 },
-  { id: "golden-oak", label: "Golden Oak", hex: "#B8860B", price: 65 },
-  { id: "walnut", label: "Walnut", hex: "#5C4033", price: 65 },
-  { id: "rosewood", label: "Rosewood", hex: "#65000B", price: 65 },
-  { id: "basalt-gray", label: "Basalt Gray", hex: "#6B6B6B", price: 45 },
-  { id: "cream", label: "Cream", hex: "#FFF8DC", price: 35 },
+const COLORS = [
+  { id: "white", label: "White", hex: "#F5F5F0", price: 0, fileKey: "white" },
+  { id: "black", label: "Black", hex: "#1A1A1A", price: 108.59, fileKey: "black" },
+  { id: "antasit-grey", label: "Antasit Grey", hex: "#6B6B6B", price: 108.59, fileKey: "antasit_grey" },
+  { id: "golden-oak", label: "Golden Oak", hex: "#B8860B", price: 108.59, fileKey: "golden_oak", isWood: true },
+  { id: "vizon", label: "Vizon", hex: "#8B7355", price: 108.59, fileKey: "vizon", isWood: true },
+  { id: "antique-oak", label: "Antique Oak", hex: "#5C4033", price: 108.59, fileKey: "antique_oak", isWood: true },
 ];
 
-const HANDLES: { id: HandleStyle; label: string; price: number }[] = [
-  { id: "line", label: "Line", price: 0 },
-  { id: "quadro", label: "Quadro", price: 25 },
-  { id: "dublin", label: "Dublin", price: 35 },
+const GLASS_PANE_TYPES = [
+  { id: "double", label: "Double Glass Pane", price: 0, isDefault: true },
+  { id: "triple", label: "Triple Glass Pane", price: 40.70, isDefault: false },
 ];
 
-const GRIDS: { id: GridPattern; label: string; price: number }[] = [
-  { id: "none", label: "No Grid", price: 0 },
-  { id: "colonial", label: "Colonial", price: 85 },
-  { id: "prairie", label: "Prairie", price: 85 },
-  { id: "heritage", label: "Heritage", price: 95 },
+const GLASS_PANES = [
+  { id: "regular", label: "Regular", price: 0, isDefault: true, desc: "Standard glass pane" },
+  { id: "tempered", label: "Tempered", price: 82.70, isDefault: false, desc: "7 times stronger than normal glass" },
 ];
 
-const STEPS = ["Product", "Size", "Material", "Glazing", "Colors", "Extras", "Summary"];
+const SPACER_BARS = [
+  { id: "aluminum", label: "Aluminum", price: 0, isDefault: true, fileKey: "aluminum" },
+  { id: "gray-warm", label: "Gray Warm", price: 10.11, isDefault: false, fileKey: "gray_warm" },
+  { id: "black-warm", label: "Black Warm", price: 10.11, isDefault: false, fileKey: "black_warm" },
+];
+
+const GLASS_TYPES = [
+  { id: "clear", label: "Clear", price: 0, isDefault: true },
+  { id: "frosted", label: "Frosted", price: 118.15, isDefault: false },
+];
+
+const GRID_OPTIONS = [
+  { id: "none", label: "None", price: 0, isDefault: true },
+  { id: "5-8", label: '5/8" Grid', price: 95.00, isDefault: false },
+];
+
+const HINGE_OPTIONS = [
+  { id: "standard", label: "Standard", price: 0, isDefault: true, desc: "Colonial or classic style" },
+  { id: "concealed", label: "Concealed", price: 172.19, isDefault: false, desc: "Modern and minimalist look" },
+];
+
+const HANDLE_MODELS = [
+  { id: "line-t", label: "Model Line-T", price: 0, isDefault: true, fileKey: "model_line_t" },
+  { id: "line-rt", label: "Model Line-RT", price: 22.89, isDefault: false, fileKey: "model_line_rt" },
+  { id: "dublin-t", label: "Model Dublin-T", price: 35.50, isDefault: false, fileKey: "model_dublin_t" },
+];
+
+const HANDLE_COLORS = [
+  { id: "white", label: "White", hex: "#F5F5F0", price: 0, isDefault: true, fileKey: "white" },
+  { id: "black", label: "Black", hex: "#1A1A1A", price: 15.00, isDefault: false, fileKey: "black" },
+  { id: "silver", label: "Silver", hex: "#C0C0C0", price: 15.00, isDefault: false, fileKey: "silver" },
+];
+
+const STEP_LABELS = [
+  "Tag Number",
+  "Frame Type",
+  "Frame Finish Inside",
+  "Frame Finish Outside",
+  "Glass Pane Type",
+  "Glass Pane",
+  "Glass Spacer Bar",
+  "Glass Type",
+  "Grid",
+  "Hinges",
+  "Handle Model",
+  "Handle Color",
+];
 
 const DEFAULT_CONFIG: Config = {
-  product: "tilt-turn",
-  width: 30,
-  height: 48,
-  material: "upvc",
-  profile: "s9000",
-  glazing: "double",
+  tagNumber: "",
+  frameType: "elegance",
   colorInside: "white",
   colorOutside: "white",
-  handle: "line",
+  glassPaneType: "double",
+  glassPane: "regular",
+  spacerBar: "aluminum",
+  glassType: "clear",
   grid: "none",
+  hinges: "standard",
+  handleModel: "line-t",
+  handleColor: "white",
 };
 
 /* ═══════════════════════════════════════════════════════════
-   PRICE LOGIC
+   PRICE CALCULATION
    ═══════════════════════════════════════════════════════════ */
-function calcPrice(c: Config): number {
-  const prod = PRODUCTS.find((p) => p.id === c.product)!;
-  const sizeMult = (c.width * c.height) / (30 * 48);
-  const matMult = c.material === "aluminum" ? 1.35 : 1.0;
-  const profMult = c.profile === "s9000" ? 1.0 : 0.88;
-  const glazMult = c.glazing === "triple" ? 1.25 : 1.0;
-  const colorIn = COLORS.find((cl) => cl.id === c.colorInside)?.price || 0;
-  const colorOut = COLORS.find((cl) => cl.id === c.colorOutside)?.price || 0;
-  const handle = HANDLES.find((h) => h.id === c.handle)?.price || 0;
-  const grid = GRIDS.find((g) => g.id === c.grid)?.price || 0;
-  return Math.round(prod.base * sizeMult * matMult * profMult * glazMult + colorIn + colorOut + handle + grid);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   SVG PREVIEW
-   ═══════════════════════════════════════════════════════════ */
-function WindowPreview({ config, view }: { config: Config; view: "inside" | "outside" }) {
-  const colorHex = view === "inside"
-    ? (COLORS.find((c) => c.id === config.colorInside)?.hex || "#F5F5F0")
-    : (COLORS.find((c) => c.id === config.colorOutside)?.hex || "#F5F5F0");
-
-  const isLight = ["white", "cream"].includes(view === "inside" ? config.colorInside : config.colorOutside);
-  const frameStroke = isLight ? "#D1D1D1" : "#222";
-
-  const isDoor = ["entry-door", "french-door", "sliding-door"].includes(config.product);
-  const isFrench = config.product === "french-door";
-  const isSliding = config.product === "sliding-door";
-
-  // Normalized preview dimensions (max 280px wide, maintain aspect ratio)
-  const maxW = 280;
-  const maxH = 360;
-  const aspect = config.width / config.height;
-  let w: number, h: number;
-  if (aspect > maxW / maxH) {
-    w = maxW;
-    h = maxW / aspect;
-  } else {
-    h = maxH;
-    w = maxH * aspect;
-  }
-
-  const pad = 12; // frame thickness
-  const glassX = pad;
-  const glassY = pad;
-  const glassW = w - pad * 2;
-  const glassH = h - pad * 2;
-
-  // Grid lines
-  const gridLines: React.ReactElement[] = [];
-  if (config.grid === "colonial") {
-    const cols = isFrench || isSliding ? 2 : 1;
-    const rows = isDoor ? 3 : 2;
-    const cellW = glassW / (cols + (isFrench || isSliding ? 2 : 1));
-    const cellH = glassH / (rows + 1);
-    for (let i = 1; i <= (isFrench || isSliding ? cols + 1 : cols); i++) {
-      gridLines.push(<line key={`cv${i}`} x1={glassX + cellW * i} y1={glassY} x2={glassX + cellW * i} y2={glassY + glassH} stroke={colorHex} strokeWidth="2.5" />);
-    }
-    for (let i = 1; i <= rows; i++) {
-      gridLines.push(<line key={`ch${i}`} x1={glassX} y1={glassY + cellH * i} x2={glassX + glassW} y2={glassY + cellH * i} stroke={colorHex} strokeWidth="2.5" />);
-    }
-  } else if (config.grid === "prairie") {
-    const inset = glassW * 0.22;
-    const insetV = glassH * 0.22;
-    // Top horizontal
-    gridLines.push(<line key="pt" x1={glassX} y1={glassY + insetV} x2={glassX + glassW} y2={glassY + insetV} stroke={colorHex} strokeWidth="2.5" />);
-    // Bottom horizontal
-    gridLines.push(<line key="pb" x1={glassX} y1={glassY + glassH - insetV} x2={glassX + glassW} y2={glassY + glassH - insetV} stroke={colorHex} strokeWidth="2.5" />);
-    // Left vertical
-    gridLines.push(<line key="pl" x1={glassX + inset} y1={glassY} x2={glassX + inset} y2={glassY + glassH} stroke={colorHex} strokeWidth="2.5" />);
-    // Right vertical
-    gridLines.push(<line key="pr" x1={glassX + glassW - inset} y1={glassY} x2={glassX + glassW - inset} y2={glassY + glassH} stroke={colorHex} strokeWidth="2.5" />);
-  } else if (config.grid === "heritage") {
-    const cx = glassX + glassW / 2;
-    gridLines.push(<line key="hv" x1={cx} y1={glassY} x2={cx} y2={glassY + glassH} stroke={colorHex} strokeWidth="2.5" />);
-    const cy = glassY + glassH * 0.4;
-    gridLines.push(<line key="hh" x1={glassX} y1={cy} x2={glassX + glassW} y2={cy} stroke={colorHex} strokeWidth="2.5" />);
-  }
-
-  // Handle position
-  const handleX = isFrench ? w / 2 : isSliding ? w * 0.55 : w - pad - 6;
-  const handleY = h * 0.5;
-
-  return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-[280px] mx-auto drop-shadow-xl" style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.15))" }}>
-      {/* Outer frame */}
-      <rect x="0" y="0" width={w} height={h} rx="3" fill={colorHex} stroke={frameStroke} strokeWidth="1" />
-
-      {/* Glass */}
-      <defs>
-        <linearGradient id="glass-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#D6EAF8" stopOpacity="0.6" />
-          <stop offset="40%" stopColor="#AED6F1" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#85C1E9" stopOpacity="0.5" />
-        </linearGradient>
-        <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#87CEEB" />
-          <stop offset="60%" stopColor="#B8E0F6" />
-          <stop offset="100%" stopColor="#E8F4FD" />
-        </linearGradient>
-      </defs>
-
-      {isFrench || isSliding ? (
-        <>
-          {/* Two glass panes */}
-          <rect x={glassX} y={glassY} width={glassW / 2 - 2} height={glassH} rx="1" fill="url(#sky-grad)" />
-          <rect x={glassX + glassW / 2 + 2} y={glassY} width={glassW / 2 - 2} height={glassH} rx="1" fill="url(#sky-grad)" />
-          <rect x={glassX} y={glassY} width={glassW / 2 - 2} height={glassH} rx="1" fill="url(#glass-grad)" />
-          <rect x={glassX + glassW / 2 + 2} y={glassY} width={glassW / 2 - 2} height={glassH} rx="1" fill="url(#glass-grad)" />
-          {/* Center mullion */}
-          <rect x={w / 2 - 3} y={glassY - 2} width={6} height={glassH + 4} fill={colorHex} stroke={frameStroke} strokeWidth="0.5" />
-        </>
-      ) : (
-        <>
-          <rect x={glassX} y={glassY} width={glassW} height={glassH} rx="1" fill="url(#sky-grad)" />
-          <rect x={glassX} y={glassY} width={glassW} height={glassH} rx="1" fill="url(#glass-grad)" />
-        </>
-      )}
-
-      {/* Grid lines */}
-      {gridLines}
-
-      {/* Tilt indicator for tilt-turn */}
-      {config.product === "tilt-turn" && (
-        <g opacity="0.25">
-          <line x1={glassX + 4} y1={glassY + glassH - 4} x2={glassX + glassW / 2} y2={glassY + 8} stroke="#333" strokeWidth="1" strokeDasharray="4 3" />
-          <line x1={glassX + glassW - 4} y1={glassY + glassH - 4} x2={glassX + glassW / 2} y2={glassY + 8} stroke="#333" strokeWidth="1" strokeDasharray="4 3" />
-        </g>
-      )}
-
-      {/* Handle */}
-      {!["fixed"].includes(config.product) && (
-        <g>
-          <rect x={handleX - 2} y={handleY - 12} width={4} height={24} rx="2" fill={isLight ? "#AAA" : "#CCC"} />
-          <circle cx={handleX} cy={handleY} r="3" fill={isLight ? "#999" : "#DDD"} />
-        </g>
-      )}
-
-      {/* Inner frame shadow */}
-      <rect x={glassX} y={glassY} width={glassW} height={glassH} rx="1" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="1" />
-    </svg>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════
-   STEP COMPONENTS
-   ═══════════════════════════════════════════════════════════ */
-
-function StepProduct({ config, onChange }: { config: Config; onChange: (c: Partial<Config>) => void }) {
-  return (
-    <div>
-      <h2 className="text-xl font-bold text-text-primary mb-2">Choose Your Product</h2>
-      <p className="text-sm text-text-secondary mb-6">Select the type of window or door you want to configure.</p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        {PRODUCTS.map((p) => (
-          <button
-            key={p.id}
-            onClick={() => onChange({ product: p.id })}
-            className={`group relative p-5 rounded-xl border-2 text-left transition-all duration-200 ${
-              config.product === p.id
-                ? "border-brand bg-brand/5 shadow-md shadow-brand/10"
-                : "border-border bg-white hover:border-brand/40 hover:shadow-sm"
-            }`}
-          >
-            <span className="text-2xl block mb-2">{p.icon}</span>
-            <span className={`text-sm font-semibold block ${config.product === p.id ? "text-brand" : "text-text-primary"}`}>
-              {p.label}
-            </span>
-            <span className="text-xs text-text-muted mt-1 block">from ${p.base}</span>
-            {config.product === p.id && (
-              <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-brand flex items-center justify-center">
-                <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            )}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function StepSize({ config, onChange }: { config: Config; onChange: (c: Partial<Config>) => void }) {
-  const isDoor = ["entry-door", "french-door", "sliding-door"].includes(config.product);
-  const presets = isDoor
-    ? [
-        { w: 36, h: 80, label: '36"×80"' },
-        { w: 48, h: 80, label: '48"×80"' },
-        { w: 60, h: 80, label: '60"×80"' },
-        { w: 72, h: 80, label: '72"×80"' },
-      ]
-    : [
-        { w: 24, h: 36, label: '24"×36"' },
-        { w: 30, h: 48, label: '30"×48"' },
-        { w: 36, h: 60, label: '36"×60"' },
-        { w: 48, h: 48, label: '48"×48"' },
-      ];
-
-  return (
-    <div>
-      <h2 className="text-xl font-bold text-text-primary mb-2">Set Dimensions</h2>
-      <p className="text-sm text-text-secondary mb-6">Choose a preset or enter custom dimensions.</p>
-
-      {/* Presets */}
-      <div className="flex flex-wrap gap-2 mb-8">
-        {presets.map((p) => (
-          <button
-            key={p.label}
-            onClick={() => onChange({ width: p.w, height: p.h })}
-            className={`px-4 py-2 rounded-lg text-sm font-medium border transition-all ${
-              config.width === p.w && config.height === p.h
-                ? "border-brand bg-brand/5 text-brand"
-                : "border-border text-text-secondary hover:border-brand/40"
-            }`}
-          >
-            {p.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Width */}
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <label className="text-sm font-semibold text-text-primary">Width</label>
-          <span className="text-lg font-bold text-brand">{config.width}&quot;</span>
-        </div>
-        <input
-          type="range"
-          min={isDoor ? 24 : 12}
-          max={isDoor ? 96 : 72}
-          value={config.width}
-          onChange={(e) => onChange({ width: +e.target.value })}
-          className="w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer accent-brand"
-        />
-        <div className="flex justify-between text-xs text-text-muted mt-1">
-          <span>{isDoor ? 24 : 12}&quot;</span>
-          <span>{isDoor ? 96 : 72}&quot;</span>
-        </div>
-      </div>
-
-      {/* Height */}
-      <div>
-        <div className="flex justify-between items-center mb-2">
-          <label className="text-sm font-semibold text-text-primary">Height</label>
-          <span className="text-lg font-bold text-brand">{config.height}&quot;</span>
-        </div>
-        <input
-          type="range"
-          min={isDoor ? 60 : 12}
-          max={isDoor ? 96 : 72}
-          value={config.height}
-          onChange={(e) => onChange({ height: +e.target.value })}
-          className="w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer accent-brand"
-        />
-        <div className="flex justify-between text-xs text-text-muted mt-1">
-          <span>{isDoor ? 60 : 12}&quot;</span>
-          <span>{isDoor ? 96 : 72}&quot;</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function StepMaterial({ config, onChange }: { config: Config; onChange: (c: Partial<Config>) => void }) {
-  return (
-    <div>
-      <h2 className="text-xl font-bold text-text-primary mb-2">Frame Material & Profile</h2>
-      <p className="text-sm text-text-secondary mb-6">GEALAN profiles are premium German-engineered systems.</p>
-
-      {/* Material */}
-      <div className="grid grid-cols-2 gap-4 mb-8">
-        {[
-          { id: "upvc" as Material, label: "uPVC", sub: "GEALAN Profile", desc: "6-chamber design, superior insulation, 15-year warranty", mult: "1.0×" },
-          { id: "aluminum" as Material, label: "Aluminum", sub: "Thermal Break", desc: "Slim profiles, structural strength, modern aesthetics", mult: "1.35×" },
-        ].map((m) => (
-          <button
-            key={m.id}
-            onClick={() => onChange({ material: m.id })}
-            className={`p-5 rounded-xl border-2 text-left transition-all ${
-              config.material === m.id
-                ? "border-brand bg-brand/5 shadow-md shadow-brand/10"
-                : "border-border hover:border-brand/40"
-            }`}
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span className={`font-bold ${config.material === m.id ? "text-brand" : "text-text-primary"}`}>{m.label}</span>
-              {config.material === m.id && (
-                <div className="w-5 h-5 rounded-full bg-brand flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
-                </div>
-              )}
-            </div>
-            <span className="text-xs text-blue-accent font-semibold block mb-1">{m.sub}</span>
-            <span className="text-xs text-text-muted block">{m.desc}</span>
-          </button>
-        ))}
-      </div>
-
-      {/* Profile (uPVC only) */}
-      {config.material === "upvc" && (
-        <>
-          <h3 className="text-sm font-semibold text-text-primary mb-3">GEALAN Profile</h3>
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { id: "s9000" as Profile, label: "S9000", chambers: 6, desc: "Premium: best thermal & sound insulation", uvalue: "0.14", price: "Included" },
-              { id: "s8000" as Profile, label: "S8000", chambers: 5, desc: "Standard: excellent performance", uvalue: "0.19", price: "-12%" },
-            ].map((p) => (
-              <button
-                key={p.id}
-                onClick={() => onChange({ profile: p.id })}
-                className={`p-4 rounded-xl border-2 text-left transition-all ${
-                  config.profile === p.id
-                    ? "border-brand bg-brand/5"
-                    : "border-border hover:border-brand/40"
-                }`}
-              >
-                <span className={`font-bold text-lg block mb-1 ${config.profile === p.id ? "text-brand" : "text-text-primary"}`}>{p.label}</span>
-                <div className="flex gap-1 mb-2">
-                  {Array.from({ length: p.chambers }).map((_, i) => (
-                    <div key={i} className="w-3 h-6 rounded-sm bg-brand/20 border border-brand/30" />
-                  ))}
-                </div>
-                <span className="text-xs text-text-muted block">{p.desc}</span>
-                <span className="text-xs font-semibold text-blue-accent mt-1 block">U-value: {p.uvalue} • {p.price}</span>
-              </button>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
-
-function StepGlazing({ config, onChange }: { config: Config; onChange: (c: Partial<Config>) => void }) {
-  return (
-    <div>
-      <h2 className="text-xl font-bold text-text-primary mb-2">Glazing Type</h2>
-      <p className="text-sm text-text-secondary mb-6">Choose your glass pane configuration for optimal energy efficiency.</p>
-      <div className="grid grid-cols-2 gap-6">
-        {[
-          {
-            id: "double" as Glazing,
-            label: "Double Pane",
-            desc: "Two glass layers with argon fill. Standard energy efficiency. Ideal for moderate climates.",
-            specs: ["U-value: 0.28", "Sound: 32 dB", "Standard"],
-            price: "Included",
-          },
-          {
-            id: "triple" as Glazing,
-            label: "Triple Pane",
-            desc: "Three glass layers with krypton fill. Maximum insulation and soundproofing for demanding environments.",
-            specs: ["U-value: 0.14", "Sound: 45 dB", "+25%"],
-            price: "+25%",
-          },
-        ].map((g) => (
-          <button
-            key={g.id}
-            onClick={() => onChange({ glazing: g.id })}
-            className={`p-6 rounded-xl border-2 text-left transition-all ${
-              config.glazing === g.id
-                ? "border-brand bg-brand/5 shadow-md shadow-brand/10"
-                : "border-border hover:border-brand/40"
-            }`}
-          >
-            {/* Glazing illustration */}
-            <div className="flex items-center justify-center mb-4">
-              <div className="flex gap-1">
-                {Array.from({ length: g.id === "triple" ? 3 : 2 }).map((_, i) => (
-                  <div key={i} className="w-1.5 h-16 bg-blue-200/60 rounded-full border border-blue-300/40" />
-                ))}
-              </div>
-            </div>
-            <span className={`font-bold text-lg block mb-2 ${config.glazing === g.id ? "text-brand" : "text-text-primary"}`}>
-              {g.label}
-            </span>
-            <span className="text-xs text-text-muted block mb-3 leading-relaxed">{g.desc}</span>
-            <div className="flex flex-wrap gap-1.5">
-              {g.specs.map((s) => (
-                <span key={s} className="text-[10px] font-semibold bg-brand/10 text-brand px-2 py-0.5 rounded">
-                  {s}
-                </span>
-              ))}
-            </div>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function StepColors({ config, onChange }: { config: Config; onChange: (c: Partial<Config>) => void }) {
-  const [biColor, setBiColor] = useState(config.colorInside !== config.colorOutside);
-
-  return (
-    <div>
-      <h2 className="text-xl font-bold text-text-primary mb-2">Frame Color</h2>
-      <p className="text-sm text-text-secondary mb-4">Choose your interior and exterior frame colors.</p>
-
-      {/* Bi-color toggle */}
-      <label className="flex items-center gap-3 mb-6 cursor-pointer">
-        <button
-          onClick={() => {
-            const next = !biColor;
-            setBiColor(next);
-            if (!next) onChange({ colorOutside: config.colorInside });
-          }}
-          className={`relative w-10 h-6 rounded-full transition-colors ${biColor ? "bg-brand" : "bg-gray-300"}`}
-        >
-          <span className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform shadow ${biColor ? "translate-x-4" : ""}`} />
-        </button>
-        <span className="text-sm text-text-secondary">Different interior/exterior colors</span>
-      </label>
-
-      {/* Interior */}
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-text-primary mb-3">{biColor ? "Interior Color" : "Frame Color"}</h3>
-        <div className="grid grid-cols-4 gap-3">
-          {COLORS.map((c) => (
-            <button
-              key={c.id}
-              onClick={() => {
-                onChange({ colorInside: c.id, ...(!biColor ? { colorOutside: c.id } : {}) });
-              }}
-              className={`group p-2 rounded-lg border-2 transition-all ${
-                config.colorInside === c.id ? "border-brand shadow-md" : "border-border hover:border-brand/40"
-              }`}
-            >
-              <div className="w-full aspect-square rounded-md mb-1.5 border border-gray-200" style={{ backgroundColor: c.hex }} />
-              <span className="text-[10px] font-medium text-text-primary block truncate">{c.label}</span>
-              {c.price > 0 && <span className="text-[9px] text-green-600 font-semibold">+${c.price}</span>}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Exterior (if bi-color) */}
-      {biColor && (
-        <div>
-          <h3 className="text-sm font-semibold text-text-primary mb-3">Exterior Color</h3>
-          <div className="grid grid-cols-4 gap-3">
-            {COLORS.map((c) => (
-              <button
-                key={c.id}
-                onClick={() => onChange({ colorOutside: c.id })}
-                className={`group p-2 rounded-lg border-2 transition-all ${
-                  config.colorOutside === c.id ? "border-brand shadow-md" : "border-border hover:border-brand/40"
-                }`}
-              >
-                <div className="w-full aspect-square rounded-md mb-1.5 border border-gray-200" style={{ backgroundColor: c.hex }} />
-                <span className="text-[10px] font-medium text-text-primary block truncate">{c.label}</span>
-                {c.price > 0 && <span className="text-[9px] text-green-600 font-semibold">+${c.price}</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function StepExtras({ config, onChange }: { config: Config; onChange: (c: Partial<Config>) => void }) {
-  return (
-    <div>
-      <h2 className="text-xl font-bold text-text-primary mb-2">Hardware & Extras</h2>
-      <p className="text-sm text-text-secondary mb-6">Choose handle style and decorative grid pattern.</p>
-
-      {/* Handle */}
-      <h3 className="text-sm font-semibold text-text-primary mb-3">Handle Style</h3>
-      <div className="grid grid-cols-3 gap-3 mb-8">
-        {HANDLES.map((h) => (
-          <button
-            key={h.id}
-            onClick={() => onChange({ handle: h.id })}
-            className={`p-4 rounded-xl border-2 text-center transition-all ${
-              config.handle === h.id ? "border-brand bg-brand/5" : "border-border hover:border-brand/40"
-            }`}
-          >
-            {/* Simple handle illustration */}
-            <div className="flex justify-center mb-2">
-              <div className="w-2 h-10 bg-gray-400 rounded-full relative">
-                <div className={`absolute -top-1 left-1/2 -translate-x-1/2 bg-gray-500 rounded ${
-                  h.id === "line" ? "w-1.5 h-5 -top-3" : h.id === "quadro" ? "w-3 h-4 -top-2.5 rounded-sm" : "w-2.5 h-6 -top-4"
-                }`} />
-              </div>
-            </div>
-            <span className={`text-sm font-semibold block ${config.handle === h.id ? "text-brand" : "text-text-primary"}`}>{h.label}</span>
-            {h.price > 0 && <span className="text-xs text-green-600 font-semibold">+${h.price}</span>}
-            {h.price === 0 && <span className="text-xs text-text-muted">Included</span>}
-          </button>
-        ))}
-      </div>
-
-      {/* Grid */}
-      <h3 className="text-sm font-semibold text-text-primary mb-3">Grid Pattern</h3>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {GRIDS.map((g) => (
-          <button
-            key={g.id}
-            onClick={() => onChange({ grid: g.id })}
-            className={`p-4 rounded-xl border-2 text-center transition-all ${
-              config.grid === g.id ? "border-brand bg-brand/5" : "border-border hover:border-brand/40"
-            }`}
-          >
-            {/* Grid pattern preview */}
-            <div className="w-12 h-16 mx-auto mb-2 border-2 border-gray-300 rounded relative overflow-hidden bg-blue-50/30">
-              {g.id === "colonial" && (
-                <>
-                  <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-300" />
-                  <div className="absolute top-1/3 left-0 right-0 h-px bg-gray-300" />
-                  <div className="absolute top-2/3 left-0 right-0 h-px bg-gray-300" />
-                </>
-              )}
-              {g.id === "prairie" && (
-                <>
-                  <div className="absolute top-[20%] left-0 right-0 h-px bg-gray-300" />
-                  <div className="absolute bottom-[20%] left-0 right-0 h-px bg-gray-300" />
-                  <div className="absolute left-[22%] top-0 bottom-0 w-px bg-gray-300" />
-                  <div className="absolute right-[22%] top-0 bottom-0 w-px bg-gray-300" />
-                </>
-              )}
-              {g.id === "heritage" && (
-                <>
-                  <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-300" />
-                  <div className="absolute top-[40%] left-0 right-0 h-px bg-gray-300" />
-                </>
-              )}
-            </div>
-            <span className={`text-xs font-semibold block ${config.grid === g.id ? "text-brand" : "text-text-primary"}`}>{g.label}</span>
-            {g.price > 0 && <span className="text-[10px] text-green-600 font-semibold">+${g.price}</span>}
-            {g.price === 0 && <span className="text-[10px] text-text-muted">Free</span>}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function StepSummary({ config, price }: { config: Config; price: number }) {
-  const product = PRODUCTS.find((p) => p.id === config.product)!;
+function calcTotal(config: Config) {
+  const frame = FRAME_TYPES.find((f) => f.id === config.frameType)!;
   const colorIn = COLORS.find((c) => c.id === config.colorInside)!;
   const colorOut = COLORS.find((c) => c.id === config.colorOutside)!;
-  const handle = HANDLES.find((h) => h.id === config.handle)!;
-  const grid = GRIDS.find((g) => g.id === config.grid)!;
+  const glassPaneType = GLASS_PANE_TYPES.find((g) => g.id === config.glassPaneType)!;
+  const glassPane = GLASS_PANES.find((g) => g.id === config.glassPane)!;
+  const spacer = SPACER_BARS.find((s) => s.id === config.spacerBar)!;
+  const glassType = GLASS_TYPES.find((g) => g.id === config.glassType)!;
+  const grid = GRID_OPTIONS.find((g) => g.id === config.grid)!;
+  const hinges = HINGE_OPTIONS.find((h) => h.id === config.hinges)!;
+  const handle = HANDLE_MODELS.find((h) => h.id === config.handleModel)!;
+  const handleColor = HANDLE_COLORS.find((c) => c.id === config.handleColor)!;
 
-  const materialLabel = config.material === "upvc" ? `uPVC — GEALAN ${config.profile.toUpperCase()}` : "Aluminum — Thermal Break";
-  const glazingLabel = config.glazing === "triple" ? "Triple Pane" : "Double Pane";
+  const total =
+    frame.basePrice +
+    colorIn.price +
+    colorOut.price +
+    glassPaneType.price +
+    glassPane.price +
+    spacer.price +
+    glassType.price +
+    grid.price +
+    hinges.price +
+    handle.price +
+    handleColor.price;
 
-  const rows = [
-    ["Product", product.label],
-    ["Dimensions", `${config.width}" × ${config.height}"`],
-    ["Material", materialLabel],
-    ["Glazing", glazingLabel],
-    ["Interior Color", colorIn.label],
-    ["Exterior Color", colorOut.label],
-    ["Handle", handle.label],
-    ["Grid", grid.label],
+  return { total, discounted: +(total * 0.8).toFixed(2) };
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PERFORMANCE RATING BAR
+   ═══════════════════════════════════════════════════════════ */
+function RatingBar({ label, value, max = 10 }: { label: string; value: number; max?: number }) {
+  return (
+    <div className="flex items-center gap-2 text-xs">
+      <span className="w-28 text-gray-500 shrink-0">{label}</span>
+      <div className="flex gap-0.5 flex-1">
+        {Array.from({ length: max }).map((_, i) => (
+          <div
+            key={i}
+            className={`h-2 flex-1 rounded-sm ${i < value ? "bg-yellow-400" : "bg-gray-200"}`}
+          />
+        ))}
+      </div>
+      <span className="text-gray-600 font-medium w-8 text-right">{value}/{max}</span>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CHECKBOX ICON
+   ═══════════════════════════════════════════════════════════ */
+function CheckIcon({ checked }: { checked: boolean }) {
+  if (!checked) {
+    return <div className="w-5 h-5 rounded border-2 border-gray-300 shrink-0" />;
+  }
+  return (
+    <div className="w-5 h-5 rounded bg-green-500 flex items-center justify-center shrink-0">
+      <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WINDOW PREVIEW (Layered PNG compositing)
+   ═══════════════════════════════════════════════════════════ */
+function WindowPreview({ config, view }: { config: Config; view: "inside" | "outside" }) {
+  const frame = FRAME_TYPES.find((f) => f.id === config.frameType)!;
+  const colorKey = COLORS.find((c) => c.id === (view === "inside" ? config.colorInside : config.colorOutside))?.fileKey || "white";
+  const spacerKey = SPACER_BARS.find((s) => s.id === config.spacerBar)?.fileKey || "aluminum";
+  const handleModelKey = HANDLE_MODELS.find((h) => h.id === config.handleModel)?.fileKey || "model_line_t";
+  const handleColorKey = HANDLE_COLORS.find((c) => c.id === config.handleColor)?.fileKey || "white";
+
+  const base = `${CDN}/images/catalog/calculator/scw/${view}/r`;
+
+  const layers = [
+    { src: `${base}/background/background.png`, alt: "Background" },
+    { src: `${base}/frame/${frame.prefix}_${colorKey}.png`, alt: "Frame" },
+    { src: `${base}/glazing_option/${spacerKey}.png`, alt: "Spacer" },
+    { src: `${base}/glass/glass.png`, alt: "Glass" },
+    { src: `${base}/hinges/${colorKey}.png`, alt: "Hinges" },
+    { src: `${base}/handle/${handleModelKey}/no_keyed/${handleColorKey}.png`, alt: "Handle" },
   ];
 
-  // Build config string for quote page: [product] Key: Value | Key: Value
-  const configString = `[${config.product}] ` + [
-    `Size: ${config.width}"×${config.height}"`,
-    `Material: ${materialLabel}`,
-    `Glazing: ${glazingLabel}`,
-    `Interior: ${colorIn.label}`,
-    `Exterior: ${colorOut.label}`,
-    `Handle: ${handle.label}`,
-    `Grid: ${grid.label}`,
-    `Estimate: $${price.toLocaleString()}`,
-  ].join(" | ");
+  return (
+    <div className="relative w-full" style={{ paddingBottom: "100%" }}>
+      {layers.map((layer, i) => (
+        <Image
+          key={i}
+          src={layer.src}
+          alt={layer.alt}
+          fill
+          className="object-contain"
+          style={{ transform: "scaleX(-1)" }}
+          sizes="300px"
+          priority={i === 0}
+          unoptimized
+        />
+      ))}
+    </div>
+  );
+}
 
-  const quoteUrl = `/quote?config=${encodeURIComponent(configString)}`;
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR — "What is Included"
+   ═══════════════════════════════════════════════════════════ */
+function Sidebar({
+  config,
+  currentStep,
+  total,
+  discounted,
+}: {
+  config: Config;
+  currentStep: number;
+  total: number;
+  discounted: number;
+}) {
+  const frame = FRAME_TYPES.find((f) => f.id === config.frameType)!;
+  const colorIn = COLORS.find((c) => c.id === config.colorInside)!;
+  const colorOut = COLORS.find((c) => c.id === config.colorOutside)!;
+  const glassPaneType = GLASS_PANE_TYPES.find((g) => g.id === config.glassPaneType)!;
+  const glassPane = GLASS_PANES.find((g) => g.id === config.glassPane)!;
+  const spacer = SPACER_BARS.find((s) => s.id === config.spacerBar)!;
+  const glassType = GLASS_TYPES.find((g) => g.id === config.glassType)!;
+  const grid = GRID_OPTIONS.find((g) => g.id === config.grid)!;
+  const hinges = HINGE_OPTIONS.find((h) => h.id === config.hinges)!;
+  const handleModel = HANDLE_MODELS.find((h) => h.id === config.handleModel)!;
+  const handleColor = HANDLE_COLORS.find((c) => c.id === config.handleColor)!;
+
+  type SidebarRow = { label: string; value: string; price?: string; stepIndex: number };
+
+  const rows: SidebarRow[] = [
+    { label: "Window Width", value: '30" (762 mm)', stepIndex: -1 },
+    { label: "Rough Opening Width (min)", value: '30 ¾" (781 mm)', stepIndex: -1 },
+    { label: "Window Height", value: '54" (1372 mm)', stepIndex: -1 },
+    { label: "Rough Opening Height (min)", value: '54 ¾" (1391 mm)', stepIndex: -1 },
+    { label: "Window Type", value: "Single Casement", stepIndex: -1 },
+    { label: "Window Opening", value: "RHI", stepIndex: -1 },
+    { label: "Frame Material", value: "uPVC", stepIndex: -1 },
+    { label: "Frame Type", value: frame.label, price: `$${frame.basePrice.toFixed(2)}`, stepIndex: 1 },
+    { label: "Frame Finish Inside", value: colorIn.label, price: colorIn.price > 0 ? `+ $${colorIn.price.toFixed(2)}` : undefined, stepIndex: 2 },
+    { label: "Frame Finish Outside", value: colorOut.label, price: colorOut.price > 0 ? `+ $${colorOut.price.toFixed(2)}` : undefined, stepIndex: 3 },
+    { label: "Glass Pane Type", value: glassPaneType.label, price: glassPaneType.price > 0 ? `+ $${glassPaneType.price.toFixed(2)}` : undefined, stepIndex: 4 },
+    { label: "Glass Pane", value: glassPane.label, price: glassPane.price > 0 ? `+ $${glassPane.price.toFixed(2)}` : undefined, stepIndex: 5 },
+    { label: "Glass Spacer Bar", value: spacer.label, price: spacer.price > 0 ? `+ $${spacer.price.toFixed(2)}` : undefined, stepIndex: 6 },
+    { label: "Glass Type", value: glassType.label, price: glassType.price > 0 ? `+ $${glassType.price.toFixed(2)}` : undefined, stepIndex: 7 },
+    { label: "Grid", value: grid.label, price: grid.price > 0 ? `+ $${grid.price.toFixed(2)}` : undefined, stepIndex: 8 },
+    { label: "Hinges", value: hinges.label, price: hinges.price > 0 ? `+ $${hinges.price.toFixed(2)}` : undefined, stepIndex: 9 },
+    { label: "Handle", value: handleModel.label, price: handleModel.price > 0 ? `+ $${handleModel.price.toFixed(2)}` : undefined, stepIndex: 10 },
+    { label: "Handle Color", value: handleColor.label, price: handleColor.price > 0 ? `+ $${handleColor.price.toFixed(2)}` : undefined, stepIndex: 11 },
+  ];
 
   return (
-    <div>
-      <h2 className="text-xl font-bold text-text-primary mb-2">Your Configuration</h2>
-      <p className="text-sm text-text-secondary mb-6">Review your selections and request a detailed quote.</p>
-
-      <div className="bg-warm-gray rounded-xl p-6 mb-6">
-        <div className="space-y-3">
-          {rows.map(([label, value]) => (
-            <div key={label} className="flex justify-between items-center">
-              <span className="text-sm text-text-secondary">{label}</span>
-              <span className="text-sm font-semibold text-text-primary">{value}</span>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 pt-6 border-t border-border">
-          <div className="flex justify-between items-baseline">
-            <span className="text-sm font-semibold text-text-secondary">Estimated Price</span>
-            <div className="text-right">
-              <span className="text-3xl font-bold text-brand">${price.toLocaleString()}</span>
-              <span className="block text-xs text-text-muted mt-1">Starting from • Final price may vary</span>
-            </div>
-          </div>
-        </div>
+    <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+      {/* Header */}
+      <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
+        <h3 className="font-bold text-sm text-gray-900">What is Included:</h3>
       </div>
 
-      <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-6">
-        <p className="text-xs text-orange-800 leading-relaxed">
-          <strong>Note:</strong> This is an estimate based on standard configurations. Final pricing includes installation requirements, site conditions, and any custom specifications. Our team will provide an exact quote within 24 hours.
+      {/* Spec rows */}
+      <div className="max-h-[450px] overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
+        {rows.map((row, i) => {
+          const isActive = row.stepIndex === currentStep;
+          return (
+            <div
+              key={i}
+              className={`px-4 py-2 border-b border-gray-100 transition-colors ${
+                isActive ? "border-l-4 border-l-yellow-400 bg-yellow-50" : "border-l-4 border-l-transparent"
+              }`}
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="text-[11px] text-gray-400 leading-tight">{row.label}</p>
+                  <p className="text-xs font-semibold text-gray-800 leading-tight">{row.value}</p>
+                </div>
+                {row.price && (
+                  <span className="text-xs font-semibold text-gray-600 shrink-0">{row.price}</span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Total */}
+      <div className="px-4 py-3 border-t border-gray-200 bg-gray-50">
+        <div className="flex items-baseline justify-between gap-2">
+          <span className="text-sm font-semibold text-gray-600">Total:</span>
+          <div className="text-right">
+            <span className="text-sm text-red-500 line-through mr-2">${total.toFixed(2)}</span>
+            <span className="text-lg font-bold text-green-600">${discounted.toFixed(2)}</span>
+          </div>
+        </div>
+        <p className="text-[10px] text-gray-400 italic text-right mt-0.5">
+          20% OFF (discount for registered clients)
         </p>
       </div>
 
-      <Link
-        href={quoteUrl}
-        className="group relative overflow-hidden w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 text-white transition-all duration-500 hover:shadow-lg hover:shadow-[#e8873a]/30"
-        style={{ background: "linear-gradient(135deg, #d94e1a 0%, #f47b2b 40%, #e8873a 100%)" }}
-      >
-        <span className="relative z-10">Request Detailed Quote</span>
-        <svg className="w-5 h-5 relative z-10 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </Link>
+      {/* Comment */}
+      <div className="px-4 py-3 border-t border-gray-200">
+        <textarea
+          placeholder="Comment"
+          className="w-full text-xs border border-gray-200 rounded px-3 py-2 resize-none focus:outline-none focus:border-yellow-400"
+          rows={2}
+        />
+      </div>
 
-      <p className="text-center text-xs text-text-muted mt-3">
-        Or call us at <a href="tel:+14137714457" className="text-brand font-semibold">(413) 771-4457</a>
+      {/* Quote button */}
+      <div className="px-4 pb-4">
+        <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-sm py-2.5 rounded transition-colors">
+          Request a Quote
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   STEP 0 — Tag Number / Location
+   ═══════════════════════════════════════════════════════════ */
+function StepTagNumber({
+  config,
+  onChange,
+  onSkip,
+  onApply,
+}: {
+  config: Config;
+  onChange: (v: Partial<Config>) => void;
+  onSkip: () => void;
+  onApply: () => void;
+}) {
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-900 text-center mb-6">
+        Add Tag Number / Location:
+      </h2>
+      <p className="text-sm text-gray-500 text-center mb-6">
+        Optionally add a tag number or location name to help identify this window in your project.
       </p>
+      <input
+        type="text"
+        value={config.tagNumber}
+        onChange={(e) => onChange({ tagNumber: e.target.value })}
+        placeholder="e.g., Kitchen Window 1, Master Bedroom..."
+        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-yellow-400 mb-6"
+      />
+      <div className="flex gap-3 justify-center">
+        <button
+          onClick={onSkip}
+          className="px-8 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors"
+        >
+          Skip
+        </button>
+        <button
+          onClick={onApply}
+          className="px-8 py-2.5 bg-yellow-400 hover:bg-yellow-500 rounded-lg text-sm font-bold text-gray-900 transition-colors"
+        >
+          Apply
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   STEP 1 — Frame Type
+   ═══════════════════════════════════════════════════════════ */
+function StepFrameType({
+  config,
+  onChange,
+}: {
+  config: Config;
+  onChange: (v: Partial<Config>) => void;
+}) {
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-900 text-center mb-6">
+        Select Window Frame Type:
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {FRAME_TYPES.map((frame) => {
+          const isSelected = config.frameType === frame.id;
+          return (
+            <button
+              key={frame.id}
+              onClick={() => onChange({ frameType: frame.id })}
+              className={`relative p-4 rounded-lg border-2 text-left transition-all ${
+                isSelected
+                  ? "border-yellow-400 bg-yellow-50/50 shadow-md"
+                  : "border-gray-200 hover:border-gray-300 bg-white"
+              }`}
+            >
+              {/* Checkbox */}
+              <div className="absolute top-3 left-3">
+                <CheckIcon checked={isSelected} />
+              </div>
+
+              {/* Warranty badge */}
+              <div className="flex justify-end mb-2">
+                <Image
+                  src={frame.warrantyBadge}
+                  alt={`${frame.warranty} year warranty`}
+                  width={50}
+                  height={50}
+                  unoptimized
+                />
+              </div>
+
+              {/* Label & price */}
+              <h3 className="font-bold text-base text-gray-900 mb-1">{frame.label}</h3>
+              {frame.basePrice > FRAME_TYPES[0].basePrice && (
+                <p className="text-green-600 text-xs font-semibold mb-2">
+                  + ${(frame.basePrice - FRAME_TYPES[0].basePrice).toFixed(2)}
+                </p>
+              )}
+              {frame.id === "elegance" && (
+                <p className="text-gray-400 text-xs font-semibold mb-2">Standard</p>
+              )}
+
+              {/* Profile cross-section image */}
+              <div className="relative w-full h-28 mb-3">
+                <Image
+                  src={frame.profileImg}
+                  alt={`${frame.label} profile`}
+                  fill
+                  className="object-contain"
+                  unoptimized
+                />
+              </div>
+
+              {/* Chambers */}
+              <p className="text-xs text-gray-500 mb-3">{frame.chambers} chambers</p>
+
+              {/* Performance ratings */}
+              <div className="space-y-1.5">
+                <RatingBar label="Sound Proof" value={frame.soundProof} />
+                <RatingBar label="Energy Efficiency" value={frame.energyEfficiency} />
+                <RatingBar label="Blow Protection" value={frame.blowProtection} />
+              </div>
+
+              {/* Description */}
+              <p className="text-[11px] text-gray-400 mt-3 leading-relaxed">
+                {frame.description}
+              </p>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COLOR SELECTION STEP (reused for Inside & Outside)
+   ═══════════════════════════════════════════════════════════ */
+function StepColorSelect({
+  title,
+  selectedId,
+  onSelect,
+}: {
+  title: string;
+  selectedId: string;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-900 text-center mb-6">{title}</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {COLORS.map((color) => {
+          const isSelected = selectedId === color.id;
+          return (
+            <button
+              key={color.id}
+              onClick={() => onSelect(color.id)}
+              className={`relative p-4 rounded-lg border-2 text-left transition-all ${
+                isSelected
+                  ? "border-yellow-400 bg-yellow-50/50 shadow-md"
+                  : "border-gray-200 hover:border-gray-300 bg-white"
+              }`}
+            >
+              <div className="absolute top-3 left-3">
+                <CheckIcon checked={isSelected} />
+              </div>
+
+              {/* Color name & price */}
+              <div className="flex items-start justify-between mb-3 pl-7">
+                <span className="font-semibold text-sm text-gray-900">{color.label}</span>
+                {color.price > 0 ? (
+                  <span className="text-green-600 text-xs font-semibold">+ ${color.price.toFixed(2)}</span>
+                ) : (
+                  <span className="text-gray-400 text-xs font-semibold">Standard</span>
+                )}
+              </div>
+
+              {/* Color swatch */}
+              <div
+                className="w-full h-24 rounded-lg border border-gray-200"
+                style={{
+                  backgroundColor: color.hex,
+                  backgroundImage: color.isWood
+                    ? "repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px)"
+                    : undefined,
+                }}
+              />
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GENERIC 2-OPTION STEP
+   ═══════════════════════════════════════════════════════════ */
+function StepTwoOptions({
+  title,
+  options,
+  selectedId,
+  onSelect,
+  renderImage,
+}: {
+  title: string;
+  options: { id: string; label: string; price: number; isDefault?: boolean; desc?: string }[];
+  selectedId: string;
+  onSelect: (id: string) => void;
+  renderImage?: (id: string) => React.ReactNode;
+}) {
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-900 text-center mb-6">{title}</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {options.map((opt) => {
+          const isSelected = selectedId === opt.id;
+          return (
+            <button
+              key={opt.id}
+              onClick={() => onSelect(opt.id)}
+              className={`relative p-5 rounded-lg border-2 text-left transition-all ${
+                isSelected
+                  ? "border-yellow-400 bg-yellow-50/50 shadow-md"
+                  : "border-gray-200 hover:border-gray-300 bg-white"
+              }`}
+            >
+              <div className="flex items-start gap-3 mb-3">
+                <CheckIcon checked={isSelected} />
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-sm text-gray-900">{opt.label}</span>
+                    {opt.price > 0 ? (
+                      <span className="text-green-600 text-xs font-semibold">+ ${opt.price.toFixed(2)}</span>
+                    ) : (
+                      <span className="text-gray-400 text-xs font-semibold">Standard</span>
+                    )}
+                  </div>
+                  {opt.desc && (
+                    <p className="text-xs text-gray-500 mt-1">{opt.desc}</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Option image */}
+              {renderImage && (
+                <div className="relative w-full h-48 rounded-lg overflow-hidden bg-gray-50">
+                  {renderImage(opt.id)}
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GENERIC 3-OPTION STEP
+   ═══════════════════════════════════════════════════════════ */
+function StepThreeOptions({
+  title,
+  options,
+  selectedId,
+  onSelect,
+  renderImage,
+}: {
+  title: string;
+  options: { id: string; label: string; price: number; isDefault?: boolean; desc?: string }[];
+  selectedId: string;
+  onSelect: (id: string) => void;
+  renderImage?: (id: string) => React.ReactNode;
+}) {
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-900 text-center mb-6">{title}</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {options.map((opt) => {
+          const isSelected = selectedId === opt.id;
+          return (
+            <button
+              key={opt.id}
+              onClick={() => onSelect(opt.id)}
+              className={`relative p-4 rounded-lg border-2 text-left transition-all ${
+                isSelected
+                  ? "border-yellow-400 bg-yellow-50/50 shadow-md"
+                  : "border-gray-200 hover:border-gray-300 bg-white"
+              }`}
+            >
+              <div className="flex items-start gap-3 mb-3">
+                <CheckIcon checked={isSelected} />
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-sm text-gray-900">{opt.label}</span>
+                    {opt.price > 0 ? (
+                      <span className="text-green-600 text-xs font-semibold">+ ${opt.price.toFixed(2)}</span>
+                    ) : (
+                      <span className="text-gray-400 text-xs font-semibold">Standard</span>
+                    )}
+                  </div>
+                  {opt.desc && (
+                    <p className="text-xs text-gray-500 mt-1">{opt.desc}</p>
+                  )}
+                </div>
+              </div>
+
+              {renderImage && (
+                <div className="relative w-full h-36 rounded-lg overflow-hidden bg-gray-50">
+                  {renderImage(opt.id)}
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GLASS PANE TYPE STEP — with cross-section illustrations
+   ═══════════════════════════════════════════════════════════ */
+function GlassPaneTypeImage({ id }: { id: string }) {
+  const panes = id === "triple" ? 3 : 2;
+  return (
+    <div className="flex items-center justify-center h-full">
+      <div className="flex items-center gap-1">
+        {Array.from({ length: panes }).map((_, i) => (
+          <React.Fragment key={i}>
+            <div className="w-1 h-32 bg-blue-200 rounded-full border border-blue-300" />
+            {i < panes - 1 && <div className="w-6 h-32 bg-blue-50/60 rounded" />}
+          </React.Fragment>
+        ))}
+      </div>
+      <div className="ml-4 text-xs text-gray-400">
+        {id === "triple" ? "3 glass layers" : "2 glass layers"}
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SPACER BAR STEP — with cross-section illustrations
+   ═══════════════════════════════════════════════════════════ */
+function SpacerBarImage({ id }: { id: string }) {
+  const barColor =
+    id === "aluminum" ? "#C0C0C0" : id === "gray-warm" ? "#808080" : "#333333";
+  return (
+    <div className="flex items-center justify-center h-full">
+      <svg width="120" height="80" viewBox="0 0 120 80">
+        {/* Two glass panes */}
+        <rect x="10" y="5" width="3" height="70" rx="1" fill="#B8D4E8" />
+        <rect x="107" y="5" width="3" height="70" rx="1" fill="#B8D4E8" />
+        {/* Spacer bar */}
+        <rect x="25" y="25" width="70" height="30" rx="2" fill={barColor} opacity="0.8" />
+        <rect x="30" y="30" width="60" height="20" rx="1" fill={barColor} />
+      </svg>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HINGE STEP — with images from CDN
+   ═══════════════════════════════════════════════════════════ */
+function HingeImage({ id }: { id: string }) {
+  if (id === "standard") {
+    return (
+      <div className="flex items-center justify-center h-full bg-gray-50 p-4">
+        <div className="text-center">
+          <svg className="w-20 h-20 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <rect x="3" y="3" width="4" height="18" rx="1" strokeWidth="1.5" />
+            <rect x="8" y="7" width="13" height="10" rx="1" strokeWidth="1.5" />
+            <circle cx="5" cy="8" r="0.5" fill="currentColor" />
+            <circle cx="5" cy="16" r="0.5" fill="currentColor" />
+          </svg>
+          <p className="text-[11px] text-gray-400 mt-2">Colonial or classic style</p>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="flex items-center justify-center h-full bg-gray-50 p-4">
+      <div className="text-center">
+        <svg className="w-20 h-20 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <rect x="3" y="3" width="4" height="18" rx="1" strokeWidth="1.5" />
+          <rect x="8" y="7" width="13" height="10" rx="1" strokeWidth="1.5" />
+          <line x1="7" y1="10" x2="7" y2="14" strokeWidth="2" />
+        </svg>
+        <p className="text-[11px] text-gray-400 mt-2">Modern and minimalist look</p>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HANDLE MODEL STEP
+   ═══════════════════════════════════════════════════════════ */
+function HandleModelImage({ id }: { id: string }) {
+  // Simple handle illustrations
+  const shapes: Record<string, React.ReactNode> = {
+    "line-t": (
+      <svg className="w-16 h-32" viewBox="0 0 40 80">
+        <rect x="17" y="30" width="6" height="40" rx="3" fill="#999" />
+        <rect x="15" y="10" width="10" height="25" rx="2" fill="#AAA" />
+      </svg>
+    ),
+    "line-rt": (
+      <svg className="w-16 h-32" viewBox="0 0 40 80">
+        <rect x="17" y="30" width="6" height="40" rx="3" fill="#999" />
+        <rect x="12" y="8" width="16" height="28" rx="3" fill="#AAA" />
+        <circle cx="20" cy="22" r="3" fill="#888" />
+      </svg>
+    ),
+    "dublin-t": (
+      <svg className="w-16 h-32" viewBox="0 0 40 80">
+        <rect x="17" y="30" width="6" height="40" rx="3" fill="#999" />
+        <rect x="10" y="5" width="20" height="30" rx="4" fill="#AAA" />
+      </svg>
+    ),
+  };
+
+  return (
+    <div className="flex items-center justify-center h-full bg-gray-50">
+      {shapes[id] || shapes["line-t"]}
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HANDLE COLOR STEP
+   ═══════════════════════════════════════════════════════════ */
+function StepHandleColor({
+  selectedId,
+  onSelect,
+}: {
+  selectedId: string;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-900 text-center mb-6">Select Handle Color:</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {HANDLE_COLORS.map((color) => {
+          const isSelected = selectedId === color.id;
+          return (
+            <button
+              key={color.id}
+              onClick={() => onSelect(color.id)}
+              className={`relative p-4 rounded-lg border-2 text-left transition-all ${
+                isSelected
+                  ? "border-yellow-400 bg-yellow-50/50 shadow-md"
+                  : "border-gray-200 hover:border-gray-300 bg-white"
+              }`}
+            >
+              <div className="flex items-start gap-3 mb-3">
+                <CheckIcon checked={isSelected} />
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-sm text-gray-900">{color.label}</span>
+                    {color.price > 0 ? (
+                      <span className="text-green-600 text-xs font-semibold">+ ${color.price.toFixed(2)}</span>
+                    ) : (
+                      <span className="text-gray-400 text-xs font-semibold">Standard</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Color swatch */}
+              <div
+                className="w-full h-20 rounded-lg border border-gray-200"
+                style={{ backgroundColor: color.hex }}
+              />
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -712,136 +875,342 @@ export function ConfiguratorContent() {
     setConfig((prev) => ({ ...prev, ...partial }));
   }, []);
 
-  const price = useMemo(() => calcPrice(config), [config]);
+  const { total, discounted } = useMemo(() => calcTotal(config), [config]);
 
-  const canNext = step < STEPS.length - 1;
-  const canPrev = step > 0;
+  const totalSteps = STEP_LABELS.length;
+  const progressPercent = ((step + 1) / totalSteps) * 100;
 
-  const stepContent = [
-    <StepProduct key={0} config={config} onChange={update} />,
-    <StepSize key={1} config={config} onChange={update} />,
-    <StepMaterial key={2} config={config} onChange={update} />,
-    <StepGlazing key={3} config={config} onChange={update} />,
-    <StepColors key={4} config={config} onChange={update} />,
-    <StepExtras key={5} config={config} onChange={update} />,
-    <StepSummary key={6} config={config} price={price} />,
-  ];
+  const goNext = () => setStep((s) => Math.min(s + 1, totalSteps - 1));
+  const goPrev = () => setStep((s) => Math.max(s - 1, 0));
+  const startAgain = () => {
+    setStep(0);
+    setConfig(DEFAULT_CONFIG);
+  };
+  const resetStep = () => {
+    // Reset current step's value to default
+    const key = [
+      "tagNumber", "frameType", "colorInside", "colorOutside",
+      "glassPaneType", "glassPane", "spacerBar", "glassType",
+      "grid", "hinges", "handleModel", "handleColor",
+    ][step] as keyof Config;
+    if (key) {
+      update({ [key]: DEFAULT_CONFIG[key] });
+    }
+  };
+
+  /* Build config string for quote page */
+  const buildQuoteUrl = () => {
+    const frame = FRAME_TYPES.find((f) => f.id === config.frameType)!;
+    const colorIn = COLORS.find((c) => c.id === config.colorInside)!;
+    const colorOut = COLORS.find((c) => c.id === config.colorOutside)!;
+    const glassPT = GLASS_PANE_TYPES.find((g) => g.id === config.glassPaneType)!;
+    const glassP = GLASS_PANES.find((g) => g.id === config.glassPane)!;
+    const spacer = SPACER_BARS.find((s) => s.id === config.spacerBar)!;
+    const glassT = GLASS_TYPES.find((g) => g.id === config.glassType)!;
+    const grid = GRID_OPTIONS.find((g) => g.id === config.grid)!;
+    const hinges = HINGE_OPTIONS.find((h) => h.id === config.hinges)!;
+    const handle = HANDLE_MODELS.find((h) => h.id === config.handleModel)!;
+    const handleC = HANDLE_COLORS.find((c) => c.id === config.handleColor)!;
+
+    const configString = `[tilt-turn] ` + [
+      `Frame: ${frame.label}`,
+      `Interior: ${colorIn.label}`,
+      `Exterior: ${colorOut.label}`,
+      `Glass: ${glassPT.label}`,
+      `Pane: ${glassP.label}`,
+      `Spacer: ${spacer.label}`,
+      `Type: ${glassT.label}`,
+      `Grid: ${grid.label}`,
+      `Hinges: ${hinges.label}`,
+      `Handle: ${handle.label}`,
+      `Handle Color: ${handleC.label}`,
+      `Estimate: $${discounted.toFixed(2)}`,
+    ].join(" | ");
+
+    return `/quote?config=${encodeURIComponent(configString)}`;
+  };
+
+  /* ── Render current step content ── */
+  const renderStep = () => {
+    switch (step) {
+      case 0:
+        return (
+          <StepTagNumber
+            config={config}
+            onChange={update}
+            onSkip={goNext}
+            onApply={goNext}
+          />
+        );
+      case 1:
+        return <StepFrameType config={config} onChange={update} />;
+      case 2:
+        return (
+          <StepColorSelect
+            title="Select Frame Finish Inside:"
+            selectedId={config.colorInside}
+            onSelect={(id) => update({ colorInside: id })}
+          />
+        );
+      case 3:
+        return (
+          <StepColorSelect
+            title="Select Frame Finish Outside:"
+            selectedId={config.colorOutside}
+            onSelect={(id) => update({ colorOutside: id })}
+          />
+        );
+      case 4:
+        return (
+          <StepTwoOptions
+            title="Select Glass Pane Type:"
+            options={GLASS_PANE_TYPES}
+            selectedId={config.glassPaneType}
+            onSelect={(id) => update({ glassPaneType: id })}
+            renderImage={(id) => <GlassPaneTypeImage id={id} />}
+          />
+        );
+      case 5:
+        return (
+          <StepTwoOptions
+            title="Select Glass Pane:"
+            options={GLASS_PANES}
+            selectedId={config.glassPane}
+            onSelect={(id) => update({ glassPane: id })}
+          />
+        );
+      case 6:
+        return (
+          <StepThreeOptions
+            title="Select Glass Spacer Bar:"
+            options={SPACER_BARS}
+            selectedId={config.spacerBar}
+            onSelect={(id) => update({ spacerBar: id })}
+            renderImage={(id) => <SpacerBarImage id={id} />}
+          />
+        );
+      case 7:
+        return (
+          <StepTwoOptions
+            title="Select Glass Type:"
+            options={GLASS_TYPES}
+            selectedId={config.glassType}
+            onSelect={(id) => update({ glassType: id })}
+          />
+        );
+      case 8:
+        return (
+          <StepTwoOptions
+            title="Select Grid:"
+            options={GRID_OPTIONS}
+            selectedId={config.grid}
+            onSelect={(id) => update({ grid: id })}
+          />
+        );
+      case 9:
+        return (
+          <StepTwoOptions
+            title="Select Hinges Type:"
+            options={HINGE_OPTIONS}
+            selectedId={config.hinges}
+            onSelect={(id) => update({ hinges: id })}
+            renderImage={(id) => <HingeImage id={id} />}
+          />
+        );
+      case 10:
+        return (
+          <StepThreeOptions
+            title="Select Handle Model:"
+            options={HANDLE_MODELS}
+            selectedId={config.handleModel}
+            onSelect={(id) => update({ handleModel: id })}
+            renderImage={(id) => <HandleModelImage id={id} />}
+          />
+        );
+      case 11:
+        return (
+          <StepHandleColor
+            selectedId={config.handleColor}
+            onSelect={(id) => update({ handleColor: id })}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
-      <Breadcrumb items={[{ label: "Configurator" }]} />
+      <Breadcrumb
+        items={[
+          { label: "Catalog", href: "/catalog" },
+          { label: "Tilt and Turn uPVC Single Casement Window 30×54\"" },
+        ]}
+      />
 
-      {/* Header */}
-      <section className="bg-gradient-to-b from-brand to-brand/95 text-white py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Design Your Window</h1>
-          <p className="text-white/70 text-sm max-w-lg mx-auto">
-            Configure every detail and get an instant estimate. Our team will follow up with a detailed quote.
-          </p>
-        </div>
-      </section>
-
-      {/* Progress bar */}
-      <div className="bg-white border-b border-border sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center gap-1 py-3 overflow-x-auto">
-            {STEPS.map((s, i) => (
-              <button
-                key={s}
-                onClick={() => setStep(i)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
-                  i === step
-                    ? "bg-brand text-white"
-                    : i < step
-                    ? "bg-brand/10 text-brand cursor-pointer hover:bg-brand/20"
-                    : "bg-gray-100 text-text-muted"
-                }`}
-              >
-                {i < step ? (
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
-                ) : (
-                  <span className="w-4 h-4 rounded-full border-2 border-current flex items-center justify-center text-[9px]">{i + 1}</span>
-                )}
-                <span className="hidden sm:inline">{s}</span>
-              </button>
-            ))}
-          </div>
-        </div>
+      {/* Title */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 pb-2">
+        <h1 className="text-xl font-bold text-gray-900">
+          Tilt and Turn uPVC Single Casement Window 30×54&quot;
+        </h1>
       </div>
 
-      {/* Main content */}
-      <div className="bg-warm-gray min-h-[70vh]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-          <div className="grid lg:grid-cols-[340px_1fr] gap-8">
-            {/* Left: Preview */}
-            <div className="lg:sticky lg:top-20 lg:self-start">
-              <div className="bg-white rounded-2xl border border-border p-6 shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-semibold text-text-muted uppercase tracking-wider">Live Preview</span>
-                  <div className="flex bg-gray-100 rounded-lg p-0.5">
-                    <button
-                      onClick={() => setPreviewView("inside")}
-                      className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
-                        previewView === "inside" ? "bg-brand text-white shadow" : "text-text-muted hover:text-text-primary"
-                      }`}
-                    >
-                      Inside
-                    </button>
-                    <button
-                      onClick={() => setPreviewView("outside")}
-                      className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
-                        previewView === "outside" ? "bg-brand text-white shadow" : "text-text-muted hover:text-text-primary"
-                      }`}
-                    >
-                      Outside
-                    </button>
-                  </div>
-                </div>
+      {/* ═══ 3-Column Layout ═══ */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_300px] gap-6">
 
-                <div className="flex items-center justify-center py-6 min-h-[300px] bg-gradient-to-b from-sky-50 to-gray-50 rounded-xl">
-                  <WindowPreview config={config} view={previewView} />
-                </div>
-
-                {/* Size label */}
-                <div className="text-center mt-3">
-                  <span className="text-xs text-text-muted">{config.width}&quot; × {config.height}&quot;</span>
-                </div>
-
-                {/* Price */}
-                <div className="mt-4 pt-4 border-t border-border flex items-baseline justify-between">
-                  <span className="text-xs font-semibold text-text-muted uppercase">Estimate</span>
-                  <span className="text-2xl font-bold text-brand">${price.toLocaleString()}</span>
-                </div>
+          {/* ── LEFT COLUMN: Window Preview ── */}
+          <div className="lg:sticky lg:top-4 lg:self-start space-y-4">
+            {/* Preview image */}
+            <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+              <div className="p-2">
+                <WindowPreview config={config} view={previewView} />
               </div>
             </div>
 
-            {/* Right: Step content */}
-            <div className="bg-white rounded-2xl border border-border p-6 sm:p-8 shadow-sm">
-              {stepContent[step]}
+            {/* Inside / Outside toggle */}
+            <div className="flex">
+              <button
+                onClick={() => setPreviewView("inside")}
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold border transition-colors ${
+                  previewView === "inside"
+                    ? "bg-yellow-400 border-yellow-400 text-gray-900"
+                    : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+                }`}
+                style={{ borderRadius: "6px 0 0 6px" }}
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                Inside
+              </button>
+              <button
+                onClick={() => setPreviewView("outside")}
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold border transition-colors ${
+                  previewView === "outside"
+                    ? "bg-yellow-400 border-yellow-400 text-gray-900"
+                    : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+                }`}
+                style={{ borderRadius: "0 6px 6px 0" }}
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                Outside
+              </button>
+            </div>
 
-              {/* Navigation */}
-              <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
+            {/* Total price */}
+            <div className="text-center">
+              <span className="text-gray-500 text-sm">Total: </span>
+              <span className="text-2xl font-bold text-green-600">${discounted.toFixed(2)}</span>
+            </div>
+
+            {/* Finish Assembly / Request Quote */}
+            <Link
+              href={buildQuoteUrl()}
+              className="flex items-center justify-center gap-2 w-full py-3 border-2 border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:border-yellow-400 hover:bg-yellow-50 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              Finish Assembly
+            </Link>
+          </div>
+
+          {/* ── CENTER COLUMN: Step Content ── */}
+          <div className="min-w-0">
+            {/* Navigation bar */}
+            <div className="flex items-center justify-between mb-3">
+              <button
+                onClick={goPrev}
+                disabled={step === 0}
+                className={`flex items-center gap-1 text-sm font-medium transition-colors ${
+                  step === 0 ? "text-gray-300 cursor-not-allowed" : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+                Back
+              </button>
+
+              <div className="flex items-center gap-4">
                 <button
-                  onClick={() => setStep((s) => s - 1)}
-                  disabled={!canPrev}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                    canPrev ? "text-text-primary hover:bg-gray-100" : "text-text-muted/30 cursor-not-allowed"
-                  }`}
+                  onClick={startAgain}
+                  className="flex items-center gap-1 text-sm font-medium text-green-600 hover:text-green-700 transition-colors"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                  Back
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Start Again
                 </button>
-                {canNext && (
-                  <button
-                    onClick={() => setStep((s) => s + 1)}
-                    className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold bg-brand text-white hover:bg-brand-dark transition-all shadow-md shadow-brand/20"
-                  >
-                    Next
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                  </button>
-                )}
+                <button
+                  onClick={resetStep}
+                  className="flex items-center gap-1 text-sm font-medium text-red-500 hover:text-red-600 transition-colors"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  Reset
+                </button>
               </div>
             </div>
+
+            {/* Progress bar */}
+            <div className="h-1 bg-gray-200 rounded-full mb-6 overflow-hidden">
+              <div
+                className="h-full bg-yellow-400 rounded-full transition-all duration-300"
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
+
+            {/* Step content */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6">
+              {renderStep()}
+            </div>
+
+            {/* Next button (below step content for steps other than tag) */}
+            {step > 0 && step < totalSteps - 1 && (
+              <div className="flex justify-end mt-4">
+                <button
+                  onClick={goNext}
+                  className="flex items-center gap-2 px-6 py-2.5 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-sm rounded-lg transition-colors"
+                >
+                  Next Step
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            )}
+
+            {/* Final step: Finish Assembly CTA */}
+            {step === totalSteps - 1 && (
+              <div className="flex justify-center mt-6">
+                <Link
+                  href={buildQuoteUrl()}
+                  className="flex items-center gap-2 px-8 py-3 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-sm rounded-lg transition-colors shadow-md"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Finish Assembly & Request Quote
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* ── RIGHT COLUMN: Sidebar ── */}
+          <div className="hidden lg:block lg:sticky lg:top-4 lg:self-start">
+            <Sidebar
+              config={config}
+              currentStep={step}
+              total={total}
+              discounted={discounted}
+            />
           </div>
         </div>
       </div>
