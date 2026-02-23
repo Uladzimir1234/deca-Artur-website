@@ -1,12 +1,13 @@
 "use client";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Suspense, useState, FormEvent } from "react";
 
 function QuoteFormInner() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const configRaw = searchParams.get("config") || "";
 
-  const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
@@ -55,50 +56,12 @@ function QuoteFormInner() {
       });
 
       if (!res.ok) throw new Error("Failed to submit");
-      setSubmitted(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      router.push("/thank-you");
     } catch {
       setError("Something went wrong. Please call us at (413) 771-4457 or try again.");
     } finally {
       setSubmitting(false);
     }
-  }
-
-  /* ══════ Thank You State ══════ */
-  if (submitted) {
-    return (
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-6">
-          <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">Thank You!</h1>
-        <p className="text-lg text-text-secondary mb-3">
-          Your quote request has been received. Our team will review your project details and contact you within 24 hours.
-        </p>
-        <p className="text-text-muted mb-8">
-          If you need immediate assistance, call us at{" "}
-          <a href="tel:+14137714457" className="text-blue-accent font-semibold hover:underline">(413) 771-4457</a>
-        </p>
-        <div className="bg-warm-gray rounded-xl p-6 border border-border inline-block text-left">
-          <h3 className="font-semibold text-text-primary mb-4">What happens next?</h3>
-          <div className="space-y-3">
-            {[
-              "We review your request within 24 hours",
-              "Our team contacts you to discuss specifications",
-              "You receive a detailed quote within 48 hours",
-              "Custom order completed in 4 weeks or less",
-            ].map((step, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <span className="shrink-0 w-6 h-6 rounded-full bg-blue-accent text-white text-xs font-bold flex items-center justify-center">{i + 1}</span>
-                <p className="text-sm text-text-secondary">{step}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
   }
 
   /* ══════ Form ══════ */

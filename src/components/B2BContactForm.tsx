@@ -1,5 +1,6 @@
 "use client";
 import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 interface B2BContactFormProps {
   title: string;
@@ -16,7 +17,7 @@ export default function B2BContactForm({
   segment,
   projectTypes = ["New Construction", "Renovation", "Multi-family", "Mixed-Use"],
 }: B2BContactFormProps) {
-  const [submitted, setSubmitted] = useState(false);
+  const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
@@ -44,34 +45,12 @@ export default function B2BContactForm({
         body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error("Failed");
-      setSubmitted(true);
+      router.push("/thank-you");
     } catch {
       setError("Something went wrong. Please call (413) 771-4457 or try again.");
     } finally {
       setSubmitting(false);
     }
-  }
-
-  if (submitted) {
-    return (
-      <section id="contact-form" className="bg-brand text-white py-20">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-full mb-6">
-            <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h2 className="text-3xl font-bold mb-4">Thank You!</h2>
-          <p className="text-white/60 text-lg mb-3">
-            Your request has been received. Our B2B team will contact you within 24 hours with pricing and specifications.
-          </p>
-          <p className="text-white/40 text-sm">
-            Need immediate assistance? Call{" "}
-            <a href="tel:+14137714457" className="text-white underline">(413) 771-4457</a>
-          </p>
-        </div>
-      </section>
-    );
   }
 
   return (

@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const PHONE = "(413) 771-4457";
 
 export default function TiltTurnLP() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,12 +16,31 @@ export default function TiltTurnLP() {
     windows: "1-5",
     message: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: connect to HubSpot / API
-    setSubmitted(true);
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: formData.name,
+          lastName: "",
+          email: formData.email,
+          phone: formData.phone,
+          projectType: `LP-tilt-turn: ${formData.projectType} (${formData.windows} windows)`,
+          message: `ZIP: ${formData.zip}\n${formData.message}`,
+          configuration: "",
+        }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      router.push("/thank-you");
+    } catch {
+      alert("Something went wrong. Please call (413) 771-4457.");
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -201,16 +222,6 @@ export default function TiltTurnLP() {
             No obligation. No pressure. Just expert advice from a local manufacturer.
           </p>
 
-          {submitted ? (
-            <div className="bg-green-900/30 border border-green-500/30 rounded-xl p-8 text-center">
-              <div className="text-2xl md:text-4xl mb-4">✓</div>
-              <h3 className="text-xl font-bold text-white mb-2">Thank You!</h3>
-              <p className="text-gray-300">
-                We&apos;ve received your request. A DECA consultant will contact you within 24 hours
-                with a detailed quote.
-              </p>
-            </div>
-          ) : (
             <form onSubmit={handleSubmit} className="bg-white/5 rounded-xl p-6 md:p-8 border border-white/10 space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
                 <input
@@ -281,15 +292,15 @@ export default function TiltTurnLP() {
               />
               <button
                 type="submit"
-                className="w-full bg-accent hover:bg-accent-hover text-white py-4 rounded-lg font-bold text-lg transition-colors"
+                disabled={submitting}
+                className="w-full bg-accent hover:bg-accent-hover disabled:opacity-50 text-white py-4 rounded-lg font-bold text-lg transition-colors"
               >
-                Get My Free Quote →
+                {submitting ? "Sending..." : "Get My Free Quote →"}
               </button>
               <p className="text-center text-gray-500 text-xs mt-2">
                 🔒 Your information is secure and will never be shared with third parties.
               </p>
             </form>
-          )}
         </div>
       </section>
 

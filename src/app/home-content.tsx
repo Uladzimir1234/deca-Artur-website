@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Section, SectionTitle, PhotoPlaceholder, ProductCard, ServiceIcons, GuideCard, AnimatedCTA } from "@/components/ui";
 import AnimatedStatCard from "@/components/AnimatedStatCard";
@@ -51,7 +52,9 @@ const featureTabs = [
 ];
 
 export default function HomeContent() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("silence");
+  const [heroSubmitting, setHeroSubmitting] = useState(false);
   const activeFeature = featureTabs.find((t) => t.id === activeTab)!;
 
   return (
@@ -111,19 +114,40 @@ export default function HomeContent() {
             <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6">
               <h2 className="text-white font-bold text-lg mb-1">Get a Free Quote</h2>
               <p className="text-white/50 text-xs mb-4">Tell us about your project</p>
-              <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); window.location.href = "/quote"; }}>
-                <input type="text" placeholder="Your name" aria-label="Your name" className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/40" />
-                <input type="email" placeholder="Email address" aria-label="Email address" className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/40" />
-                <input type="tel" placeholder="Phone number" aria-label="Phone number" className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/40" />
-                <select className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white/60 text-sm focus:outline-none focus:border-white/40 appearance-none">
+              <form className="space-y-3" onSubmit={async (e) => {
+                e.preventDefault();
+                setHeroSubmitting(true);
+                const fd = new FormData(e.currentTarget);
+                try {
+                  const res = await fetch("/api/quote", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      firstName: fd.get("heroName") as string,
+                      lastName: "",
+                      email: fd.get("heroEmail") as string,
+                      phone: fd.get("heroPhone") as string,
+                      projectType: `Hero: ${fd.get("heroProject") as string}`,
+                      message: "",
+                      configuration: "",
+                    }),
+                  });
+                  if (!res.ok) throw new Error("Failed");
+                  router.push("/thank-you");
+                } catch { setHeroSubmitting(false); }
+              }}>
+                <input name="heroName" type="text" placeholder="Your name" aria-label="Your name" required className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/40" />
+                <input name="heroEmail" type="email" placeholder="Email address" aria-label="Email address" required className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/40" />
+                <input name="heroPhone" type="tel" placeholder="Phone number" aria-label="Phone number" required className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/40" />
+                <select name="heroProject" className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white/60 text-sm focus:outline-none focus:border-white/40 appearance-none">
                   <option value="">Project type</option>
                   <option value="new">New Construction</option>
                   <option value="replacement">Window Replacement</option>
                   <option value="renovation">Full Renovation</option>
                   <option value="commercial">Commercial Project</option>
                 </select>
-                <button type="submit" className="w-full bg-[#e8873a] hover:bg-[#d4792f] text-white font-semibold py-3 rounded-lg text-sm transition-colors">
-                  Get Free Estimate
+                <button type="submit" disabled={heroSubmitting} className="w-full bg-[#e8873a] hover:bg-[#d4792f] disabled:opacity-50 text-white font-semibold py-3 rounded-lg text-sm transition-colors">
+                  {heroSubmitting ? "Sending..." : "Get Free Estimate"}
                 </button>
               </form>
               <p className="text-white/30 text-[10px] mt-3 text-center">Response within 24 hours • No obligation</p>
