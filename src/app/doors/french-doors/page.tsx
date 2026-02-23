@@ -49,7 +49,7 @@ export default function FrenchDoorsPage() {
                 <Link href="/doors" className="border border-border text-text-primary hover:border-blue-accent/30 px-7 py-3.5 rounded font-semibold transition-colors">All Doors</Link>
               </div>
             </div>
-            <PhotoPlaceholder description="Фото: французские двери DECA в интерьере — двустворчатые, полностью открыты, вид на террасу и сад" height="h-[450px]" />
+            <img src="/french_doors.png" alt="European French swing doors by DECA — double door configuration with full glass panels, open to garden terrace" className="w-full h-[450px] object-cover rounded-xl" loading="eager" />
           </div>
         </div>
       </section>
