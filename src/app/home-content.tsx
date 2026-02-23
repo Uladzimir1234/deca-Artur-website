@@ -195,41 +195,61 @@ export default function HomeContent() {
         </div>
       </Section>
 
-      {/* ===== Customer Stories / Use Cases ===== */}
+      {/* ===== Customer Stories / Use Cases — Horizontal Scroll ===== */}
       <Section>
         <SectionTitle badge="Customer Stories" title="Real Homes. Real Results." subtitle="See how DECA windows transform comfort, energy bills, and everyday living." />
-        <div className="grid sm:grid-cols-2 gap-6">
-          {cases.slice(0, 4).map((c) => (
-            <Link key={c.slug} href={`/cases/${c.slug}`} className="group block bg-warm-gray rounded-xl border border-border overflow-hidden transition-all hover:shadow-xl hover:border-blue-accent/20">
-              <PhotoPlaceholder description={c.photoDesc} height="h-48" className="rounded-none border-0" />
-              <div className="p-6 relative">
-                <span className="absolute top-6 right-6 bg-blue-accent hover:bg-blue-hover text-white text-xs font-semibold px-4 py-2 rounded-md transition-colors group-hover:bg-blue-hover inline-flex items-center gap-1.5">
-                  Read Story
-                  <svg className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                </span>
-                <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="text-[10px] font-semibold tracking-wider uppercase text-brand bg-brand/10 px-2 py-0.5 rounded-full">{c.type}</span>
-                  <span className="text-[10px] font-semibold tracking-wider uppercase text-text-muted bg-white px-2 py-0.5 rounded-full">{c.location}</span>
-                </div>
-                <h3 className="font-bold text-text-primary mb-2 pr-28 group-hover:text-blue-accent transition-colors">{c.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed mb-4 line-clamp-2">{c.summary}</p>
-                <div className="flex gap-3">
-                  {c.results.slice(0, 3).map((r) => (
-                    <div key={r.label} className="text-center bg-white rounded-lg px-3 py-2 border border-border">
-                      <span className="block text-sm font-bold text-brand">{r.value}</span>
-                      <span className="text-[9px] text-text-muted uppercase">{r.label}</span>
+        <div className="relative -mx-4 sm:-mx-6">
+          {/* Scrollable container */}
+          <div className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4 sm:px-6 pb-4 scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}>
+            {cases.slice(0, 4).map((c) => (
+              <Link
+                key={c.slug}
+                href={`/cases/${c.slug}`}
+                className="group flex-none w-[85vw] sm:w-[420px] snap-start bg-white rounded-xl border border-border overflow-hidden transition-all hover:shadow-xl hover:border-blue-accent/20"
+              >
+                <PhotoPlaceholder description={c.photoDesc} height="h-44" className="rounded-none border-0" />
+                <div className="p-5">
+                  {/* Tags + CTA row */}
+                  <div className="flex items-center justify-between mb-2.5">
+                    <div className="flex gap-1.5">
+                      <span className="text-[10px] font-semibold tracking-wider uppercase text-brand bg-brand/10 px-2 py-0.5 rounded-full">{c.type}</span>
+                      <span className="text-[10px] font-semibold tracking-wider uppercase text-text-muted bg-warm-gray px-2 py-0.5 rounded-full">{c.location}</span>
                     </div>
-                  ))}
+                    <span className="text-blue-accent text-xs font-semibold inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Read
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-text-primary text-[15px] leading-snug mb-1.5 group-hover:text-blue-accent transition-colors">{c.title}</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed mb-3 line-clamp-2">{c.summary}</p>
+                  {/* Compact stats row */}
+                  <div className="flex items-center gap-1">
+                    {c.results.slice(0, 3).map((r, i) => (
+                      <div key={r.label} className="flex items-center gap-1">
+                        {i > 0 && <span className="text-border mx-1">·</span>}
+                        <span className="text-sm font-bold text-brand">{r.value}</span>
+                        <span className="text-[10px] text-text-muted">{r.label}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              </Link>
+            ))}
+            {/* "View all" card */}
+            <Link
+              href="/cases"
+              className="group flex-none w-[200px] snap-start bg-warm-gray rounded-xl border border-border flex flex-col items-center justify-center text-center p-6 hover:border-blue-accent/20 hover:shadow-md transition-all"
+            >
+              <div className="w-12 h-12 rounded-full bg-blue-accent/10 flex items-center justify-center mb-3 group-hover:bg-blue-accent/20 transition-colors">
+                <svg className="w-5 h-5 text-blue-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </div>
+              <span className="text-sm font-semibold text-text-primary group-hover:text-blue-accent transition-colors">View All Stories</span>
+              <span className="text-xs text-text-muted mt-1">{cases.length} case studies</span>
             </Link>
-          ))}
-        </div>
-        <div className="text-center mt-10">
-          <Link href="/cases" className="text-blue-accent font-medium hover:text-blue-hover transition-colors inline-flex items-center gap-2">
-            View all customer stories
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-          </Link>
+          </div>
+          {/* Scroll fade hints */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white to-transparent sm:hidden" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white to-transparent" />
         </div>
       </Section>
 
