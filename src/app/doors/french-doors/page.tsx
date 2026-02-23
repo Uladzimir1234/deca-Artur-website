@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Breadcrumb, Section, SectionTitle, PhotoPlaceholder, GuideCard } from "@/components/ui";
+import { Breadcrumb, Section, SectionTitle, PhotoPlaceholder, GuideCard, AnimatedCTA } from "@/components/ui";
 import { FrenchDoorConfigurator } from "@/components/ProductConfigurator";
 import type { Metadata } from "next";
 import ReviewsSection from "@/components/ReviewsSection";
@@ -7,10 +7,12 @@ import DeliveryMapSection from "@/components/DeliveryMapSection";
 import CTAWithDocs from "@/components/CTAWithDocs";
 import StickyCTA from "@/components/StickyCTA";
 import AnimatedStatCard from "@/components/AnimatedStatCard";
+import ProcessSection from "@/components/ProcessSection";
+import LeadMagnet from "@/components/LeadMagnet";
 
 export const metadata: Metadata = {
-  title: "French Doors | Double Swing European Doors | DECA Windows",
-  description: "Classic European-style French swing doors with dual openings, minimal profiles, and premium aesthetics. Energy efficient with multi-point locking.",
+  title: "European French Doors | Custom Swing Doors in Massachusetts | DECA",
+  description: "Factory-direct European French swing doors built in Westfield, MA. Triple glazing, multi-point locking, 15-year warranty. Get a free quote for your home.",
   alternates: { canonical: "/doors/french-doors" },
 };
 
@@ -22,6 +24,7 @@ const faqSchema = {
     { "@type": "Question", "name": "What sizes are available for French doors?", "acceptedAnswer": { "@type": "Answer", "text": "Single French doors range from 32-42 inches wide. Double French doors (the classic configuration) range from 60-72 inches total width. Custom sizes are available. All doors are 80 inches standard height, with custom heights up to 108 inches." } },
     { "@type": "Question", "name": "What glass options do you offer for French doors?", "acceptedAnswer": { "@type": "Answer", "text": "Choose from clear, frosted, decorative, textured, or laminated tempered glass. All glass is insulated with argon fill for energy efficiency. Triple-glazing achieves U-values of 0.9-1.3 W/m²K, meeting ENERGY STAR and building codes." } },
     { "@type": "Question", "name": "Are French doors weatherproof in cold climates?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. DECA French doors use compression seals and EPDM gaskets to create watertight, airtight barriers. Triple-glazed insulated units with thermal breaks prevent condensation and drafts even in cold climates like New England winters." } },
+    { "@type": "Question", "name": "How do I choose between French and sliding doors?", "acceptedAnswer": { "@type": "Answer", "text": "French doors are ideal for elegance, full opening width, and cross-ventilation in traditional homes. Sliding doors suit large panoramic openings in contemporary spaces. DECA offers both — contact us to discuss your project." } },
   ],
 };
 
@@ -36,13 +39,13 @@ export default function FrenchDoorsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="inline-block text-xs font-semibold tracking-wider uppercase text-blue-accent mb-3">Classic Style</span>
-              <h1 className="text-4xl md:text-5xl font-bold text-text-primary leading-tight mb-4">French Doors</h1>
+              <span className="inline-block text-xs font-semibold tracking-wider uppercase text-blue-accent mb-3">Classic European Style</span>
+              <h1 className="text-4xl md:text-5xl font-bold text-text-primary leading-tight mb-4">European French Swing Doors</h1>
               <p className="text-lg text-text-secondary leading-relaxed mb-6">
                 Elegant, functional, and classically beautiful. Flood interiors with light while creating seamless transitions to outdoor spaces. Available in single or double configurations.
               </p>
               <div className="flex gap-3 flex-wrap">
-                <Link href="/quote" className="bg-blue-accent hover:bg-blue-hover text-white px-7 py-3.5 rounded font-semibold transition-colors">Get Custom Quote</Link>
+                <AnimatedCTA href="/quote" id="french-hero">Get Custom Quote</AnimatedCTA>
                 <Link href="/doors" className="border border-border text-text-primary hover:border-blue-accent/30 px-7 py-3.5 rounded font-semibold transition-colors">All Doors</Link>
               </div>
             </div>
@@ -69,18 +72,27 @@ export default function FrenchDoorsPage() {
         <SectionTitle badge="Benefits" title="Why French Doors?" subtitle="Elegance, light, and seamless indoor-outdoor transitions." />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { title: "Maximum Natural Light", desc: "Full-height glass panes flood interiors with daylight, reducing artificial lighting needs.", photoDesc: "Фото: гостиная залитая светом через французские двери" },
-            { title: "Unobstructed Passage", desc: "Both doors swing fully open — 100% clear passage. Move furniture, enjoy full airflow.", photoDesc: "Фото: полностью открытые французские двери — свободный проход на террасу" },
-            { title: "Visual Elegance", desc: "Symmetrical glass-paned design is timelessly beautiful. Works in any architectural style.", photoDesc: "Фото: французские двери в классическом интерьере — симметрия и элегантность" },
-            { title: "Superior Airflow", desc: "Both doors create cross-ventilation. Cool homes naturally with fresh air circulation.", photoDesc: "Фото: открытые французские двери — ветер и свежий воздух в комнате" },
-            { title: "Mechanical Simplicity", desc: "Hinged mechanism is reliable for decades. No tracks to clean, no rollers to fail.", photoDesc: "Фото: петли французской двери — надёжный механизм" },
-            { title: "Flexible Configurations", desc: "Single, double, triple, with sidelights and transoms. Fully customizable.", photoDesc: "Фото: различные конфигурации французских дверей — от одинарной до тройной" },
+            { title: "Maximum Natural Light", desc: "Full-height glass panes flood interiors with daylight, reducing artificial lighting needs.", photoDesc: "Фото: гостиная залитая светом через французские двери", icon: "M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636" },
+            { title: "Unobstructed Passage", desc: "Both doors swing fully open — 100% clear passage. Move furniture, enjoy full airflow.", photoDesc: "Фото: полностью открытые французские двери — свободный проход на террасу", icon: "M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" },
+            { title: "Visual Elegance", desc: "Symmetrical glass-paned design is timelessly beautiful. Works in any architectural style.", photoDesc: "Фото: французские двери в классическом интерьере — симметрия и элегантность", icon: "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" },
+            { title: "Superior Airflow", desc: "Both doors create cross-ventilation. Cool homes naturally with fresh air circulation.", photoDesc: "Фото: открытые французские двери — ветер и свежий воздух в комнате", icon: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+            { title: "Mechanical Simplicity", desc: "Hinged mechanism is reliable for decades. No tracks to clean, no rollers to fail.", photoDesc: "Фото: петли французской двери — надёжный механизм", icon: "M11.42 15.17l-5.658-5.658a1 1 0 010-1.414l5.658-5.658m0 0L15.66 6.9a1 1 0 010 1.414L9.82 14.172" },
+            { title: "Flexible Configurations", desc: "Single, double, triple, with sidelights and transoms. Fully customizable.", photoDesc: "Фото: различные конфигурации французских дверей — от одинарной до тройной", icon: "M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5" },
           ].map((b) => (
-            <div key={b.title} className="bg-white rounded-xl border border-border overflow-hidden hover:shadow-md transition-all">
+            <div key={b.title} className="group bg-white rounded-xl border border-border overflow-hidden hover:shadow-lg hover:border-blue-accent/20 transition-all">
               <PhotoPlaceholder description={b.photoDesc} height="h-40" className="rounded-none border-0" />
               <div className="p-5">
-                <h2 className="font-semibold text-text-primary mb-2">{b.title}</h2>
-                <p className="text-sm text-text-muted leading-relaxed">{b.desc}</p>
+                <div className="flex items-start gap-3">
+                  <div className="shrink-0 w-9 h-9 rounded-lg bg-blue-light flex items-center justify-center mt-0.5">
+                    <svg className="w-4.5 h-4.5 text-blue-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={b.icon} />
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 className="font-semibold text-text-primary mb-1 group-hover:text-blue-accent transition-colors">{b.title}</h2>
+                    <p className="text-sm text-text-muted leading-relaxed">{b.desc}</p>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
@@ -97,7 +109,7 @@ export default function FrenchDoorsPage() {
             { name: "With Sidelights", desc: "Pair flanked by fixed glass panels. Maximum light and architectural presence.", photoDesc: "Фото: двойные французские двери с боковыми стеклянными панелями" },
             { name: "With Transom", desc: "Fixed transom window above extends height. Additional light and ventilation.", photoDesc: "Фото: французские двери с фрамугой сверху — высокий потолок" },
           ].map((config) => (
-            <div key={config.name} className="bg-white rounded-xl border border-border overflow-hidden">
+            <div key={config.name} className="bg-white rounded-xl border border-border overflow-hidden hover:shadow-md transition-all">
               <PhotoPlaceholder description={config.photoDesc} height="h-48" className="rounded-none border-0" />
               <div className="p-6">
                 <h2 className="font-bold text-text-primary text-lg mb-2">{config.name}</h2>
@@ -139,9 +151,9 @@ export default function FrenchDoorsPage() {
       <Section gray>
         <SectionTitle title="French Doors vs. Sliding Doors" />
         <div className="overflow-x-auto">
-          <table className="w-full max-w-4xl mx-auto text-sm">
+          <table className="w-full max-w-4xl mx-auto text-sm rounded-xl overflow-hidden">
             <thead>
-              <tr className="bg-navy-950 text-white">
+              <tr className="bg-brand text-white">
                 <th className="px-5 py-3.5 text-left font-medium">Feature</th>
                 <th className="px-5 py-3.5 text-center font-medium">French Doors</th>
                 <th className="px-5 py-3.5 text-center font-medium">Sliding Doors</th>
@@ -178,8 +190,6 @@ export default function FrenchDoorsPage() {
         </div>
       </Section>
 
-
-
       {/* ═══════ REVIEWS ═══════ */}
       <ReviewsSection />
 
@@ -192,9 +202,12 @@ export default function FrenchDoorsPage() {
         <div className="grid md:grid-cols-3 gap-6">
           <GuideCard title="Entry & Front Doors" desc="Premium security and design for your main entrance." href="/doors/entry-doors" photoDesc="Фото: парадная входная дверь DECA" />
           <GuideCard title="Sliding Patio Doors" desc="Panoramic openings up to 20 feet wide." href="/sliding-doors" photoDesc="Фото: раздвижная панорамная дверь" />
-          <GuideCard title="Door Maintenance Guide" desc="Keep your doors performing beautifully for decades." href="/blog" photoDesc="Фото: обслуживание дверной фурнитуры — смазка петель" />
+          <GuideCard title="Technology & Performance" desc="Learn about our European engineering and energy efficiency." href="/performance" photoDesc="Фото: технические характеристики окон и дверей DECA" />
         </div>
       </Section>
+
+      {/* ═══════ PROCESS ═══════ */}
+      <ProcessSection />
 
       <CTAWithDocs
         title="Add Elegance with French Doors"
@@ -223,6 +236,9 @@ export default function FrenchDoorsPage() {
           ))}
         </div>
       </Section>
+
+      {/* ═══════ LEAD MAGNET ═══════ */}
+      <LeadMagnet />
 
       <StickyCTA />
     </>
