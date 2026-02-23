@@ -61,7 +61,7 @@ export default function MaterialsSection({
               <img
                 src={m.image}
                 alt={`${m.name} door profile by DECA Windows`}
-                className="w-3/4 object-contain object-bottom max-h-[75%] px-4 pt-4 group-hover:scale-105 transition-transform duration-500"
+                className="w-[86%] object-contain object-bottom max-h-[86%] px-4 pt-4 group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
               {/* Material badge */}
