@@ -8,6 +8,7 @@ import CTAWithDocs from "@/components/CTAWithDocs";
 import StickyCTA from "@/components/StickyCTA";
 import AnimatedStats from "@/components/AnimatedStats";
 import MaterialsSection from "@/components/MaterialsSection";
+import GalleryLightbox from "@/components/GalleryLightbox";
 
 export const metadata: Metadata = {
   title: "Entry Doors & Front Doors | Secure European Design | DECA Windows",
@@ -164,26 +165,21 @@ export default function EntryDoorsPage() {
       </Section>
 
       {/* Gallery */}
-      <Section gray>
-        <SectionTitle badge="Gallery" title="Entry Doors in Real Homes" />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <PhotoPlaceholder 
-            description="Фото: парадная входная дверь с боковыми панелями — классический стиль" 
-            height="h-48"
-          />
-          <PhotoPlaceholder 
-            description="Фото: современная входная дверь — антрацит, минималистичная ручка" 
-            height="h-48"
-          />
-          <PhotoPlaceholder 
-            description="Фото: двустворчатая входная дверь с декоративным остеклением" 
-            height="h-48"
-          />
-          <PhotoPlaceholder 
-            description="Фото: входная дверь с фрамугой — вечернее освещение крыльца" 
-            height="h-48"
-          />
-        </div>
+      <Section>
+        <SectionTitle badge="Our Work" title="Entry Doors in Real Homes" subtitle="DECA doors installed across New England." />
+        <GalleryLightbox
+          alt="DECA entry door installation"
+          items={[
+            { src: "/assets/gallery/gallery-1.webp", tall: true },
+            { src: "/assets/gallery/gallery-2.webp", tall: true },
+            { src: "/assets/gallery/gallery-3.webp" },
+            { src: "/assets/gallery/gallery-4.webp" },
+            { src: "/assets/gallery/gallery-5.webp" },
+            { src: "/assets/gallery/gallery-6.webp" },
+            { src: "/assets/gallery/gallery-7.webp" },
+            { src: "/assets/gallery/gallery-8.webp" },
+          ]}
+        />
       </Section>
 
 

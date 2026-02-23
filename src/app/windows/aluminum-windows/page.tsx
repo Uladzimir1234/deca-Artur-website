@@ -7,6 +7,7 @@ import DeliveryMapSection from "@/components/DeliveryMapSection";
 import CTAWithDocs from "@/components/CTAWithDocs";
 import StickyCTA from "@/components/StickyCTA";
 import AnimatedStats from "@/components/AnimatedStats";
+import GalleryLightbox from "@/components/GalleryLightbox";
 
 export const metadata: Metadata = {
   title: "Aluminum Windows | Modern European Design | DECA Windows",
@@ -179,13 +180,20 @@ export default function AluminumWindowsPage() {
 
       {/* Gallery */}
       <Section>
-        <SectionTitle badge="Gallery" title="Aluminum Windows in Projects" />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <PhotoPlaceholder description="Фото: современный дом с алюминиевыми окнами от пола до потолка" height="h-48" />
-          <PhotoPlaceholder description="Фото: коммерческое здание — фасад с алюминиевым остеклением" height="h-48" />
-          <PhotoPlaceholder description="Фото: интерьер лофта с панорамными алюминиевыми окнами" height="h-48" />
-          <PhotoPlaceholder description="Фото: угловое остекление алюминиевым профилем — вид снаружи" height="h-48" />
-        </div>
+        <SectionTitle badge="Our Work" title="Aluminum Windows in Projects" subtitle="DECA aluminum windows in residential and commercial applications." />
+        <GalleryLightbox
+          alt="DECA aluminum window installation"
+          items={[
+            { src: "/assets/gallery/gallery-1.webp", tall: true },
+            { src: "/assets/gallery/gallery-2.webp", tall: true },
+            { src: "/assets/gallery/gallery-3.webp" },
+            { src: "/assets/gallery/gallery-4.webp" },
+            { src: "/assets/gallery/gallery-5.webp" },
+            { src: "/assets/gallery/gallery-6.webp" },
+            { src: "/assets/gallery/gallery-7.webp" },
+            { src: "/assets/gallery/gallery-8.webp" },
+          ]}
+        />
       </Section>
 
 

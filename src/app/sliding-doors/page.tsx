@@ -8,6 +8,7 @@ import CTAWithDocs from "@/components/CTAWithDocs";
 import StickyCTA from "@/components/StickyCTA";
 import AnimatedStats from "@/components/AnimatedStats";
 import MaterialsSection from "@/components/MaterialsSection";
+import GalleryLightbox from "@/components/GalleryLightbox";
 
 export const metadata: Metadata = {
   title: "Sliding Door Systems | PSk, Lift & Slide | DECA Windows",
@@ -179,15 +180,22 @@ export default function SlidingDoorsPage() {
         </div>
       </Section>
 
-      {/* Gallery - Figma Pattern: 4-Column Image Grid */}
+      {/* Gallery */}
       <Section>
-        <SectionTitle badge="Gallery" title="Sliding Doors in Real Homes" />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <PhotoPlaceholder description="Фото: панорамные раздвижные двери в гостиной с выходом на террасу" height="h-48" />
-          <PhotoPlaceholder description="Фото: Lift & Slide дверь с видом на сад — полностью открыта" height="h-48" />
-          <PhotoPlaceholder description="Фото: раздвижная дверь на кухне — стык внутреннего и наружного пространства" height="h-48" />
-          <PhotoPlaceholder description="Фото: вечерний вид дома с подсвеченными раздвижными дверями DECA" height="h-48" />
-        </div>
+        <SectionTitle badge="Our Work" title="Sliding Doors in Real Homes" subtitle="DECA doors installed across New England." />
+        <GalleryLightbox
+          alt="DECA sliding door installation"
+          items={[
+            { src: "/assets/gallery/gallery-1.webp", tall: true },
+            { src: "/assets/gallery/gallery-2.webp", tall: true },
+            { src: "/assets/gallery/gallery-3.webp" },
+            { src: "/assets/gallery/gallery-4.webp" },
+            { src: "/assets/gallery/gallery-5.webp" },
+            { src: "/assets/gallery/gallery-6.webp" },
+            { src: "/assets/gallery/gallery-7.webp" },
+            { src: "/assets/gallery/gallery-8.webp" },
+          ]}
+        />
       </Section>
 
 
