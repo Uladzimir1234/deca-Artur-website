@@ -46,7 +46,7 @@ const navItems = [
       { href: "/faq", label: "FAQ" },
     ],
   },
-  { href: "/calculator", label: "Calculator", highlight: true },
+  { href: "/configurator", label: "Configurator", highlight: true },
   { href: "/professionals", label: "For Pros" },
   { href: "/quote", label: "Contact" },
 ];
