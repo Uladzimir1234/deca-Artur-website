@@ -1,14 +1,17 @@
 "use client";
 
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui";
 
 /* ═══════════════════════════════════════════════════════════
-   CDN & CONSTANTS
+   CDN & ACCENT COLOR
    ═══════════════════════════════════════════════════════════ */
 const CDN = "https://assets.brogawindows.com";
+const ACCENT = "#e8873a";          // DECA orange
+const ACCENT_HOVER = "#d47630";
+const ACCENT_LIGHT = "#fef3ec";    // light orange bg
 
 /* ═══════════════════════════════════════════════════════════
    TYPES
@@ -31,7 +34,6 @@ interface Config {
 /* ═══════════════════════════════════════════════════════════
    DATA
    ═══════════════════════════════════════════════════════════ */
-
 const FRAME_TYPES = [
   {
     id: "elegance",
@@ -77,7 +79,7 @@ const FRAME_TYPES = [
   },
 ];
 
-const COLORS = [
+const COLORS: { id: string; label: string; hex: string; price: number; fileKey: string; isWood?: boolean }[] = [
   { id: "white", label: "White", hex: "#F5F5F0", price: 0, fileKey: "white" },
   { id: "black", label: "Black", hex: "#1A1A1A", price: 108.59, fileKey: "black" },
   { id: "antasit-grey", label: "Antasit Grey", hex: "#6B6B6B", price: 108.59, fileKey: "antasit_grey" },
@@ -202,7 +204,8 @@ function RatingBar({ label, value, max = 10 }: { label: string; value: number; m
         {Array.from({ length: max }).map((_, i) => (
           <div
             key={i}
-            className={`h-2 flex-1 rounded-sm ${i < value ? "bg-yellow-400" : "bg-gray-200"}`}
+            className={`h-2 flex-1 rounded-sm ${i >= value ? "bg-gray-200" : ""}`}
+            style={i < value ? { backgroundColor: ACCENT } : undefined}
           />
         ))}
       </div>
@@ -257,7 +260,6 @@ function WindowPreview({ config, view }: { config: Config; view: "inside" | "out
           alt={layer.alt}
           fill
           className="object-contain"
-          style={{ transform: "scaleX(-1)" }}
           sizes="300px"
           priority={i === 0}
           unoptimized
@@ -275,11 +277,13 @@ function Sidebar({
   currentStep,
   total,
   discounted,
+  quoteUrl,
 }: {
   config: Config;
   currentStep: number;
   total: number;
   discounted: number;
+  quoteUrl: string;
 }) {
   const frame = FRAME_TYPES.find((f) => f.id === config.frameType)!;
   const colorIn = COLORS.find((c) => c.id === config.colorInside)!;
@@ -324,15 +328,18 @@ function Sidebar({
       </div>
 
       {/* Spec rows */}
-      <div className="max-h-[450px] overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
+      <div className="max-h-[520px] overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
         {rows.map((row, i) => {
           const isActive = row.stepIndex === currentStep;
           return (
             <div
               key={i}
-              className={`px-4 py-2 border-b border-gray-100 transition-colors ${
-                isActive ? "border-l-4 border-l-yellow-400 bg-yellow-50" : "border-l-4 border-l-transparent"
-              }`}
+              className="px-4 py-2 border-b border-gray-100 border-l-4 transition-colors"
+              style={
+                isActive
+                  ? { borderLeftColor: ACCENT, backgroundColor: ACCENT_LIGHT }
+                  : { borderLeftColor: "transparent" }
+              }
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
@@ -366,19 +373,40 @@ function Sidebar({
       <div className="px-4 py-3 border-t border-gray-200">
         <textarea
           placeholder="Comment"
-          className="w-full text-xs border border-gray-200 rounded px-3 py-2 resize-none focus:outline-none focus:border-yellow-400"
+          className="w-full text-xs border border-gray-200 rounded px-3 py-2 resize-none focus:outline-none"
+          style={{ borderColor: undefined }}
+          onFocus={(e) => (e.target.style.borderColor = ACCENT)}
+          onBlur={(e) => (e.target.style.borderColor = "")}
           rows={2}
         />
       </div>
 
-      {/* Quote button */}
+      {/* Quote button — links to quote page */}
       <div className="px-4 pb-4">
-        <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-sm py-2.5 rounded transition-colors">
+        <Link
+          href={quoteUrl}
+          className="block w-full text-center text-white font-bold text-sm py-2.5 rounded transition-colors"
+          style={{ backgroundColor: ACCENT }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
+        >
           Request a Quote
-        </button>
+        </Link>
       </div>
     </div>
   );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SELECTED CARD STYLE (reusable)
+   ═══════════════════════════════════════════════════════════ */
+function selectedCardStyle(isSelected: boolean): React.CSSProperties {
+  if (!isSelected) return {};
+  return {
+    borderColor: ACCENT,
+    backgroundColor: ACCENT_LIGHT,
+    boxShadow: `0 4px 6px -1px ${ACCENT}20`,
+  };
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -408,7 +436,9 @@ function StepTagNumber({
         value={config.tagNumber}
         onChange={(e) => onChange({ tagNumber: e.target.value })}
         placeholder="e.g., Kitchen Window 1, Master Bedroom..."
-        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-yellow-400 mb-6"
+        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none mb-6"
+        onFocus={(e) => (e.target.style.borderColor = ACCENT)}
+        onBlur={(e) => (e.target.style.borderColor = "")}
       />
       <div className="flex gap-3 justify-center">
         <button
@@ -419,7 +449,10 @@ function StepTagNumber({
         </button>
         <button
           onClick={onApply}
-          className="px-8 py-2.5 bg-yellow-400 hover:bg-yellow-500 rounded-lg text-sm font-bold text-gray-900 transition-colors"
+          className="px-8 py-2.5 rounded-lg text-sm font-bold text-white transition-colors"
+          style={{ backgroundColor: ACCENT }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
         >
           Apply
         </button>
@@ -451,17 +484,13 @@ function StepFrameType({
               key={frame.id}
               onClick={() => onChange({ frameType: frame.id })}
               className={`relative p-4 rounded-lg border-2 text-left transition-all ${
-                isSelected
-                  ? "border-yellow-400 bg-yellow-50/50 shadow-md"
-                  : "border-gray-200 hover:border-gray-300 bg-white"
+                isSelected ? "shadow-md" : "border-gray-200 hover:border-gray-300 bg-white"
               }`}
+              style={selectedCardStyle(isSelected)}
             >
-              {/* Checkbox */}
               <div className="absolute top-3 left-3">
                 <CheckIcon checked={isSelected} />
               </div>
-
-              {/* Warranty badge */}
               <div className="flex justify-end mb-2">
                 <Image
                   src={frame.warrantyBadge}
@@ -471,8 +500,6 @@ function StepFrameType({
                   unoptimized
                 />
               </div>
-
-              {/* Label & price */}
               <h3 className="font-bold text-base text-gray-900 mb-1">{frame.label}</h3>
               {frame.basePrice > FRAME_TYPES[0].basePrice && (
                 <p className="text-green-600 text-xs font-semibold mb-2">
@@ -482,8 +509,6 @@ function StepFrameType({
               {frame.id === "elegance" && (
                 <p className="text-gray-400 text-xs font-semibold mb-2">Standard</p>
               )}
-
-              {/* Profile cross-section image */}
               <div className="relative w-full h-28 mb-3">
                 <Image
                   src={frame.profileImg}
@@ -493,21 +518,13 @@ function StepFrameType({
                   unoptimized
                 />
               </div>
-
-              {/* Chambers */}
               <p className="text-xs text-gray-500 mb-3">{frame.chambers} chambers</p>
-
-              {/* Performance ratings */}
               <div className="space-y-1.5">
                 <RatingBar label="Sound Proof" value={frame.soundProof} />
                 <RatingBar label="Energy Efficiency" value={frame.energyEfficiency} />
                 <RatingBar label="Blow Protection" value={frame.blowProtection} />
               </div>
-
-              {/* Description */}
-              <p className="text-[11px] text-gray-400 mt-3 leading-relaxed">
-                {frame.description}
-              </p>
+              <p className="text-[11px] text-gray-400 mt-3 leading-relaxed">{frame.description}</p>
             </button>
           );
         })}
@@ -539,16 +556,13 @@ function StepColorSelect({
               key={color.id}
               onClick={() => onSelect(color.id)}
               className={`relative p-4 rounded-lg border-2 text-left transition-all ${
-                isSelected
-                  ? "border-yellow-400 bg-yellow-50/50 shadow-md"
-                  : "border-gray-200 hover:border-gray-300 bg-white"
+                isSelected ? "shadow-md" : "border-gray-200 hover:border-gray-300 bg-white"
               }`}
+              style={selectedCardStyle(isSelected)}
             >
               <div className="absolute top-3 left-3">
                 <CheckIcon checked={isSelected} />
               </div>
-
-              {/* Color name & price */}
               <div className="flex items-start justify-between mb-3 pl-7">
                 <span className="font-semibold text-sm text-gray-900">{color.label}</span>
                 {color.price > 0 ? (
@@ -557,8 +571,6 @@ function StepColorSelect({
                   <span className="text-gray-400 text-xs font-semibold">Standard</span>
                 )}
               </div>
-
-              {/* Color swatch */}
               <div
                 className="w-full h-24 rounded-lg border border-gray-200"
                 style={{
@@ -603,10 +615,9 @@ function StepTwoOptions({
               key={opt.id}
               onClick={() => onSelect(opt.id)}
               className={`relative p-5 rounded-lg border-2 text-left transition-all ${
-                isSelected
-                  ? "border-yellow-400 bg-yellow-50/50 shadow-md"
-                  : "border-gray-200 hover:border-gray-300 bg-white"
+                isSelected ? "shadow-md" : "border-gray-200 hover:border-gray-300 bg-white"
               }`}
+              style={selectedCardStyle(isSelected)}
             >
               <div className="flex items-start gap-3 mb-3">
                 <CheckIcon checked={isSelected} />
@@ -619,13 +630,9 @@ function StepTwoOptions({
                       <span className="text-gray-400 text-xs font-semibold">Standard</span>
                     )}
                   </div>
-                  {opt.desc && (
-                    <p className="text-xs text-gray-500 mt-1">{opt.desc}</p>
-                  )}
+                  {opt.desc && <p className="text-xs text-gray-500 mt-1">{opt.desc}</p>}
                 </div>
               </div>
-
-              {/* Option image */}
               {renderImage && (
                 <div className="relative w-full h-48 rounded-lg overflow-hidden bg-gray-50">
                   {renderImage(opt.id)}
@@ -666,10 +673,9 @@ function StepThreeOptions({
               key={opt.id}
               onClick={() => onSelect(opt.id)}
               className={`relative p-4 rounded-lg border-2 text-left transition-all ${
-                isSelected
-                  ? "border-yellow-400 bg-yellow-50/50 shadow-md"
-                  : "border-gray-200 hover:border-gray-300 bg-white"
+                isSelected ? "shadow-md" : "border-gray-200 hover:border-gray-300 bg-white"
               }`}
+              style={selectedCardStyle(isSelected)}
             >
               <div className="flex items-start gap-3 mb-3">
                 <CheckIcon checked={isSelected} />
@@ -682,12 +688,9 @@ function StepThreeOptions({
                       <span className="text-gray-400 text-xs font-semibold">Standard</span>
                     )}
                   </div>
-                  {opt.desc && (
-                    <p className="text-xs text-gray-500 mt-1">{opt.desc}</p>
-                  )}
+                  {opt.desc && <p className="text-xs text-gray-500 mt-1">{opt.desc}</p>}
                 </div>
               </div>
-
               {renderImage && (
                 <div className="relative w-full h-36 rounded-lg overflow-hidden bg-gray-50">
                   {renderImage(opt.id)}
@@ -702,7 +705,7 @@ function StepThreeOptions({
 }
 
 /* ═══════════════════════════════════════════════════════════
-   GLASS PANE TYPE STEP — with cross-section illustrations
+   GLASS PANE TYPE STEP — cross-section illustrations
    ═══════════════════════════════════════════════════════════ */
 function GlassPaneTypeImage({ id }: { id: string }) {
   const panes = id === "triple" ? 3 : 2;
@@ -724,18 +727,15 @@ function GlassPaneTypeImage({ id }: { id: string }) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SPACER BAR STEP — with cross-section illustrations
+   SPACER BAR STEP — cross-section illustrations
    ═══════════════════════════════════════════════════════════ */
 function SpacerBarImage({ id }: { id: string }) {
-  const barColor =
-    id === "aluminum" ? "#C0C0C0" : id === "gray-warm" ? "#808080" : "#333333";
+  const barColor = id === "aluminum" ? "#C0C0C0" : id === "gray-warm" ? "#808080" : "#333333";
   return (
     <div className="flex items-center justify-center h-full">
       <svg width="120" height="80" viewBox="0 0 120 80">
-        {/* Two glass panes */}
         <rect x="10" y="5" width="3" height="70" rx="1" fill="#B8D4E8" />
         <rect x="107" y="5" width="3" height="70" rx="1" fill="#B8D4E8" />
-        {/* Spacer bar */}
         <rect x="25" y="25" width="70" height="30" rx="2" fill={barColor} opacity="0.8" />
         <rect x="30" y="30" width="60" height="20" rx="1" fill={barColor} />
       </svg>
@@ -744,33 +744,27 @@ function SpacerBarImage({ id }: { id: string }) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   HINGE STEP — with images from CDN
+   HINGE STEP
    ═══════════════════════════════════════════════════════════ */
 function HingeImage({ id }: { id: string }) {
-  if (id === "standard") {
-    return (
-      <div className="flex items-center justify-center h-full bg-gray-50 p-4">
-        <div className="text-center">
-          <svg className="w-20 h-20 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <rect x="3" y="3" width="4" height="18" rx="1" strokeWidth="1.5" />
-            <rect x="8" y="7" width="13" height="10" rx="1" strokeWidth="1.5" />
-            <circle cx="5" cy="8" r="0.5" fill="currentColor" />
-            <circle cx="5" cy="16" r="0.5" fill="currentColor" />
-          </svg>
-          <p className="text-[11px] text-gray-400 mt-2">Colonial or classic style</p>
-        </div>
-      </div>
-    );
-  }
   return (
     <div className="flex items-center justify-center h-full bg-gray-50 p-4">
       <div className="text-center">
         <svg className="w-20 h-20 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <rect x="3" y="3" width="4" height="18" rx="1" strokeWidth="1.5" />
           <rect x="8" y="7" width="13" height="10" rx="1" strokeWidth="1.5" />
-          <line x1="7" y1="10" x2="7" y2="14" strokeWidth="2" />
+          {id === "standard" ? (
+            <>
+              <circle cx="5" cy="8" r="0.5" fill="currentColor" />
+              <circle cx="5" cy="16" r="0.5" fill="currentColor" />
+            </>
+          ) : (
+            <line x1="7" y1="10" x2="7" y2="14" strokeWidth="2" />
+          )}
         </svg>
-        <p className="text-[11px] text-gray-400 mt-2">Modern and minimalist look</p>
+        <p className="text-[11px] text-gray-400 mt-2">
+          {id === "standard" ? "Colonial or classic style" : "Modern and minimalist look"}
+        </p>
       </div>
     </div>
   );
@@ -780,7 +774,6 @@ function HingeImage({ id }: { id: string }) {
    HANDLE MODEL STEP
    ═══════════════════════════════════════════════════════════ */
 function HandleModelImage({ id }: { id: string }) {
-  // Simple handle illustrations
   const shapes: Record<string, React.ReactNode> = {
     "line-t": (
       <svg className="w-16 h-32" viewBox="0 0 40 80">
@@ -802,7 +795,6 @@ function HandleModelImage({ id }: { id: string }) {
       </svg>
     ),
   };
-
   return (
     <div className="flex items-center justify-center h-full bg-gray-50">
       {shapes[id] || shapes["line-t"]}
@@ -831,10 +823,9 @@ function StepHandleColor({
               key={color.id}
               onClick={() => onSelect(color.id)}
               className={`relative p-4 rounded-lg border-2 text-left transition-all ${
-                isSelected
-                  ? "border-yellow-400 bg-yellow-50/50 shadow-md"
-                  : "border-gray-200 hover:border-gray-300 bg-white"
+                isSelected ? "shadow-md" : "border-gray-200 hover:border-gray-300 bg-white"
               }`}
+              style={selectedCardStyle(isSelected)}
             >
               <div className="flex items-start gap-3 mb-3">
                 <CheckIcon checked={isSelected} />
@@ -849,8 +840,6 @@ function StepHandleColor({
                   </div>
                 </div>
               </div>
-
-              {/* Color swatch */}
               <div
                 className="w-full h-20 rounded-lg border border-gray-200"
                 style={{ backgroundColor: color.hex }}
@@ -870,6 +859,7 @@ export function ConfiguratorContent() {
   const [step, setStep] = useState(0);
   const [config, setConfig] = useState<Config>(DEFAULT_CONFIG);
   const [previewView, setPreviewView] = useState<"inside" | "outside">("inside");
+  const centerRef = useRef<HTMLDivElement>(null);
 
   const update = useCallback((partial: Partial<Config>) => {
     setConfig((prev) => ({ ...prev, ...partial }));
@@ -880,6 +870,11 @@ export function ConfiguratorContent() {
   const totalSteps = STEP_LABELS.length;
   const progressPercent = ((step + 1) / totalSteps) * 100;
 
+  // Scroll center column to top on step change
+  useEffect(() => {
+    centerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [step]);
+
   const goNext = () => setStep((s) => Math.min(s + 1, totalSteps - 1));
   const goPrev = () => setStep((s) => Math.max(s - 1, 0));
   const startAgain = () => {
@@ -887,19 +882,16 @@ export function ConfiguratorContent() {
     setConfig(DEFAULT_CONFIG);
   };
   const resetStep = () => {
-    // Reset current step's value to default
     const key = [
       "tagNumber", "frameType", "colorInside", "colorOutside",
       "glassPaneType", "glassPane", "spacerBar", "glassType",
       "grid", "hinges", "handleModel", "handleColor",
     ][step] as keyof Config;
-    if (key) {
-      update({ [key]: DEFAULT_CONFIG[key] });
-    }
+    if (key) update({ [key]: DEFAULT_CONFIG[key] });
   };
 
   /* Build config string for quote page */
-  const buildQuoteUrl = () => {
+  const quoteUrl = useMemo(() => {
     const frame = FRAME_TYPES.find((f) => f.id === config.frameType)!;
     const colorIn = COLORS.find((c) => c.id === config.colorInside)!;
     const colorOut = COLORS.find((c) => c.id === config.colorOutside)!;
@@ -908,7 +900,7 @@ export function ConfiguratorContent() {
     const spacer = SPACER_BARS.find((s) => s.id === config.spacerBar)!;
     const glassT = GLASS_TYPES.find((g) => g.id === config.glassType)!;
     const grid = GRID_OPTIONS.find((g) => g.id === config.grid)!;
-    const hinges = HINGE_OPTIONS.find((h) => h.id === config.hinges)!;
+    const hingesVal = HINGE_OPTIONS.find((h) => h.id === config.hinges)!;
     const handle = HANDLE_MODELS.find((h) => h.id === config.handleModel)!;
     const handleC = HANDLE_COLORS.find((c) => c.id === config.handleColor)!;
 
@@ -921,119 +913,42 @@ export function ConfiguratorContent() {
       `Spacer: ${spacer.label}`,
       `Type: ${glassT.label}`,
       `Grid: ${grid.label}`,
-      `Hinges: ${hinges.label}`,
+      `Hinges: ${hingesVal.label}`,
       `Handle: ${handle.label}`,
       `Handle Color: ${handleC.label}`,
-      `Estimate: $${discounted.toFixed(2)}`,
+      `Estimate: $${(+(calcTotal(config).discounted)).toFixed(2)}`,
     ].join(" | ");
 
     return `/quote?config=${encodeURIComponent(configString)}`;
-  };
+  }, [config]);
 
   /* ── Render current step content ── */
   const renderStep = () => {
     switch (step) {
       case 0:
-        return (
-          <StepTagNumber
-            config={config}
-            onChange={update}
-            onSkip={goNext}
-            onApply={goNext}
-          />
-        );
+        return <StepTagNumber config={config} onChange={update} onSkip={goNext} onApply={goNext} />;
       case 1:
         return <StepFrameType config={config} onChange={update} />;
       case 2:
-        return (
-          <StepColorSelect
-            title="Select Frame Finish Inside:"
-            selectedId={config.colorInside}
-            onSelect={(id) => update({ colorInside: id })}
-          />
-        );
+        return <StepColorSelect title="Select Frame Finish Inside:" selectedId={config.colorInside} onSelect={(id) => update({ colorInside: id })} />;
       case 3:
-        return (
-          <StepColorSelect
-            title="Select Frame Finish Outside:"
-            selectedId={config.colorOutside}
-            onSelect={(id) => update({ colorOutside: id })}
-          />
-        );
+        return <StepColorSelect title="Select Frame Finish Outside:" selectedId={config.colorOutside} onSelect={(id) => update({ colorOutside: id })} />;
       case 4:
-        return (
-          <StepTwoOptions
-            title="Select Glass Pane Type:"
-            options={GLASS_PANE_TYPES}
-            selectedId={config.glassPaneType}
-            onSelect={(id) => update({ glassPaneType: id })}
-            renderImage={(id) => <GlassPaneTypeImage id={id} />}
-          />
-        );
+        return <StepTwoOptions title="Select Glass Pane Type:" options={GLASS_PANE_TYPES} selectedId={config.glassPaneType} onSelect={(id) => update({ glassPaneType: id })} renderImage={(id) => <GlassPaneTypeImage id={id} />} />;
       case 5:
-        return (
-          <StepTwoOptions
-            title="Select Glass Pane:"
-            options={GLASS_PANES}
-            selectedId={config.glassPane}
-            onSelect={(id) => update({ glassPane: id })}
-          />
-        );
+        return <StepTwoOptions title="Select Glass Pane:" options={GLASS_PANES} selectedId={config.glassPane} onSelect={(id) => update({ glassPane: id })} />;
       case 6:
-        return (
-          <StepThreeOptions
-            title="Select Glass Spacer Bar:"
-            options={SPACER_BARS}
-            selectedId={config.spacerBar}
-            onSelect={(id) => update({ spacerBar: id })}
-            renderImage={(id) => <SpacerBarImage id={id} />}
-          />
-        );
+        return <StepThreeOptions title="Select Glass Spacer Bar:" options={SPACER_BARS} selectedId={config.spacerBar} onSelect={(id) => update({ spacerBar: id })} renderImage={(id) => <SpacerBarImage id={id} />} />;
       case 7:
-        return (
-          <StepTwoOptions
-            title="Select Glass Type:"
-            options={GLASS_TYPES}
-            selectedId={config.glassType}
-            onSelect={(id) => update({ glassType: id })}
-          />
-        );
+        return <StepTwoOptions title="Select Glass Type:" options={GLASS_TYPES} selectedId={config.glassType} onSelect={(id) => update({ glassType: id })} />;
       case 8:
-        return (
-          <StepTwoOptions
-            title="Select Grid:"
-            options={GRID_OPTIONS}
-            selectedId={config.grid}
-            onSelect={(id) => update({ grid: id })}
-          />
-        );
+        return <StepTwoOptions title="Select Grid:" options={GRID_OPTIONS} selectedId={config.grid} onSelect={(id) => update({ grid: id })} />;
       case 9:
-        return (
-          <StepTwoOptions
-            title="Select Hinges Type:"
-            options={HINGE_OPTIONS}
-            selectedId={config.hinges}
-            onSelect={(id) => update({ hinges: id })}
-            renderImage={(id) => <HingeImage id={id} />}
-          />
-        );
+        return <StepTwoOptions title="Select Hinges Type:" options={HINGE_OPTIONS} selectedId={config.hinges} onSelect={(id) => update({ hinges: id })} renderImage={(id) => <HingeImage id={id} />} />;
       case 10:
-        return (
-          <StepThreeOptions
-            title="Select Handle Model:"
-            options={HANDLE_MODELS}
-            selectedId={config.handleModel}
-            onSelect={(id) => update({ handleModel: id })}
-            renderImage={(id) => <HandleModelImage id={id} />}
-          />
-        );
+        return <StepThreeOptions title="Select Handle Model:" options={HANDLE_MODELS} selectedId={config.handleModel} onSelect={(id) => update({ handleModel: id })} renderImage={(id) => <HandleModelImage id={id} />} />;
       case 11:
-        return (
-          <StepHandleColor
-            selectedId={config.handleColor}
-            onSelect={(id) => update({ handleColor: id })}
-          />
-        );
+        return <StepHandleColor selectedId={config.handleColor} onSelect={(id) => update({ handleColor: id })} />;
       default:
         return null;
     }
@@ -1061,7 +976,6 @@ export function ConfiguratorContent() {
 
           {/* ── LEFT COLUMN: Window Preview ── */}
           <div className="lg:sticky lg:top-4 lg:self-start space-y-4">
-            {/* Preview image */}
             <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
               <div className="p-2">
                 <WindowPreview config={config} view={previewView} />
@@ -1070,36 +984,25 @@ export function ConfiguratorContent() {
 
             {/* Inside / Outside toggle */}
             <div className="flex">
-              <button
-                onClick={() => setPreviewView("inside")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold border transition-colors ${
-                  previewView === "inside"
-                    ? "bg-yellow-400 border-yellow-400 text-gray-900"
-                    : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
-                }`}
-                style={{ borderRadius: "6px 0 0 6px" }}
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-                Inside
-              </button>
-              <button
-                onClick={() => setPreviewView("outside")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold border transition-colors ${
-                  previewView === "outside"
-                    ? "bg-yellow-400 border-yellow-400 text-gray-900"
-                    : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
-                }`}
-                style={{ borderRadius: "0 6px 6px 0" }}
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-                Outside
-              </button>
+              {(["inside", "outside"] as const).map((view) => (
+                <button
+                  key={view}
+                  onClick={() => setPreviewView(view)}
+                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold border transition-colors ${
+                    previewView !== view ? "bg-white border-gray-200 text-gray-600 hover:bg-gray-50" : "text-white"
+                  }`}
+                  style={{
+                    borderRadius: view === "inside" ? "6px 0 0 6px" : "0 6px 6px 0",
+                    ...(previewView === view ? { backgroundColor: ACCENT, borderColor: ACCENT } : {}),
+                  }}
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  {view === "inside" ? "Inside" : "Outside"}
+                </button>
+              ))}
             </div>
 
             {/* Total price */}
@@ -1108,10 +1011,17 @@ export function ConfiguratorContent() {
               <span className="text-2xl font-bold text-green-600">${discounted.toFixed(2)}</span>
             </div>
 
-            {/* Finish Assembly / Request Quote */}
+            {/* Finish Assembly */}
             <Link
-              href={buildQuoteUrl()}
-              className="flex items-center justify-center gap-2 w-full py-3 border-2 border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:border-yellow-400 hover:bg-yellow-50 transition-colors"
+              href={quoteUrl}
+              className="flex items-center justify-center gap-2 w-full py-3 border-2 rounded-lg text-sm font-semibold transition-colors"
+              style={{ borderColor: ACCENT, color: ACCENT }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = ACCENT_LIGHT;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "";
+              }}
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -1121,7 +1031,7 @@ export function ConfiguratorContent() {
           </div>
 
           {/* ── CENTER COLUMN: Step Content ── */}
-          <div className="min-w-0">
+          <div className="min-w-0" ref={centerRef}>
             {/* Navigation bar */}
             <div className="flex items-center justify-between mb-3">
               <button
@@ -1136,21 +1046,14 @@ export function ConfiguratorContent() {
                 </svg>
                 Back
               </button>
-
               <div className="flex items-center gap-4">
-                <button
-                  onClick={startAgain}
-                  className="flex items-center gap-1 text-sm font-medium text-green-600 hover:text-green-700 transition-colors"
-                >
+                <button onClick={startAgain} className="flex items-center gap-1 text-sm font-medium text-green-600 hover:text-green-700 transition-colors">
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                   </svg>
                   Start Again
                 </button>
-                <button
-                  onClick={resetStep}
-                  className="flex items-center gap-1 text-sm font-medium text-red-500 hover:text-red-600 transition-colors"
-                >
+                <button onClick={resetStep} className="flex items-center gap-1 text-sm font-medium text-red-500 hover:text-red-600 transition-colors">
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
@@ -1162,8 +1065,8 @@ export function ConfiguratorContent() {
             {/* Progress bar */}
             <div className="h-1 bg-gray-200 rounded-full mb-6 overflow-hidden">
               <div
-                className="h-full bg-yellow-400 rounded-full transition-all duration-300"
-                style={{ width: `${progressPercent}%` }}
+                className="h-full rounded-full transition-all duration-300"
+                style={{ width: `${progressPercent}%`, backgroundColor: ACCENT }}
               />
             </div>
 
@@ -1172,12 +1075,15 @@ export function ConfiguratorContent() {
               {renderStep()}
             </div>
 
-            {/* Next button (below step content for steps other than tag) */}
+            {/* Next button */}
             {step > 0 && step < totalSteps - 1 && (
               <div className="flex justify-end mt-4">
                 <button
                   onClick={goNext}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-sm rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-6 py-2.5 text-white font-bold text-sm rounded-lg transition-colors"
+                  style={{ backgroundColor: ACCENT }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
                 >
                   Next Step
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -1187,12 +1093,15 @@ export function ConfiguratorContent() {
               </div>
             )}
 
-            {/* Final step: Finish Assembly CTA */}
+            {/* Final step CTA */}
             {step === totalSteps - 1 && (
               <div className="flex justify-center mt-6">
                 <Link
-                  href={buildQuoteUrl()}
-                  className="flex items-center gap-2 px-8 py-3 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-sm rounded-lg transition-colors shadow-md"
+                  href={quoteUrl}
+                  className="flex items-center gap-2 px-8 py-3 text-white font-bold text-sm rounded-lg transition-colors shadow-md"
+                  style={{ backgroundColor: ACCENT }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -1210,6 +1119,7 @@ export function ConfiguratorContent() {
               currentStep={step}
               total={total}
               discounted={discounted}
+              quoteUrl={quoteUrl}
             />
           </div>
         </div>
