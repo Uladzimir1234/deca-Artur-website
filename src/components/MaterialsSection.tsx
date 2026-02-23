@@ -57,11 +57,11 @@ export default function MaterialsSection({
             className="group bg-white rounded-2xl border border-border overflow-hidden hover:shadow-xl hover:border-blue-accent/20 transition-all duration-300"
           >
             {/* Image */}
-            <div className="relative h-56 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+            <div className="relative h-72 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
               <img
                 src={m.image}
                 alt={`${m.name} door profile by DECA Windows`}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
               {/* Material badge */}
