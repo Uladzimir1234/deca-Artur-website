@@ -11,7 +11,7 @@ export default function ThankYouPage() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Hero banner with gradient */}
-      <section className="relative bg-gradient-to-br from-brand via-brand to-brand-light pt-48 pb-16 px-4 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-brand via-brand to-brand-light pt-48 pb-28 px-4 overflow-hidden">
         {/* Decorative circles */}
         <div className="absolute top-20 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-10 w-48 h-48 bg-accent/10 rounded-full blur-2xl" />
@@ -40,7 +40,7 @@ export default function ThankYouPage() {
       </section>
 
       {/* Main content */}
-      <main className="flex-1 px-4 -mt-6">
+      <main className="flex-1 px-4 -mt-20 relative z-10">
         <div className="max-w-3xl mx-auto">
           {/* Timeline + CTA row */}
           <div className="grid md:grid-cols-5 gap-4 mb-8">
