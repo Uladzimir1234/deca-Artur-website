@@ -76,30 +76,23 @@ export default function FrenchDoorsPage() {
       {/* Benefits */}
       <Section>
         <SectionTitle badge="Benefits" title="Why French Doors?" subtitle="Elegance, light, and seamless indoor-outdoor transitions." />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {[
-            { title: "Maximum Natural Light", desc: "Full-height glass panes flood interiors with daylight, reducing artificial lighting needs.", photoDesc: "Фото: гостиная залитая светом через французские двери", icon: "M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636" },
-            { title: "Unobstructed Passage", desc: "Both doors swing fully open — 100% clear passage. Move furniture, enjoy full airflow.", photoDesc: "Фото: полностью открытые французские двери — свободный проход на террасу", icon: "M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" },
-            { title: "Visual Elegance", desc: "Symmetrical glass-paned design is timelessly beautiful. Works in any architectural style.", photoDesc: "Фото: французские двери в классическом интерьере — симметрия и элегантность", icon: "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" },
-            { title: "Superior Airflow", desc: "Both doors create cross-ventilation. Cool homes naturally with fresh air circulation.", photoDesc: "Фото: открытые французские двери — ветер и свежий воздух в комнате", icon: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-            { title: "Mechanical Simplicity", desc: "Hinged mechanism is reliable for decades. No tracks to clean, no rollers to fail.", photoDesc: "Фото: петли французской двери — надёжный механизм", icon: "M11.42 15.17l-5.658-5.658a1 1 0 010-1.414l5.658-5.658m0 0L15.66 6.9a1 1 0 010 1.414L9.82 14.172" },
-            { title: "Flexible Configurations", desc: "Single, double, triple, with sidelights and transoms. Fully customizable.", photoDesc: "Фото: различные конфигурации французских дверей — от одинарной до тройной", icon: "M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5" },
+            { title: "Maximum Natural Light", desc: "Full-height glass floods interiors with daylight.", icon: "M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" },
+            { title: "Unobstructed Passage", desc: "100% clear opening for full airflow and access.", icon: "M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" },
+            { title: "Visual Elegance", desc: "Timeless symmetrical design for any style.", icon: "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" },
+            { title: "Superior Airflow", desc: "Cross-ventilation cools homes naturally.", icon: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+            { title: "Mechanical Simplicity", desc: "Reliable hinges — no tracks or rollers.", icon: "M21.75 6.75a4.5 4.5 0 01-4.884 4.484c-1.076-.091-2.264.071-2.95.904l-7.152 8.684a2.548 2.548 0 11-3.586-3.586l8.684-7.152c.833-.686.995-1.874.904-2.95a4.5 4.5 0 016.336-4.486l-3.276 3.276a3.004 3.004 0 002.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852z" },
+            { title: "Flexible Configurations", desc: "Single, double, with sidelights & transoms.", icon: "M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5" },
           ].map((b) => (
-            <div key={b.title} className="group bg-white rounded-xl border border-border overflow-hidden hover:shadow-lg hover:border-blue-accent/20 transition-all">
-              <PhotoPlaceholder description={b.photoDesc} height="h-40" className="rounded-none border-0" />
-              <div className="p-5">
-                <div className="flex items-start gap-3">
-                  <div className="shrink-0 w-9 h-9 rounded-lg bg-blue-light flex items-center justify-center mt-0.5">
-                    <svg className="w-4.5 h-4.5 text-blue-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={b.icon} />
-                    </svg>
-                  </div>
-                  <div>
-                    <h2 className="font-semibold text-text-primary mb-1 group-hover:text-blue-accent transition-colors">{b.title}</h2>
-                    <p className="text-sm text-text-muted leading-relaxed">{b.desc}</p>
-                  </div>
-                </div>
+            <div key={b.title} className="group bg-white rounded-xl border border-border p-5 text-center hover:shadow-lg hover:border-blue-accent/20 transition-all">
+              <div className="w-11 h-11 rounded-xl bg-blue-light flex items-center justify-center mx-auto mb-3 group-hover:bg-brand group-hover:scale-110 transition-all">
+                <svg className="w-5 h-5 text-blue-accent group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d={b.icon} />
+                </svg>
               </div>
+              <h2 className="font-semibold text-text-primary text-sm mb-1 group-hover:text-blue-accent transition-colors">{b.title}</h2>
+              <p className="text-xs text-text-muted leading-relaxed">{b.desc}</p>
             </div>
           ))}
         </div>
