@@ -6,7 +6,7 @@ import ReviewsSection from "@/components/ReviewsSection";
 import DeliveryMapSection from "@/components/DeliveryMapSection";
 import CTAWithDocs from "@/components/CTAWithDocs";
 import StickyCTA from "@/components/StickyCTA";
-import AnimatedStatCard from "@/components/AnimatedStatCard";
+import AnimatedStats from "@/components/AnimatedStats";
 
 export const metadata: Metadata = {
   title: "Entry Doors & Front Doors | Secure European Design | DECA Windows",
@@ -55,12 +55,17 @@ export default function EntryDoorsPage() {
       </section>
 
       {/* Stats */}
-      <section className="bg-warm-gray py-8 border-y border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <AnimatedStatCard value="7" label="Lock Points" />
-          <AnimatedStatCard value="RC3" label="Security Rating" />
-          <AnimatedStatCard value="0.8" label="Best U-Value" />
-          <AnimatedStatCard value="50+" label="Year Lifespan" />
+      <section className="bg-brand text-white py-5 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.06, backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <AnimatedStats
+            stats={[
+              { value: 7, label: "Lock Points", icon: <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg> },
+              { value: 3, prefix: "RC", label: "Security Rating", icon: <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg> },
+              { value: 0.8, label: "Best U-Value (W/m²K)", decimals: 1, icon: <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /></svg> },
+              { value: 50, suffix: "+", label: "Year Lifespan", icon: <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg> },
+            ]}
+          />
         </div>
       </section>
 

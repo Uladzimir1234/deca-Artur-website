@@ -6,7 +6,7 @@ import ReviewsSection from "@/components/ReviewsSection";
 import DeliveryMapSection from "@/components/DeliveryMapSection";
 import CTAWithDocs from "@/components/CTAWithDocs";
 import StickyCTA from "@/components/StickyCTA";
-import AnimatedStatCard from "@/components/AnimatedStatCard";
+import AnimatedStats from "@/components/AnimatedStats";
 
 export const metadata: Metadata = {
   title: "Aluminum Windows | Modern European Design | DECA Windows",
@@ -52,12 +52,17 @@ export default function AluminumWindowsPage() {
       </section>
 
       {/* Stats */}
-      <section className="bg-warm-gray py-8 border-y border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <AnimatedStatCard value="92%" label="Glass Area" />
-          <AnimatedStatCard value="0.20" label="Best U-Value" />
-          <AnimatedStatCard value={'1.75"'} label="Slimmest Profile" />
-          <AnimatedStatCard value="50+" label="Year Lifespan" />
+      <section className="bg-brand text-white py-5 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.06, backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <AnimatedStats
+            stats={[
+              { value: 92, suffix: "%", label: "Glass Area", icon: <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" /></svg> },
+              { value: 0.20, label: "Best U-Value (W/m²K)", decimals: 2, icon: <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /></svg> },
+              { value: 1.75, suffix: '"', label: "Slimmest Profile", decimals: 2, icon: <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125Z" /></svg> },
+              { value: 50, suffix: "+", label: "Year Lifespan", icon: <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg> },
+            ]}
+          />
         </div>
       </section>
 
