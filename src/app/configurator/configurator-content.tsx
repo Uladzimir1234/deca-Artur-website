@@ -247,8 +247,12 @@ function WindowPreview({ config, view }: { config: Config; view: "inside" | "out
     { src: `${base}/frame/${frame.prefix}_${colorKey}.png`, alt: "Frame" },
     { src: `${base}/glazing_option/${spacerKey}.png`, alt: "Spacer" },
     { src: `${base}/glass/glass.png`, alt: "Glass" },
-    { src: `${base}/hinges/${colorKey}.png`, alt: "Hinges" },
-    { src: `${base}/handle/${handleModelKey}/no_keyed/${handleColorKey}.png`, alt: "Handle" },
+    ...(view === "inside"
+      ? [
+          { src: `${base}/hinges/${colorKey}.png`, alt: "Hinges" },
+          { src: `${base}/handle/${handleModelKey}/no_keyed/${handleColorKey}.png`, alt: "Handle" },
+        ]
+      : []),
   ];
 
   return (
