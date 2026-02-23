@@ -1,20 +1,13 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
+import { articles } from "@/data/articles";
 
-const filters = ["All", "Buying Guides", "Comparisons", "Energy Efficiency", "Costs & ROI", "Technical"];
-
-const articles = [
-  { title: "European vs American Windows: Complete Comparison", tag: "Comparison", author: "Technical Director", readTime: "8 min" },
-  { title: "How to Choose Replacement Windows: 2026 Buying Guide", tag: "Buying Guides", author: "Installation Lead", readTime: "12 min" },
-  { title: "How Much Do New Windows Cost? Price Guide", tag: "Costs & ROI", author: "Vladimir, CEO", readTime: "10 min" },
-  { title: "Triple vs Double Pane: Which Should You Choose?", tag: "Comparison", author: "Technical Director", readTime: "7 min" },
-  { title: "Are Energy Efficient Windows Worth the Investment?", tag: "Energy Efficiency", author: "Technical Director", readTime: "9 min" },
-  { title: "Tilt & Turn vs Double Hung: Which Is Better?", tag: "Comparison", author: "Technical Director", readTime: "6 min" },
-];
+const filters = ["All", "Buying Guides", "Comparisons", "Energy Efficiency", "Costs & ROI"];
 
 export default function BlogContent() {
   const [activeFilter, setActiveFilter] = useState("All");
-  const filtered = activeFilter === "All" ? articles : articles.filter((a) => a.tag === activeFilter);
+  const filtered = activeFilter === "All" ? articles : articles.filter((a) => a.category === activeFilter);
 
   return (
     <>
@@ -36,21 +29,35 @@ export default function BlogContent() {
       {/* Articles grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {filtered.map((article) => (
-          <div key={article.title} className="bg-white rounded-xl border border-border overflow-hidden hover:shadow-lg transition-all cursor-pointer group">
-            <div className="bg-warm-gray h-44 flex items-center justify-center text-text-muted text-sm group-hover:bg-blue-light transition-colors">
-              [Article Image]
-            </div>
-            <div className="p-5">
-              <span className="inline-block text-xs font-semibold text-blue-accent bg-blue-light px-2.5 py-1 rounded mb-2">{article.tag}</span>
-              <h3 className="font-semibold text-text-primary text-sm leading-tight mb-3 group-hover:text-blue-accent transition-colors">{article.title}</h3>
-              <div className="flex items-center justify-between text-xs text-text-muted">
-                <span>By {article.author}</span>
-                <span>{article.readTime} read</span>
+          <Link key={article.slug} href={`/blog/${article.slug}`} className="group block">
+            <div className="bg-white rounded-xl border border-border overflow-hidden hover:shadow-lg transition-all">
+              <div className="h-44 overflow-hidden">
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-5">
+                <span className="inline-block text-xs font-semibold text-blue-accent bg-blue-light px-2.5 py-1 rounded mb-2">{article.category}</span>
+                <h3 className="font-semibold text-text-primary text-sm leading-tight mb-3 group-hover:text-blue-accent transition-colors">{article.title}</h3>
+                <p className="text-xs text-text-muted leading-relaxed mb-3 line-clamp-2">{article.excerpt}</p>
+                <div className="flex items-center justify-between text-xs text-text-muted">
+                  <span>By {article.author}</span>
+                  <span>{article.readTime} read</span>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
+
+      {filtered.length === 0 && (
+        <div className="text-center py-16 text-text-muted">
+          <p>No articles found in this category yet.</p>
+        </div>
+      )}
     </>
   );
 }
