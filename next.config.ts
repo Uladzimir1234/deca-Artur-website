@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         hostname: "gealanwindows.com",
         pathname: "/app/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "assets.brogawindows.com",
+        pathname: "/images/**",
+      },
     ],
   },
 };

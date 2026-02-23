@@ -1,11 +1,13 @@
 import Link from "next/link";
-import { Breadcrumb, Section, SectionTitle, PhotoPlaceholder } from "@/components/ui";
+import { Breadcrumb, Section, SectionTitle } from "@/components/ui";
 import type { Metadata } from "next";
 import ReviewsSection from "@/components/ReviewsSection";
 import DeliveryMapSection from "@/components/DeliveryMapSection";
 import StickyCTA from "@/components/StickyCTA";
 import B2BContactForm from "@/components/B2BContactForm";
 import AnimatedStatCard from "@/components/AnimatedStatCard";
+
+const CDN = "https://assets.brogawindows.com";
 
 export const metadata: Metadata = {
   title: "Commercial Projects | Multi-Family, Office & Retail | DECA Windows",
@@ -57,7 +59,10 @@ export default function CommercialPage() {
               </Link>
             </div>
           </div>
-          <PhotoPlaceholder description="Фото: многоквартирный жилой комплекс с установленными окнами DECA" height="h-80" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <div className="h-80 rounded-xl overflow-hidden">
+            <img src={`${CDN}/images/windows/tilt/gallery/3.webp`} alt="European windows in a commercial building project" className="w-full h-full object-cover" style={{ transform: "scaleX(-1)" }} loading="lazy" />
+          </div>
         </div>
       </Section>
 

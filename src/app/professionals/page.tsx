@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Breadcrumb, Section, SectionTitle, PhotoPlaceholder } from "@/components/ui";
+import { Breadcrumb, Section, SectionTitle } from "@/components/ui";
 import type { Metadata } from "next";
 import ReviewsSection from "@/components/ReviewsSection";
 import DeliveryMapSection from "@/components/DeliveryMapSection";
@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   description: "Premium European-style windows for contractors, architects, builders, and dealers. Volume pricing, custom specifications, and dedicated technical support.",
   alternates: { canonical: "/professionals" },
 };
+
+const CDN = "https://assets.brogawindows.com";
+
+/* eslint-disable @next/next/no-img-element */
+function Img({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
+  return <img src={src} alt={alt} className={`w-full h-full object-cover ${className}`} style={{ transform: "scaleX(-1)" }} loading="lazy" />;
+}
 
 export default function ProfessionalsPage() {
   return (
@@ -32,7 +39,9 @@ export default function ProfessionalsPage() {
                 Get Professional Pricing
               </Link>
             </div>
-            <PhotoPlaceholder description="Фото: строительная площадка — монтажная бригада устанавливает окна DECA в новостройке" height="h-[400px]" />
+            <div className="h-[400px] rounded-xl overflow-hidden">
+              <Img src={`${CDN}/images/windows/tilt/gallery/1.webp`} alt="European tilt & turn windows installed in a modern home" />
+            </div>
           </div>
         </div>
       </section>
@@ -52,15 +61,17 @@ export default function ProfessionalsPage() {
         <SectionTitle badge="Advantages" title="Why Professionals Choose DECA" />
         <div className="grid md:grid-cols-3 gap-6">
           {[
-            { title: "Custom to Spec", desc: "Any size, shape, or configuration manufactured to your exact specifications at our MA facility.", photoDesc: "Фото: нестандартное окно DECA — арочная форма, изготовленное по спецификации" },
-            { title: "Volume Pricing", desc: "Quantity-based discounts. Larger orders = better pricing. Factory-direct, no middleman.", photoDesc: "Фото: склад готовых окон — крупная партия для застройщика" },
-            { title: "Technical Support", desc: "Dedicated project support, detailed specs, and installation guidance throughout.", photoDesc: "Фото: технический консультант DECA на стройплощадке с подрядчиком" },
-            { title: "Local Manufacturing", desc: "Made in Massachusetts. 4-week production. Reliable delivery across the Northeast.", photoDesc: "Фото: производственная линия DECA в Вестфилде, MA" },
-            { title: "Exceed Codes", desc: "Windows exceed building codes by up to 300%. NFRC certified, ENERGY STAR ready, LEED eligible.", photoDesc: "Фото: сертификаты NFRC и ENERGY STAR для окон DECA" },
-            { title: "Partnership Program", desc: "Become a DECA dealer or preferred installer. Training, marketing support, priority pricing.", photoDesc: "Фото: рукопожатие — партнёрское соглашение с дилером DECA" },
+            { title: "Custom to Spec", desc: "Any size, shape, or configuration manufactured to your exact specifications at our MA facility.", img: `${CDN}/images/shared/our-projects/3_cover.webp` },
+            { title: "Volume Pricing", desc: "Quantity-based discounts. Larger orders = better pricing. Factory-direct, no middleman.", img: `${CDN}/images/shared/our-projects/1_cover.webp` },
+            { title: "Technical Support", desc: "Dedicated project support, detailed specs, and installation guidance throughout.", img: `${CDN}/images/shared/our-projects/5_cover.webp` },
+            { title: "Local Manufacturing", desc: "Made in Massachusetts. 4-week production. Reliable delivery across the Northeast.", img: `${CDN}/images/shared/our-projects/4_cover.webp` },
+            { title: "Exceed Codes", desc: "Windows exceed building codes by up to 300%. NFRC certified, ENERGY STAR ready, LEED eligible.", img: `${CDN}/images/shared/our-projects/6_cover.webp` },
+            { title: "Partnership Program", desc: "Become a DECA dealer or preferred installer. Training, marketing support, priority pricing.", img: `${CDN}/images/banners/allmetrodecor/p2.webp` },
           ].map((item) => (
             <div key={item.title} className="bg-white rounded-xl border border-border overflow-hidden hover:shadow-md transition-all">
-              <PhotoPlaceholder description={item.photoDesc} height="h-40" className="rounded-none border-0" />
+              <div className="h-40 overflow-hidden">
+                <Img src={item.img} alt={item.title} />
+              </div>
               <div className="p-5">
                 <h2 className="font-semibold text-text-primary mb-2">{item.title}</h2>
                 <p className="text-sm text-text-muted leading-relaxed">{item.desc}</p>
@@ -75,13 +86,15 @@ export default function ProfessionalsPage() {
         <SectionTitle badge="Segments" title="Solutions for Your Business" subtitle="Explore dedicated resources for your industry." />
         <div className="grid md:grid-cols-2 gap-8">
           {[
-            { title: "Contractors & Builders", href: "/professionals/contractors", desc: "Volume pricing, on-time delivery, dedicated project manager. Built for your construction schedule.", photoDesc: "Фото: подрядчик на строительной площадке с чертежами окон DECA" },
-            { title: "Architects & Designers", href: "/professionals/architects", desc: "Custom specs, CAD/BIM data, NFRC reports, and 200+ RAL colors. Design without compromise.", photoDesc: "Фото: архитектор за рабочим столом с образцами профилей DECA" },
-            { title: "Dealers & Installers", href: "/professionals/dealers", desc: "Territory exclusivity, dealer pricing, training, and marketing support. Grow your business with DECA.", photoDesc: "Фото: шоурум дилера DECA с образцами окон и дверей" },
-            { title: "Commercial Projects", href: "/professionals/commercial", desc: "Multi-family, office, retail, historic renovation. Engineering support and phased delivery at scale.", photoDesc: "Фото: многоквартирный дом с окнами DECA — коммерческий проект" },
+            { title: "Contractors & Builders", href: "/professionals/contractors", desc: "Volume pricing, on-time delivery, dedicated project manager. Built for your construction schedule.", img: `${CDN}/images/windows/tilt/gallery/2.webp` },
+            { title: "Architects & Designers", href: "/professionals/architects", desc: "Custom specs, CAD/BIM data, NFRC reports, and 200+ RAL colors. Design without compromise.", img: `${CDN}/images/shared/our-projects/7_cover.webp` },
+            { title: "Dealers & Installers", href: "/professionals/dealers", desc: "Territory exclusivity, dealer pricing, training, and marketing support. Grow your business with DECA.", img: `${CDN}/images/banners/allmetrodecor/p1.webp` },
+            { title: "Commercial Projects", href: "/professionals/commercial", desc: "Multi-family, office, retail, historic renovation. Engineering support and phased delivery at scale.", img: `${CDN}/images/shared/our-projects/10_cover.webp` },
           ].map((s) => (
             <Link key={s.title} href={s.href} className="group block bg-white rounded-xl border border-border overflow-hidden transition-all hover:shadow-xl hover:border-blue-accent/20">
-              <PhotoPlaceholder description={s.photoDesc} height="h-48" className="rounded-none border-0" />
+              <div className="h-48 overflow-hidden">
+                <Img src={s.img} alt={s.title} />
+              </div>
               <div className="p-6 flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-bold text-text-primary text-lg mb-2 group-hover:text-blue-accent transition-colors">{s.title}</h3>
@@ -97,10 +110,6 @@ export default function ProfessionalsPage() {
           ))}
         </div>
       </Section>
-
-      {/* Testimonials — hidden until real B2B testimonials are collected from contractors/architects */}
-
-
 
       {/* ═══════ REVIEWS ═══════ */}
       <ReviewsSection />

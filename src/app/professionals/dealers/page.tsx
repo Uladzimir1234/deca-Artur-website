@@ -1,11 +1,13 @@
 import Link from "next/link";
-import { Breadcrumb, Section, SectionTitle, PhotoPlaceholder } from "@/components/ui";
+import { Breadcrumb, Section, SectionTitle } from "@/components/ui";
 import type { Metadata } from "next";
 import ReviewsSection from "@/components/ReviewsSection";
 import DeliveryMapSection from "@/components/DeliveryMapSection";
 import StickyCTA from "@/components/StickyCTA";
 import B2BContactForm from "@/components/B2BContactForm";
 import AnimatedStatCard from "@/components/AnimatedStatCard";
+
+const CDN = "https://assets.brogawindows.com";
 
 export const metadata: Metadata = {
   title: "For Dealers & Installers | Partnership Program | DECA Windows",
@@ -57,7 +59,10 @@ export default function DealersPage() {
               </Link>
             </div>
           </div>
-          <PhotoPlaceholder description="Фото: шоурум дилера DECA с образцами окон и дверей, клиент консультируется" height="h-80" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <div className="h-80 rounded-xl overflow-hidden">
+            <img src={`${CDN}/images/banners/allmetrodecor/p1.webp`} alt="Window and door showroom display" className="w-full h-full object-cover" style={{ transform: "scaleX(-1)" }} loading="lazy" />
+          </div>
         </div>
       </Section>
 
