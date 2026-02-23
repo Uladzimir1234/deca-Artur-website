@@ -10,6 +10,7 @@ import AnimatedStats from "@/components/AnimatedStats";
 import ProcessSection from "@/components/ProcessSection";
 import LeadMagnet from "@/components/LeadMagnet";
 import MaterialsSection from "@/components/MaterialsSection";
+import GalleryLightbox from "@/components/GalleryLightbox";
 
 export const metadata: Metadata = {
   title: "European French Doors | Custom Swing Doors in Massachusetts | DECA",
@@ -182,15 +183,24 @@ export default function FrenchDoorsPage() {
       </Section>
 
       {/* Gallery */}
-      <Section>
-        <SectionTitle badge="Gallery" title="French Doors in Real Homes" />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <PhotoPlaceholder description="Фото: белые французские двери в загородном доме — выход в сад" height="h-48" />
-          <PhotoPlaceholder description="Фото: антрацитовые французские двери — современный интерьер" height="h-48" />
-          <PhotoPlaceholder description="Фото: тройная конфигурация французских дверей — панорамный вид" height="h-48" />
-          <PhotoPlaceholder description="Фото: интерьерные французские двери между гостиной и столовой" height="h-48" />
-        </div>
-      </Section>
+      <section className="bg-warm-gray py-16 md:py-24">
+        <GalleryLightbox
+          badge="Our Work"
+          title="French Doors in Real Homes"
+          subtitle="DECA doors installed across New England."
+          alt="DECA French door installation"
+          items={[
+            { src: "/assets/gallery/gallery-1.webp", tall: true },
+            { src: "/assets/gallery/gallery-2.webp", tall: true },
+            { src: "/assets/gallery/gallery-3.webp" },
+            { src: "/assets/gallery/gallery-4.webp" },
+            { src: "/assets/gallery/gallery-5.webp" },
+            { src: "/assets/gallery/gallery-6.webp" },
+            { src: "/assets/gallery/gallery-7.webp" },
+            { src: "/assets/gallery/gallery-8.webp" },
+          ]}
+        />
+      </section>
 
       {/* ═══════ REVIEWS ═══════ */}
       <ReviewsSection />
