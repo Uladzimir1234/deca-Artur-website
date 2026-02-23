@@ -36,7 +36,6 @@ const navItems = [
   },
   {
     label: "Resources",
-    highlight: true,
     children: [
       { href: "/performance", label: "Technology & Performance" },
       { href: "/cases", label: "Customer Stories" },
