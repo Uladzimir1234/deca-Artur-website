@@ -101,7 +101,7 @@ export default function FrenchDoorsPage() {
       {/* Configurations */}
       <Section gray>
         <SectionTitle badge="Configurations" title="Opening Options" subtitle="Flexible designs that match your space and aesthetic." />
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
           {[
             { name: "Single French Door", desc: "One-panel swing for interior passages and narrow openings. 36-42\" widths.", photoDesc: "Фото: одинарная французская дверь — вид из коридора" },
             { name: "Double French Doors", desc: "Two matching doors swing open from center. 60-72\" total. Classic choice.", photoDesc: "Фото: двойные французские двери — симметричный вход на террасу" },
@@ -109,10 +109,10 @@ export default function FrenchDoorsPage() {
             { name: "With Transom", desc: "Fixed transom window above extends height. Additional light and ventilation.", photoDesc: "Фото: французские двери с фрамугой сверху — высокий потолок" },
           ].map((config) => (
             <div key={config.name} className="bg-white rounded-xl border border-border overflow-hidden hover:shadow-md transition-all">
-              <PhotoPlaceholder description={config.photoDesc} height="h-48" className="rounded-none border-0" />
-              <div className="p-6">
-                <h2 className="font-bold text-text-primary text-lg mb-2">{config.name}</h2>
-                <p className="text-sm text-text-secondary leading-relaxed">{config.desc}</p>
+              <PhotoPlaceholder description={config.photoDesc} height="h-44" className="rounded-none border-0" />
+              <div className="p-4">
+                <h2 className="font-bold text-text-primary text-sm mb-1">{config.name}</h2>
+                <p className="text-xs text-text-secondary leading-relaxed">{config.desc}</p>
               </div>
             </div>
           ))}
