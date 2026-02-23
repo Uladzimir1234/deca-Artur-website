@@ -9,6 +9,7 @@ import StickyCTA from "@/components/StickyCTA";
 import AnimatedStats from "@/components/AnimatedStats";
 import ProcessSection from "@/components/ProcessSection";
 import LeadMagnet from "@/components/LeadMagnet";
+import MaterialsSection from "@/components/MaterialsSection";
 
 export const metadata: Metadata = {
   title: "European French Doors | Custom Swing Doors in Massachusetts | DECA",
@@ -124,6 +125,9 @@ export default function FrenchDoorsPage() {
           ))}
         </div>
       </Section>
+
+      {/* Materials */}
+      <MaterialsSection />
 
       {/* Technical Specs */}
       <Section>

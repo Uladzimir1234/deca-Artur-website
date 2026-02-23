@@ -7,6 +7,7 @@ import DeliveryMapSection from "@/components/DeliveryMapSection";
 import CTAWithDocs from "@/components/CTAWithDocs";
 import StickyCTA from "@/components/StickyCTA";
 import AnimatedStats from "@/components/AnimatedStats";
+import MaterialsSection from "@/components/MaterialsSection";
 
 export const metadata: Metadata = {
   title: "Sliding Door Systems | PSk, Lift & Slide | DECA Windows",
@@ -137,6 +138,9 @@ export default function SlidingDoorsPage() {
           </div>
         </div>
       </Section>
+
+      {/* Materials */}
+      <MaterialsSection />
 
       {/* Comparison Table - Updated with GEALAN data */}
       <Section gray>

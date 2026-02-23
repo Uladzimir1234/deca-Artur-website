@@ -7,6 +7,7 @@ import DeliveryMapSection from "@/components/DeliveryMapSection";
 import CTAWithDocs from "@/components/CTAWithDocs";
 import StickyCTA from "@/components/StickyCTA";
 import AnimatedStats from "@/components/AnimatedStats";
+import MaterialsSection from "@/components/MaterialsSection";
 
 export const metadata: Metadata = {
   title: "Entry Doors & Front Doors | Secure European Design | DECA Windows",
@@ -104,6 +105,9 @@ export default function EntryDoorsPage() {
           />
         </div>
       </Section>
+
+      {/* Materials */}
+      <MaterialsSection />
 
       {/* Technical Specs */}
       <Section gray>
