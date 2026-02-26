@@ -2,6 +2,14 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 
+/* Keyframe for drop overlay animation */
+const dropOverlayStyle = `
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+`;
+
 interface Attachment {
   name: string;
   base64: string;
@@ -151,6 +159,8 @@ function ChatInterface({ token }: { token: string }) {
   const [attachment, setAttachment] = useState<Attachment | null>(null);
   const [sending, setSending] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
+  const dragCounterRef = useRef(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -222,6 +232,46 @@ function ChatInterface({ token }: { token: string }) {
     };
     document.addEventListener("paste", handlePaste);
     return () => document.removeEventListener("paste", handlePaste);
+  }, []);
+
+  // Drag & drop handlers
+  const handleDragEnter = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounterRef.current += 1;
+    if (e.dataTransfer.types.includes("Files")) {
+      setIsDraggingOver(true);
+    }
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounterRef.current -= 1;
+    if (dragCounterRef.current <= 0) {
+      dragCounterRef.current = 0;
+      setIsDraggingOver(false);
+    }
+  }, []);
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounterRef.current = 0;
+    setIsDraggingOver(false);
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      const file = files[0];
+      if (file.type.startsWith("image/")) {
+        handleFileSelect(file);
+      }
+    }
   }, []);
 
   const sendMessage = useCallback(async () => {
@@ -306,7 +356,32 @@ function ChatInterface({ token }: { token: string }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div
+      className="min-h-screen bg-gray-50 flex flex-col relative"
+      onDragEnter={handleDragEnter}
+      onDragLeave={handleDragLeave}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >
+      <style dangerouslySetInnerHTML={{ __html: dropOverlayStyle }} />
+
+      {/* Drag & Drop Overlay */}
+      {isDraggingOver && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none" style={{ backgroundColor: "rgba(56, 84, 170, 0.12)" }}>
+          <div className="border-[3px] border-dashed border-[#3854AA] rounded-3xl px-16 py-12 bg-white/90 backdrop-blur-sm shadow-2xl flex flex-col items-center gap-4 animate-[scaleIn_0.15s_ease-out]">
+            <div className="w-16 h-16 rounded-2xl bg-[#3854AA]/10 flex items-center justify-center">
+              <svg className="w-8 h-8 text-[#3854AA]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z" />
+              </svg>
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-semibold text-[#3854AA]">Drop screenshot here</p>
+              <p className="text-sm text-gray-500 mt-1">Image will be attached to your message</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {showHelp && <HelpPanel onClose={() => setShowHelp(false)} />}
 
       {/* Header */}
@@ -503,7 +578,7 @@ function ChatInterface({ token }: { token: string }) {
             </button>
           </div>
           <p className="text-[10px] text-gray-400 mt-2 text-center">
-            Attach screenshots with 📎 or paste (Ctrl+V). Changes appear on the site in ~30-60 seconds.
+            Drag & drop, paste (Ctrl+V), or click 📎 to attach a screenshot. Changes go live in ~30-60 sec.
           </p>
         </div>
       </div>
