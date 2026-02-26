@@ -1,0 +1,171 @@
+{
+  "slug": "windows",
+  "meta": {
+    "title": "European-Style Windows | uPVC & Aluminum | DECA Windows",
+    "description": "Premium tilt & turn, uPVC, and aluminum windows manufactured in Massachusetts. Industry-leading U-values, sound insulation, and security. Factory-direct pricing."
+  },
+  "hero": {
+    "badge": "Our Products",
+    "heading": "DECA Windows",
+    "subheading": "European engineering, manufactured in Massachusetts. Our windows deliver industry-leading thermal performance (U-value 0.10), exceptional noise reduction (45-50 dB), and multi-point security — all with factory-direct pricing and a 15-year warranty.",
+    "subcategories": [
+      {
+        "href": "/tilt-turn",
+        "label": "Tilt & Turn Windows",
+        "tag": "Most Popular",
+        "desc": "Two opening modes for ventilation, cleaning, and security."
+      },
+      {
+        "href": "/windows/upvc-windows",
+        "label": "uPVC / Vinyl Windows",
+        "tag": "Energy Efficient",
+        "desc": "6-chamber profile, exceptional thermal insulation."
+      },
+      {
+        "href": "/windows/aluminum-windows",
+        "label": "Aluminum Windows",
+        "tag": "Modern Design",
+        "desc": "Slim profiles, maximum glass area, contemporary aesthetics."
+      }
+    ],
+    "image": "https://gealanwindows.com/app/uploads/2024/09/GEALAN-LINEAR-13-1-1.webp",
+    "imageAlt": "DECA window collection — GEALAN-LINEAR windows installed in modern home"
+  },
+  "profileSystems": {
+    "badge": "Engineered in Germany",
+    "title": "GEALAN Profile Systems",
+    "subtitle": "We build with GEALAN — one of Europe's leading uPVC profile manufacturers with 50+ years of innovation.",
+    "systems": [
+      {
+        "title": "GEALAN-LINEAR",
+        "tag": "Premium",
+        "description": "Modern angular design with aluminum-like aesthetics. 3-level sealing, narrow visible widths for maximum glass area.",
+        "image": "https://gealanwindows.com/app/uploads/2024/09/LINEAR-2595x7001x7082_00191674-e1730101062788.webp",
+        "specs": [
+          ["U-Factor", "0.14–0.25"],
+          ["IGU", "0.8″–2.0″"],
+          ["Max Size", "11′6″ × 11′6″"],
+          ["Sealing", "3 Levels"]
+        ]
+      },
+      {
+        "title": "GEALAN S 8000",
+        "tag": "Popular",
+        "description": "Classic 5–6 chamber system with 3″ installation depth. Large main chamber for steel stiffeners, elements up to 80″.",
+        "image": "https://gealanwindows.com/app/uploads/2024/09/S-8000-2595x8001x8081_00191668-e1730100936341.webp",
+        "specs": [
+          ["U-Factor", "0.16–0.27"],
+          ["IGU", "0.8″–2.0″"],
+          ["Max Size", "11′6″ × 11′6″"],
+          ["Chambers", "5–6"]
+        ]
+      }
+    ],
+    "surfaceTechnology": {
+      "title": "GEALAN-acrylcolor Surface Technology",
+      "description": "Co-extruded acrylic surface (since 1980) — scratch-resistant, weather-resistant, lightfast, and dirt-resistant. Available in Matte, Smooth, Grained, and RealWood finishes. Over 40 standard colors + 200 RAL custom options."
+    },
+    "components": [
+      {
+        "title": "Multi-Point Locks",
+        "desc": "Up to 12 locking points for maximum security"
+      },
+      {
+        "title": "3-Level Sealing",
+        "desc": "EPDM triple sealing for air & water tightness"
+      },
+      {
+        "title": "Glass Packages",
+        "desc": "Double and triple glazing, IGU up to 2.0″"
+      },
+      {
+        "title": "FlexScreen Option",
+        "desc": "Virtually invisible spring-steel insect screens"
+      }
+    ]
+  },
+  "windowTypes": {
+    "badge": "Configurations",
+    "title": "Window Types",
+    "subtitle": "Available in uPVC and aluminum. All types support tilt & turn functionality.",
+    "types": [
+      { "name": "Fixed Window", "desc": "Maximum light, no opening mechanism" },
+      { "name": "Single Casement", "desc": "One tilt & turn sash" },
+      { "name": "Double Casement", "desc": "Two tilt & turn sashes" },
+      { "name": "Triple Casement", "desc": "Three-sash configuration" },
+      { "name": "Basement / Hopper", "desc": "Top-hinged inward tilt" },
+      { "name": "Custom Combo", "desc": "Any combination of fixed + operable" }
+    ]
+  },
+  "colors": {
+    "badge": "Customization",
+    "title": "Colors That Complement Your Style",
+    "subtitle": "Choose from over 40 standard colors and 200+ RAL custom options for both interior and exterior finishes.",
+    "swatches": [
+      { "name": "White", "color": "#FFFFFF" },
+      { "name": "Cream", "color": "#F5F0E1" },
+      { "name": "Light Gray", "color": "#C4C4C4" },
+      { "name": "Anthracite", "color": "#3C3C3C" },
+      { "name": "Dark Brown", "color": "#4A2E1C" },
+      { "name": "Golden Oak", "color": "#B8860B" },
+      { "name": "Mahogany", "color": "#6B3A2A" },
+      { "name": "Black", "color": "#1A1A1A" }
+    ],
+    "note": "Wood-grain laminate finishes also available. Contact us for samples"
+  },
+  "gallery": {
+    "badge": "Gallery",
+    "title": "Windows in Real Homes",
+    "items": [
+      { "src": "https://gealanwindows.com/app/uploads/2024/09/DSC03114-Edit-44.webp", "alt": "Panoramic window in living room" },
+      { "src": "https://gealanwindows.com/app/uploads/2024/09/DSC03069-Edit-34.webp", "alt": "Modern kitchen with DECA corner glazing" },
+      { "src": "https://gealanwindows.com/app/uploads/2024/09/DSC03344-1.webp", "alt": "Bedroom window with uPVC frame" },
+      { "src": "https://gealanwindows.com/app/uploads/2025/08/23-web-or-mls-16039-Austin-St-NE-23-2-1.webp", "alt": "Home exterior with various DECA window sizes" }
+    ]
+  },
+  "guides": {
+    "badge": "Resources",
+    "title": "Expert Guides and Instructions",
+    "items": [
+      {
+        "title": "How Tilt & Turn Windows Work",
+        "desc": "Complete guide to the dual-function opening mechanism that defines European windows."
+      },
+      {
+        "title": "Triple vs Double Glazing",
+        "desc": "Which glass package is right for your climate? A data-driven comparison."
+      },
+      {
+        "title": "Window Maintenance Guide",
+        "desc": "Simple steps to keep your DECA windows performing for decades."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Find Your Perfect Window",
+    "subtitle": "Get your custom order form, window blueprints, and detailed specification — all prepared for your project.",
+    "btnText": "Get a Quote"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "q": "What is the difference between uPVC and aluminum windows?",
+        "a": "uPVC windows offer superior thermal insulation and are more affordable. Aluminum windows provide slimmer profiles, larger glass areas, and a more modern aesthetic. Both are available in tilt & turn configuration with the same glazing and hardware options."
+      },
+      {
+        "q": "Can I get custom sizes and configurations?",
+        "a": "Yes. Every DECA window is made to order. We can accommodate virtually any size, shape, or configuration — including arched tops, angled shapes, and multi-unit combinations."
+      },
+      {
+        "q": "How do tilt & turn windows open?",
+        "a": "Tilt & turn windows have two modes controlled by a single handle. Turn the handle 90° to tilt the sash inward from the top for ventilation. Turn it 180° to swing the entire sash inward like a door for full opening and easy cleaning."
+      },
+      {
+        "q": "What glazing options are available?",
+        "a": "We offer double-glazed (U-value 0.25), triple-glazed (U-value 0.10-0.13), and laminated safety glass. All units come with argon fill, Low-E coating, and warm-edge spacer bars as standard."
+      }
+    ]
+  }
+}

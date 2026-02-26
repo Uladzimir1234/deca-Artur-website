@@ -1,0 +1,136 @@
+{
+  "meta": {
+    "title": "About DECA | European Technology, American Craftsmanship",
+    "description": "Elevating home comfort. European technology, American craftsmanship, Massachusetts quality. Learn about DECA Windows & Doors.",
+    "canonical": "/about"
+  },
+  "breadcrumb": {
+    "items": [
+      {
+        "label": "About DECA"
+      }
+    ]
+  },
+  "hero": {
+    "badge": "Our Story",
+    "heading": "About DECA",
+    "description": "Elevating home comfort. European technology, American craftsmanship, Massachusetts quality. We bring 70 years of German window engineering to American homes — manufactured locally in Westfield, MA.",
+    "cta": "Get in Touch",
+    "photoDesc": "Фото: производственный цех DECA в Вестфилде, Массачусетс — линия сборки окон"
+  },
+  "mission": {
+    "badge": "Our Mission",
+    "title": "Making European Windows Accessible",
+    "description": "Our mission is to make European-style windows and doors available to everyone by manufacturing them in the USA. Our products prioritize energy efficiency, sound insulation, thermal comfort, security, sleek aesthetics, durability, environmental considerations, and easy maintenance.",
+    "stats": [
+      {
+        "value": "70+",
+        "label": "Years of German Engineering"
+      },
+      {
+        "value": "500+",
+        "label": "Completed Projects"
+      },
+      {
+        "value": "15",
+        "label": "Year Warranty"
+      },
+      {
+        "value": "0.10",
+        "label": "Best U-Value"
+      }
+    ]
+  },
+  "difference": {
+    "badge": "Why DECA",
+    "title": "What Makes DECA Different",
+    "subtitle": "One of few local tilt & turn window manufacturers in the US.",
+    "mainImage": "https://gealanwindows.com/app/uploads/2024/09/8001-88x8095-88x7162_00163128_gGK-1.webp",
+    "imageAlt": "DECA window profile cross-section showing multi-chamber design vs standard American windows",
+    "heading": "European Standards, Local Production",
+    "description": "DECA is one of few local tilt and turn window manufacturers in the US. Taking advantage of German standards and technologies proven over 70 years, we deliver premium quality with the speed and warranties of domestic suppliers. Our well-streamlined production allows for more attainable pricing than European importers.",
+    "highlights": [
+      {
+        "title": "Factory-Direct Pricing",
+        "desc": "No import markups. 30-40% less than European imported windows."
+      },
+      {
+        "title": "4-Week Lead Time",
+        "desc": "Local manufacturing means faster delivery across the Northeast."
+      },
+      {
+        "title": "Domestic Warranties",
+        "desc": "15-year frame, 10-year glass, 5-year hardware — backed locally."
+      }
+    ]
+  },
+  "values": {
+    "badge": "Our Values",
+    "title": "Built on Quality, Driven by Innovation",
+    "items": [
+      {
+        "title": "Quality First",
+        "desc": "Every window is manufactured to exacting European standards with premium materials and rigorous quality control.",
+        "photoDesc": "Фото: контроль качества на производстве — проверка профиля"
+      },
+      {
+        "title": "Innovation",
+        "desc": "We continuously invest in new technologies to improve thermal performance, security, and ease of use.",
+        "photoDesc": "Фото: современное оборудование на заводе DECA"
+      },
+      {
+        "title": "Customer Satisfaction",
+        "desc": "From initial consultation to installation and after-sale service, we ensure every customer is fully satisfied.",
+        "photoDesc": "Фото: довольный клиент у новых окон DECA в своём доме"
+      }
+    ]
+  },
+  "team": {
+    "badge": "Leadership",
+    "title": "Our Team",
+    "members": [
+      {
+        "name": "Vladimir",
+        "role": "Founder & CEO",
+        "desc": "15+ years in European window industry. Passionate about making premium products accessible.",
+        "photoDesc": "Фото: портрет Владимира, основателя и CEO DECA"
+      },
+      {
+        "name": "Technical Director",
+        "role": "Engineering Lead",
+        "desc": "10+ years of window engineering. NFRC certified specialist.",
+        "photoDesc": "Фото: портрет технического директора DECA"
+      },
+      {
+        "name": "Installation Lead",
+        "role": "Field Operations",
+        "desc": "500+ completed projects across New England. Expert in residential and commercial installation.",
+        "photoDesc": "Фото: руководитель монтажной бригады DECA"
+      }
+    ]
+  },
+  "factory": {
+    "badge": "Manufacturing",
+    "title": "Our Factory in Westfield, MA",
+    "subtitle": "All DECA products are manufactured at our modern facility in Westfield, Massachusetts.",
+    "photos": [
+      {
+        "photoDesc": "Фото: внешний вид завода DECA в Вестфилде"
+      },
+      {
+        "photoDesc": "Фото: линия экструзии профилей на заводе"
+      },
+      {
+        "photoDesc": "Фото: сборка стеклопакетов — аргоновая заправка"
+      },
+      {
+        "photoDesc": "Фото: склад готовой продукции с упакованными окнами"
+      }
+    ]
+  },
+  "ctaWithDocs": {
+    "title": "Ready to Work with Us?",
+    "subtitle": "Get your custom order form, window blueprints, and detailed specification — all prepared for your project.",
+    "btnText": "Contact Us"
+  }
+}

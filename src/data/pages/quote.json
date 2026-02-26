@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "title": "Get a Free Quote | DECA Windows & Doors",
+    "description": "Get a free, no-obligation quote for premium European-style windows and doors. Custom sizes and configurations available."
+  },
+  "breadcrumb": {
+    "items": [
+      {
+        "label": "Get a Free Quote"
+      }
+    ]
+  },
+  "quoteForm": {
+    "heading": "Get Your Free Quote",
+    "subheading": "Tell us about your project and we'll prepare a detailed, no-obligation quote. Custom sizes and configurations welcome.",
+    "formFields": {
+      "firstName": {
+        "label": "First Name *",
+        "required": true
+      },
+      "lastName": {
+        "label": "Last Name *",
+        "required": true
+      },
+      "email": {
+        "label": "Email *",
+        "type": "email",
+        "required": true
+      },
+      "phone": {
+        "label": "Phone *",
+        "type": "tel",
+        "required": true
+      },
+      "projectType": {
+        "label": "Project Type",
+        "options": [
+          "Residential — Window Replacement",
+          "Residential — New Construction",
+          "Commercial Project",
+          "Multi-family",
+          "Dealer / Installer Partnership"
+        ]
+      },
+      "message": {
+        "label": "Tell us about your project",
+        "placeholder": "Number of windows/doors, sizes, any special requirements...",
+        "rows": 4
+      }
+    },
+    "submitText": "Request a Free Quote",
+    "privacyNote": "By submitting, you agree to our Privacy Policy.",
+    "errorMessage": "Something went wrong. Please call us at (413) 771-4457 or try again."
+  },
+  "contactDetails": {
+    "heading": "Contact Details",
+    "address": "109 Apremont Way, Westfield, MA 01085",
+    "phone": "(413) 771-4457",
+    "email": "info@decawindows.com"
+  },
+  "processSection": {
+    "heading": "What happens next?",
+    "steps": [
+      "We review your request within 24 hours",
+      "Our team contacts you to discuss specifications",
+      "You receive a detailed quote within 48 hours",
+      "Custom order completed in 4 weeks or less"
+    ]
+  },
+  "guarantees": {
+    "heading": "Our Guarantees",
+    "items": [
+      "15-year transferable warranty",
+      "Factory-direct pricing",
+      "Free consultation",
+      "Custom sizes available"
+    ]
+  },
+  "map": {
+    "title": "DECA Windows & Doors - 109 Apremont Way, Westfield, MA",
+    "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2966.5!2d-72.765!3d42.125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e6d93bfbf09b0d%3A0x0!2s109+Apremont+Way%2C+Westfield%2C+MA+01085!5e0!3m2!1sen!2sus!4v1"
+  }
+}

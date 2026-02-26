@@ -1,0 +1,265 @@
+{
+  "slug": "upvc-windows",
+  "meta": {
+    "title": "uPVC Vinyl Windows | Energy Efficient European Windows | DECA",
+    "description": "Premium uPVC vinyl windows with exceptional energy efficiency. GEALAN profiles, triple-pane glazing, U-values as low as 0.14, and 50+ year lifespan. Manufactured in Massachusetts."
+  },
+  "hero": {
+    "badge": "European Engineering · American Craftsmanship",
+    "heading": "Premium uPVC Windows",
+    "subheading": "GEALAN-engineered profiles with up to 6 chambers, triple-pane glazing, and U-values as low as 0.14 W/m²K — delivering 40-50% energy savings with a 50+ year lifespan.",
+    "trustBadges": [
+      "ENERGY STAR®",
+      "NFRC Certified",
+      "Made in MA",
+      "RC2 Security"
+    ],
+    "ctas": [
+      { "text": "Get Free Quote", "href": "/quote" },
+      { "text": "(413) 771-4457", "href": "tel:+14137714457" }
+    ],
+    "image": "/assets/gallery/gallery-2.webp",
+    "imageAlt": "DECA uPVC windows installed in a modern home — white profile, triple glazing",
+    "imageCaption": "European tilt & turn uPVC window — Westfield, MA"
+  },
+  "stats": [
+    { "value": 50, "suffix": "+", "label": "Year Lifespan" },
+    { "value": 0.14, "label": "Lowest U-Value", "decimals": 2 },
+    { "value": 83, "suffix": "mm", "label": "Profile Depth" },
+    { "value": 6, "label": "Chamber Design" }
+  ],
+  "profileTechnology": {
+    "badge": "GEALAN Technology",
+    "title": "What Makes Our uPVC Different",
+    "subtitle": "German-engineered GEALAN profiles with multi-chamber design for superior thermal performance.",
+    "components": [
+      {
+        "title": "Profile Cross-Section",
+        "description": "Multi-chamber uPVC profile with galvanized steel reinforcement for structural rigidity.",
+        "image": "/assets/components/profile-cross-section.png",
+        "alt": "GEALAN profile cross-section — multi-chamber uPVC window profile"
+      },
+      {
+        "title": "Chamber Structure",
+        "description": "5–6 insulating chambers trap air, creating a thermal barrier that outperforms standard vinyl by 40%.",
+        "image": "/assets/components/chamber-structure.png",
+        "alt": "GEALAN chamber structure — 5-6 insulating chambers highlighted in green"
+      },
+      {
+        "title": "Triple Seal System",
+        "description": "Three continuous EPDM gaskets block air, water, and sound at every point of the frame.",
+        "image": "/assets/components/triple-seal-system.png",
+        "alt": "GEALAN triple seal system — three EPDM gasket contours visible on profile"
+      },
+      {
+        "title": "Glazing Package",
+        "description": "Triple-pane argon-filled glass unit with warm-edge spacer for maximum thermal and acoustic insulation.",
+        "image": "/assets/components/glazing-package.png",
+        "alt": "GEALAN triple-pane glazing package with argon fill and warm-edge spacer"
+      },
+      {
+        "title": "Hardware Detail",
+        "description": "Precision Roto/Siegenia hardware with up to 12 locking points for maximum security.",
+        "image": "/assets/components/hardware-detail.png",
+        "alt": "Tilt & turn window hardware — Roto/Siegenia multi-point locking system"
+      }
+    ]
+  },
+  "glazing": {
+    "badge": "Energy-Efficient Glass",
+    "title": "Glazing Configuration",
+    "subtitle": "Compare glass packages side by side — click any type to highlight its performance."
+  },
+  "specs": {
+    "badge": "Specifications",
+    "title": "Technical Details",
+    "subtitle": "Built to GEALAN standards with NFRC-certified performance.",
+    "rows": [
+      ["Profile System", "GEALAN-LINEAR® / S 8000"],
+      ["Profile Depth", "74mm – 83mm"],
+      ["Material", "Virgin uPVC + galvanized steel"],
+      ["Chamber Count", "5–6 chambers"],
+      ["Surface", "GEALAN-acrylcolor® (co-extruded)"],
+      ["Glass Package", "Triple-pane, argon-filled, up to 52mm"],
+      ["U-Factor (window)", "0.14 – 0.25 W/m²K"],
+      ["Max Size", "Up to 11′6″ × 11′6″"],
+      ["Sound Insulation", "STC 42–50 dB"],
+      ["Air Leakage", "< 0.30 CFM/ft²"],
+      ["Lock Points", "8–12 multi-point (Roto/Siegenia)"],
+      ["Security Rating", "RC2 / RC3 certified"],
+      ["Insect Screen", "FlexScreen® (virtually invisible)"],
+      ["Warranty", "15yr frame / 10yr glass / 5yr hardware"]
+    ],
+    "finishes": {
+      "title": "GEALAN-acrylcolor® Finishes",
+      "description": "Co-extruded acrylic surface technology, proven since 1980. The surface is molecularly bonded to the profile — it cannot peel, crack, or fade.",
+      "colors": [
+        { "name": "White", "color": "#FFFFFF" },
+        { "name": "Cream", "color": "#F5F0E1" },
+        { "name": "Anthracite", "color": "#3C3C3C" },
+        { "name": "Golden Oak", "color": "#B8860B" },
+        { "name": "Dark Brown", "color": "#4A2E1C" },
+        { "name": "Mahogany", "color": "#6B3A2A" },
+        { "name": "Light Gray", "color": "#C4C4C4" },
+        { "name": "Black", "color": "#1A1A1A" }
+      ]
+    }
+  },
+  "videoTabs": {
+    "badge": "See It In Action",
+    "title": "Why Homeowners Love Tilt & Turn",
+    "tabs": [
+      {
+        "title": "Tilt to Vent",
+        "description": "Just turn handle up to air out your home. Secure, rain-safe airflow — no need to open the window fully.",
+        "video": "/assets/videos/ventilation.mp4"
+      },
+      {
+        "title": "Easy to Clean",
+        "description": "Opens inward, making cleaning more convenient. Clean exterior glass from inside, on any floor.",
+        "video": "/assets/videos/easy-to-clean.mp4"
+      },
+      {
+        "title": "Air-Tight & Secure",
+        "description": "Up to 12 locking points engage with a single handle turn. RC2/RC3 certified security.",
+        "video": "/assets/videos/airtight-secure.mp4"
+      }
+    ]
+  },
+  "performance": {
+    "badge": "Why Upgrade",
+    "title": "DECA vs. Traditional Windows",
+    "subtitle": "See how European uPVC technology outperforms standard American vinyl windows.",
+    "metrics": [
+      {
+        "label": "Thermal Insulation",
+        "deca": 95,
+        "decaLabel": "U-Factor 0.14",
+        "traditional": 40,
+        "traditionalLabel": "U-Factor 0.30"
+      },
+      {
+        "label": "Sound Reduction",
+        "deca": 90,
+        "decaLabel": "42–50 dB",
+        "traditional": 55,
+        "traditionalLabel": "25–30 dB"
+      },
+      {
+        "label": "Air Tightness",
+        "deca": 98,
+        "decaLabel": "12-point lock",
+        "traditional": 35,
+        "traditionalLabel": "2-point lock"
+      },
+      {
+        "label": "Lifespan",
+        "deca": 100,
+        "decaLabel": "50+ years",
+        "traditional": 40,
+        "traditionalLabel": "15–20 years"
+      }
+    ]
+  },
+  "energySavings": {
+    "badge": "Your Investment",
+    "title": "The Economics of Quality Windows",
+    "subtitle": "Energy-efficient windows aren't just better — they pay for themselves."
+  },
+  "materialComparison": {
+    "title": "uPVC vs. Aluminum vs. Standard Vinyl",
+    "subtitle": "See why DECA uPVC delivers the best value for New England homeowners.",
+    "rows": [
+      ["U-Factor", "0.14–0.25", "0.30–0.50", "0.25–0.35"],
+      ["Sound (STC)", "42–50 dB", "28–35 dB", "32–38 dB"],
+      ["Lifespan", "50+ years", "30–40 years", "25–35 years"],
+      ["Maintenance", "Wash only", "Periodic caulking", "Minimal"],
+      ["Colors", "50+ RAL", "10–15", "5–10"],
+      ["Security", "RC2 / RC3", "Limited", "RC1"],
+      ["Cold Climate", "Optimal", "Conducts cold", "Good"]
+    ],
+    "columns": ["DECA uPVC ★", "Aluminum", "Standard Vinyl"]
+  },
+  "windowTypes": {
+    "badge": "Window Types",
+    "title": "Styles for Every Project",
+    "subtitle": "Custom-made to your exact specifications.",
+    "types": [
+      {
+        "src": "style-single-casement.png",
+        "name": "Single Tilt & Turn",
+        "desc": "Classic single-panel operation"
+      },
+      {
+        "src": "style-hopper.png",
+        "name": "Hopper / Awning",
+        "desc": "Top-hinged ventilation window"
+      },
+      {
+        "src": "style-double-casement.png",
+        "name": "Double Section",
+        "desc": "Side-by-side panels for wider openings"
+      },
+      {
+        "src": "style-triple-casement.png",
+        "name": "Triple Section",
+        "desc": "Three-panel for panoramic views"
+      },
+      {
+        "src": "style-arched.png",
+        "name": "Arched / Custom",
+        "desc": "Curved, triangular, circular shapes"
+      }
+    ]
+  },
+  "gallery": {
+    "badge": "Our Work",
+    "title": "Installed Projects",
+    "subtitle": "Real DECA uPVC windows in homes across New England.",
+    "items": [
+      { "src": "/assets/gallery/gallery-9.webp", "tall": true },
+      { "src": "/assets/gallery/gallery-10.webp", "tall": true },
+      { "src": "/assets/gallery/gallery-11.webp" },
+      { "src": "/assets/gallery/gallery-12.webp" },
+      { "src": "/assets/gallery/gallery-13.webp" },
+      { "src": "/assets/gallery/gallery-14.webp" },
+      { "src": "/assets/gallery/gallery-15.webp" },
+      { "src": "/assets/gallery/gallery-16.webp" }
+    ]
+  },
+  "cta": {
+    "title": "Ready for Premium uPVC Windows?",
+    "subtitle": "Get your custom order form, window blueprints, and detailed specification — all prepared for your project.",
+    "btnText": "Get Free Quote"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "q": "Are uPVC windows prone to warping or discoloration?",
+        "a": "No. Our GEALAN profiles use virgin uPVC with co-extruded acrylic surfaces, engineered for dimensional stability from -30°F to 140°F. UV-stable coloring is bonded at the molecular level — it cannot fade, yellow, or peel."
+      },
+      {
+        "q": "How do your windows compare to European imports?",
+        "a": "We use the same GEALAN profiles and German Roto/Siegenia hardware as top European manufacturers, but fabricate in Massachusetts. You get identical performance at 30-40% lower cost with local warranties and service."
+      },
+      {
+        "q": "What energy savings can I expect?",
+        "a": "Homeowners typically save 40-50% on heating/cooling. A 2,500 sq ft home saves $1,500-2,500 annually. Federal energy tax credits up to $3,200 are available for qualifying installations."
+      },
+      {
+        "q": "Can I customize size, shape, and color?",
+        "a": "Absolutely. Every window is custom-made. Arched, circular, triangular — any shape. 50+ RAL colors plus wood-grain laminates. Standard lead time is 4-6 weeks."
+      },
+      {
+        "q": "What about insect screens?",
+        "a": "We offer FlexScreen® — a virtually invisible, spring-steel insect screen that snaps into place without visible hardware. Unlike traditional screens, FlexScreen doesn't block your view or airflow."
+      },
+      {
+        "q": "Do you offer installation?",
+        "a": "Yes. Professional installation across New England through our field team and vetted local contractors. Every installation includes a final quality inspection."
+      }
+    ]
+  }
+}

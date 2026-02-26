@@ -1,0 +1,299 @@
+{
+  "meta": {
+    "title": "Entry Doors & Front Doors | Secure European Design | DECA Windows",
+    "description": "Premium entry doors with multi-point locking (5-7 points), RC2/RC3 security, and U-value 0.8-1.2. Sidelights, transoms, custom options.",
+    "canonical": "/doors/entry-doors"
+  },
+  "breadcrumb": [
+    {
+      "label": "Doors",
+      "href": "/doors"
+    },
+    {
+      "label": "Entry Doors"
+    }
+  ],
+  "hero": {
+    "badge": "Secure Entry",
+    "title": "Entry & Front Doors",
+    "description": "First impressions matter. European-engineered entry doors with multi-point locking, weather seals, and timeless design. Security, thermal performance, and elegance.",
+    "photoDescription": "Фото: входная дверь DECA — современный дизайн, боковые стеклянные панели, вечернее освещение",
+    "buttons": [
+      {
+        "text": "Get Custom Quote",
+        "href": "/quote",
+        "variant": "primary"
+      },
+      {
+        "text": "All Doors",
+        "href": "/doors",
+        "variant": "secondary"
+      }
+    ]
+  },
+  "stats": [
+    {
+      "value": 7,
+      "label": "Lock Points",
+      "icon": "lock"
+    },
+    {
+      "value": 3,
+      "prefix": "RC",
+      "label": "Security Rating",
+      "icon": "shield"
+    },
+    {
+      "value": 0.8,
+      "label": "Best U-Value (W/m²K)",
+      "decimals": 1,
+      "icon": "thermometer"
+    },
+    {
+      "value": 50,
+      "suffix": "+",
+      "label": "Year Lifespan",
+      "icon": "clock"
+    }
+  ],
+  "security": {
+    "badge": "Security",
+    "title": "Multi-Point Locking System",
+    "subtitle": "5-7 lock points engage simultaneously across the entire frame.",
+    "features": [
+      {
+        "title": "Top Lock Points",
+        "description": "Secure upper frame, prevent top prying"
+      },
+      {
+        "title": "Center Deadbolt",
+        "description": "Primary lock, centrally located"
+      },
+      {
+        "title": "Bottom Lock Points",
+        "description": "2-3 points secure lower frame against forcing"
+      },
+      {
+        "title": "Compression Seals",
+        "description": "All lock points compress frame seals when engaged"
+      }
+    ],
+    "certification": {
+      "title": "RC2/RC3 Certification",
+      "description": "RC2 resists 3-5 min of attack; RC3 resists 10+ min. DECA doors available in both."
+    },
+    "photoDescription": "Фото: схема многоточечного замка входной двери — все точки запирания обозначены"
+  },
+  "specs": {
+    "badge": "Performance",
+    "title": "Technical Specifications",
+    "specifications": [
+      [
+        "Construction",
+        "Solid core / foam-insulated + steel"
+      ],
+      [
+        "U-Value",
+        "0.8-1.2 W/m²K"
+      ],
+      [
+        "Weathersealing",
+        "Triple compression seals"
+      ],
+      [
+        "Lock Points",
+        "5-7 depending on size"
+      ],
+      [
+        "Security",
+        "RC2/RC3 certified"
+      ],
+      [
+        "Width",
+        "32-48\" (custom to 60\")"
+      ],
+      [
+        "Height",
+        "80\" standard (custom available)"
+      ],
+      [
+        "Material",
+        "uPVC, aluminum, or composite"
+      ],
+      [
+        "Glass",
+        "Tempered safety glass"
+      ],
+      [
+        "Lifespan",
+        "40-50 years"
+      ]
+    ],
+    "profileImage": "https://gealanwindows.com/app/uploads/2024/09/S-8000-2595x8001x8081_00191668-scaled.webp",
+    "profileImageAlt": "Entry door profile cross-section showing foam insulation, steel reinforcement, and weather seals"
+  },
+  "designOptions": {
+    "badge": "Customization",
+    "title": "Design Options",
+    "subtitle": "Customize your entry to match your home's architecture.",
+    "options": [
+      {
+        "title": "Panel Configurations",
+        "description": "Single, double, triple. Solid or glazed.",
+        "photoDescription": "Фото: варианты конфигураций входных дверей — одна, две, три створки"
+      },
+      {
+        "title": "Sidelights & Transoms",
+        "description": "Fixed glass panels for natural light.",
+        "photoDescription": "Фото: входная дверь с боковыми стеклянными панелями и фрамугой сверху"
+      },
+      {
+        "title": "Glass Styles",
+        "description": "Clear, frosted, decorative, laminated.",
+        "photoDescription": "Фото: образцы стёкол для входных дверей — матовое, декоративное, прозрачное"
+      },
+      {
+        "title": "Hardware Styles",
+        "description": "Contemporary pulls, classic handles, Euro levers.",
+        "photoDescription": "Фото: различная фурнитура для входных дверей — ручки, замки, петли"
+      },
+      {
+        "title": "Colors & Finishes",
+        "description": "50+ RAL colors, wood-grain, anodized.",
+        "photoDescription": "Фото: палитра цветов для входных дверей — образцы профилей"
+      },
+      {
+        "title": "Material Options",
+        "description": "uPVC, aluminum, or composite.",
+        "photoDescription": "Фото: три материала входных дверей — uPVC, алюминий, композит — рядом"
+      }
+    ]
+  },
+  "gallery": {
+    "badge": "Our Work",
+    "title": "Entry Doors in Real Homes",
+    "subtitle": "DECA doors installed across New England.",
+    "items": [
+      {
+        "src": "/assets/gallery/gallery-1.webp",
+        "tall": true
+      },
+      {
+        "src": "/assets/gallery/gallery-2.webp",
+        "tall": true
+      },
+      {
+        "src": "/assets/gallery/gallery-3.webp"
+      },
+      {
+        "src": "/assets/gallery/gallery-4.webp"
+      },
+      {
+        "src": "/assets/gallery/gallery-5.webp"
+      },
+      {
+        "src": "/assets/gallery/gallery-6.webp"
+      },
+      {
+        "src": "/assets/gallery/gallery-7.webp"
+      },
+      {
+        "src": "/assets/gallery/gallery-8.webp"
+      }
+    ],
+    "alt": "DECA entry door installation"
+  },
+  "guides": {
+    "badge": "Resources",
+    "title": "Expert Guides",
+    "items": [
+      {
+        "title": "Entry Door Security Guide",
+        "description": "Multi-point locking vs deadbolts — a complete comparison.",
+        "href": "/blog",
+        "photoDescription": "Фото: сравнение многоточечного замка и обычного дедболта"
+      },
+      {
+        "title": "French Swing Doors",
+        "description": "Classic elegance for indoor-outdoor transitions.",
+        "href": "/doors/french-doors",
+        "photoDescription": "Фото: французские двери в интерьере — свет и простор"
+      },
+      {
+        "title": "Sliding Patio Doors",
+        "description": "Panoramic openings for modern living.",
+        "href": "/sliding-doors",
+        "photoDescription": "Фото: панорамная раздвижная дверь с видом на террасу"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Upgrade Your Entry?",
+    "subtitle": "Get your custom order form, door blueprints, and detailed specification — all prepared for your project.",
+    "buttonText": "Get Custom Quote"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "q": "How secure are multi-point locking doors?",
+        "a": "Significantly more secure than single deadbolts. 5-7 lock points distribute force across the frame, making forced entry virtually impossible. RC2/RC3 tested."
+      },
+      {
+        "q": "Will entry doors reduce energy costs?",
+        "a": "Yes. U-values of 0.8-1.2 (vs 1.5-2.5 standard) typically save $200-400 annually in heating/cooling."
+      },
+      {
+        "q": "Can I get sidelights and transoms?",
+        "a": "Absolutely. Fixed glass sidelights and transom windows in matching materials and finishes. All glass is tempered."
+      },
+      {
+        "q": "What's the difference between RC2 and RC3?",
+        "a": "RC2: 3-5 min resistance. RC3: 10+ min. RC3 for high-value homes; RC2 meets typical residential needs."
+      },
+      {
+        "q": "How long do entry doors last?",
+        "a": "40-50 years with minimal maintenance. Backed by comprehensive DECA warranties."
+      }
+    ]
+  },
+  "faqSchema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How secure are multi-point locking entry doors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Multi-point locking distributes force across 5-7 points on the entire frame, making forced entry virtually impossible. DECA entry doors are RC2/RC3 certified — RC2 resists 3-5 minutes of attack, RC3 resists 10+ minutes. This is far superior to single deadbolts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the energy efficiency benefits of premium entry doors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DECA entry doors achieve U-values of 0.8-1.2 W/m²K, compared to standard doors at 1.5-2.5. This typically saves $200-400 annually in heating/cooling costs. Triple compression seals prevent drafts and heat loss."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I customize entry doors with sidelights and transoms?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. DECA offers fixed glass sidelights and transom windows in matching materials and finishes. All glass is tempered safety glass. Configurations can be single, double, or triple panel with full customization."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What materials are available for entry doors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DECA manufactures entry doors in uPVC, aluminum, and composite materials. All offer 40-50 year lifespans with multi-point locking, RC security certification, and customizable colors. Choose based on your aesthetic preferences and climate."
+        }
+      }
+    ]
+  }
+}

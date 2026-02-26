@@ -98,9 +98,9 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { message, slug } = await req.json();
+    const { message, slug, image } = await req.json();
 
-    if (!message || !slug) {
+    if ((!message && !image) || !slug) {
       return NextResponse.json({ error: "Missing message or slug" }, { status: 400 });
     }
 
@@ -112,7 +112,26 @@ export async function POST(req: NextRequest) {
 
     const { page, sha } = pageResult;
 
-    // 2. Send to Claude API
+    // 2. Build message content (text + optional image)
+    const userContent: Array<Record<string, unknown>> = [];
+
+    if (image?.base64 && image?.mediaType) {
+      userContent.push({
+        type: "image",
+        source: {
+          type: "base64",
+          media_type: image.mediaType,
+          data: image.base64,
+        },
+      });
+    }
+
+    userContent.push({
+      type: "text",
+      text: `Current page JSON:\n${JSON.stringify(page, null, 2)}\n\nEdit instruction: ${message || "See the attached screenshot and make the changes shown/described."}`,
+    });
+
+    // 3. Send to Claude API
     const claudeRes = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
@@ -127,7 +146,7 @@ export async function POST(req: NextRequest) {
         messages: [
           {
             role: "user",
-            content: `Current page JSON:\n${JSON.stringify(page, null, 2)}\n\nEdit instruction: ${message}`,
+            content: userContent,
           },
         ],
       }),
@@ -144,7 +163,7 @@ export async function POST(req: NextRequest) {
     const claudeData = await claudeRes.json();
     const responseText = claudeData.content?.[0]?.text || "";
 
-    // 3. Parse Claude's response as JSON
+    // 4. Parse Claude's response as JSON
     let updatedPage;
     try {
       // Try to extract JSON from the response (Claude might wrap in code blocks)
@@ -169,10 +188,10 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 4. Push updated JSON to GitHub
+    // 5. Push updated JSON to GitHub
     const newSha = await updatePageOnGitHub(slug, updatedPage, sha, ghToken);
 
-    // 5. Generate a brief summary of what changed
+    // 6. Generate a brief summary of what changed
     const changedKeys: string[] = [];
     for (const key of Object.keys(updatedPage)) {
       if (JSON.stringify(updatedPage[key]) !== JSON.stringify((page as Record<string, unknown>)[key])) {

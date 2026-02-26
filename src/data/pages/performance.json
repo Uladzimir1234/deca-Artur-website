@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "title": "Performance & Testing Data | DECA Windows",
+    "description": "Comprehensive test results proving our windows exceed industry standards by up to 300%. U-values, noise reduction, energy efficiency data.",
+    "canonical": "/performance"
+  },
+  "breadcrumb": {
+    "items": [
+      {
+        "label": "Performance"
+      }
+    ]
+  },
+  "hero": {
+    "badge": "Proven Results",
+    "heading": "Performance & Testing Data",
+    "description": "Comprehensive test results proving our windows exceed industry standards by up to 300%. Real data, real tests, real performance.",
+    "cta": "Get a Quote",
+    "photoDesc": "Фото: лаборатория тестирования окон — измерение U-value и воздухопроницаемости"
+  },
+  "keyStats": [
+    {
+      "value": "0.10",
+      "label": "U-Value (lowest)"
+    },
+    {
+      "value": "500 Pa",
+      "label": "Water Resistance"
+    },
+    {
+      "value": "45-50 dB",
+      "label": "Noise Reduction"
+    },
+    {
+      "value": "140 mph",
+      "label": "Wind Rating"
+    }
+  ],
+  "performanceCategories": [
+    {
+      "title": "Energy Efficiency",
+      "tag": "U: 0.10",
+      "desc": "U-values, R-values, SHGC data. Compare to ENERGY STAR.",
+      "photoDesc": "Фото: термографический снимок дома — сравнение DECA и обычных окон"
+    },
+    {
+      "title": "Sound Insulation",
+      "tag": "45-50 dB",
+      "desc": "STC ratings, decibel reduction. Watch our soundproof test.",
+      "photoDesc": "Фото: тест шумоизоляции — измерение децибел до и после установки"
+    },
+    {
+      "title": "Air & Water Tightness",
+      "tag": "500 Pa",
+      "desc": "Pressure test results for infiltration resistance.",
+      "photoDesc": "Фото: тест воздухонепроницаемости в лаборатории — манометр"
+    },
+    {
+      "title": "Security",
+      "tag": "RC2/RC3",
+      "desc": "Multi-point locking, impact resistance data.",
+      "photoDesc": "Фото: тест безопасности — имитация взлома окна с многоточечным замком"
+    },
+    {
+      "title": "Certifications",
+      "tag": "NFRC",
+      "desc": "NFRC, ENERGY STAR, LEED documentation.",
+      "photoDesc": "Фото: сертификаты NFRC и ENERGY STAR рядом с окном DECA"
+    },
+    {
+      "title": "Durability",
+      "tag": "50+ years",
+      "desc": "UV resistance, weathering test data.",
+      "photoDesc": "Фото: окно DECA после 20 лет эксплуатации — отличное состояние"
+    }
+  ],
+  "uValueComparison": {
+    "badge": "Energy",
+    "title": "U-Value Comparison",
+    "subtitle": "Lower U-value = better insulation. See where DECA stands.",
+    "items": [
+      {
+        "label": "DECA Triple Glazed",
+        "value": "0.10-0.12",
+        "percentage": 95,
+        "color": "bg-blue-accent",
+        "note": "Passive house ready"
+      },
+      {
+        "label": "DECA Double Glazed",
+        "value": "0.20-0.25",
+        "percentage": 75,
+        "color": "bg-blue-accent/70",
+        "note": "Superior efficiency"
+      },
+      {
+        "label": "ENERGY STAR® Required",
+        "value": "≤ 0.30",
+        "percentage": 60,
+        "color": "bg-yellow-500",
+        "note": "Minimum certification"
+      },
+      {
+        "label": "Standard Windows",
+        "value": "0.30-0.50",
+        "percentage": 40,
+        "color": "bg-gray-400",
+        "note": "Typical market"
+      },
+      {
+        "label": "Single Glazed",
+        "value": "≥ 1.0",
+        "percentage": 15,
+        "color": "bg-red-400",
+        "note": "Poor performance"
+      }
+    ]
+  },
+  "soundInsulation": {
+    "badge": "Acoustics",
+    "title": "Sound Insulation Performance",
+    "description": "DECA windows achieve STC ratings of 42-50 dB — reducing highway noise, aircraft, and urban traffic to comfortable background levels. Our triple-glazed systems outperform standard windows by 50-80%.",
+    "noiseReductions": [
+      {
+        "label": "Highway traffic (80 dB)",
+        "result": "Reduced to 30-35 dB"
+      },
+      {
+        "label": "Aircraft flyover (90 dB)",
+        "result": "Reduced to 40-45 dB"
+      },
+      {
+        "label": "Construction noise (95 dB)",
+        "result": "Reduced to 45-50 dB"
+      }
+    ],
+    "photoDesc": "Фото: звукоизоляционный тест — установка для измерения STC в лаборатории"
+  },
+  "energySavingsCalculator": {
+    "badge": "Calculator",
+    "title": "Energy Savings Calculator",
+    "description": "Calculate how much you could save by upgrading to DECA windows.",
+    "form": {
+      "currentWindows": {
+        "label": "Current windows",
+        "options": [
+          "Single glazed",
+          "Double glazed"
+        ]
+      },
+      "numberOfWindows": {
+        "label": "Number of windows",
+        "defaultValue": 10
+      },
+      "region": {
+        "label": "Region",
+        "options": [
+          "Massachusetts",
+          "Connecticut",
+          "New York"
+        ]
+      },
+      "submitText": "Calculate Savings"
+    }
+  },
+  "expertGuides": {
+    "badge": "Resources",
+    "title": "Expert Guides",
+    "guides": [
+      {
+        "title": "Triple vs Double Glazing",
+        "desc": "Data-driven comparison for your climate zone.",
+        "href": "/blog",
+        "photoDesc": "Фото: сравнительная диаграмма двойного и тройного стеклопакета"
+      },
+      {
+        "title": "Understanding U-Values",
+        "desc": "What U-values mean and why they matter for your home.",
+        "href": "/blog",
+        "photoDesc": "Фото: инфографика — шкала U-value от плохого к отличному"
+      },
+      {
+        "title": "NFRC Certification Guide",
+        "desc": "How to read NFRC labels and what they mean.",
+        "href": "/blog",
+        "photoDesc": "Фото: этикетка NFRC на окне — расшифровка показателей"
+      }
+    ]
+  },
+  "ctaWithDocs": {
+    "title": "Want the Full Performance Report?",
+    "subtitle": "Get your custom order form, window blueprints, and detailed specification — all prepared for your project.",
+    "btnText": "Download Report"
+  }
+}

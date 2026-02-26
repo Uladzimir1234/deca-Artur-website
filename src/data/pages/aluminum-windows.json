@@ -1,0 +1,172 @@
+{
+  "slug": "aluminum-windows",
+  "meta": {
+    "title": "Aluminum Windows | Modern European Design | DECA Windows",
+    "description": "Contemporary aluminum windows with thermal break technology. Slim profiles, maximum glass area, modern aesthetics. Ideal for commercial and modern residential."
+  },
+  "hero": {
+    "badge": "Modern Design",
+    "heading": "Aluminum Windows",
+    "subheading": "Contemporary aesthetics meets European engineering. Slim profiles, maximum glass area, and architectural flexibility for modern residential and commercial applications.",
+    "ctas": [
+      { "text": "Get Custom Quote", "href": "/quote" },
+      { "text": "Architect Resources", "href": "/professionals" }
+    ],
+    "image": "https://gealanwindows.com/app/uploads/2024/09/GEALAN-LINEAR-15.webp",
+    "imageAlt": "Modern aluminum window with slim profiles and panoramic glazing in contemporary home"
+  },
+  "stats": [
+    { "value": 92, "suffix": "%", "label": "Glass Area" },
+    { "value": 0.20, "label": "Best U-Value (W/m²K)", "decimals": 2 },
+    { "value": 1.75, "suffix": "\"", "label": "Slimmest Profile", "decimals": 2 },
+    { "value": 50, "suffix": "+", "label": "Year Lifespan" }
+  ],
+  "advantages": {
+    "badge": "Advantages",
+    "title": "Why Choose Aluminum?",
+    "subtitle": "The cutting edge of modern window design.",
+    "items": [
+      {
+        "title": "Architectural Freedom",
+        "desc": "Thinner profiles (as narrow as 1.75 inches) maximize glass area. Corner-to-corner glass is achievable only with aluminum."
+      },
+      {
+        "title": "Modern Aesthetics",
+        "desc": "Crisp lines, precision-welded corners. Matte, brushed, anodized, or powder-coated finishes in unlimited colors."
+      },
+      {
+        "title": "Structural Strength",
+        "desc": "3-4x stronger than uPVC. Large unsupported spans, heavy tempered glass, minimal deflection."
+      },
+      {
+        "title": "Commercial Applications",
+        "desc": "Storefronts, curtain walls, modular assembly. Commercial-grade systems for retail, office, hospitality."
+      }
+    ]
+  },
+  "thermalBreak": {
+    "badge": "Engineering",
+    "title": "Thermal Break Technology",
+    "subtitle": "How DECA achieves energy efficiency with aluminum.",
+    "intro": "Aluminum conducts heat 200x faster than uPVC. DECA's solution: polyamide thermal breaks — synthetic strips that physically separate interior and exterior frames, interrupting the thermal bridge.",
+    "steps": [
+      {
+        "step": "1",
+        "title": "Polyamide Barrier",
+        "desc": "15-25mm strips between exterior and interior aluminum"
+      },
+      {
+        "step": "2",
+        "title": "Thermal Interruption",
+        "desc": "Conducts heat 1/200th as efficiently as aluminum"
+      },
+      {
+        "step": "3",
+        "title": "Interior Warmth",
+        "desc": "Prevents condensation, improves comfort"
+      },
+      {
+        "step": "4",
+        "title": "Energy Savings",
+        "desc": "U-values of 0.20-0.30 with triple glazing"
+      }
+    ],
+    "image": "https://gealanwindows.com/app/uploads/2024/09/7001x7072x7242_00163072_GK-grau.webp",
+    "imageAlt": "Aluminum window profile cross-section showing polyamide thermal break inserts and chambers"
+  },
+  "specs": {
+    "badge": "Specifications",
+    "title": "Technical Data",
+    "rows": [
+      ["Frame Profile", "50-80mm depth, 1.75-2.25\" slim profiles"],
+      ["Material", "6063-T5 aluminum + polyamide thermal breaks"],
+      ["Thermal Break", "14-20mm polyamide strips"],
+      ["Glass Area", "Up to 92% coverage"],
+      ["U-Value", "0.20-0.30 W/m²K (thermally broken)"],
+      ["Corner Welding", "Precision 45° mitered corners"],
+      ["Lock Points", "6-10 multi-point locking"],
+      ["Glass Options", "Double, triple, laminated, tempered"],
+      ["Finish Options", "RAL anodized, powder-coat, brushed, matte"],
+      ["Fire Rating", "Up to 2-hour rated assemblies"]
+    ]
+  },
+  "comparison": {
+    "title": "Aluminum vs. uPVC",
+    "subtitle": "Which is right for your project?",
+    "rows": [
+      ["U-Value", "0.20-0.30", "0.10-0.25"],
+      ["Profile Width", "1.75-2.25\" (slim)", "2.75-3.5\""],
+      ["Glass Area", "Up to 92%", "Up to 70%"],
+      ["Strength", "Superior — large spans", "Good — moderate"],
+      ["Aesthetics", "Minimalist, contemporary", "Traditional options"],
+      ["Sound Insulation", "32-40 dB", "42-50 dB"],
+      ["Cost", "Higher", "Lower"],
+      ["Best For", "Modern / Commercial", "Residential"]
+    ],
+    "columns": ["Aluminum", "uPVC"]
+  },
+  "gallery": {
+    "badge": "Our Work",
+    "title": "Aluminum Windows in Projects",
+    "subtitle": "DECA aluminum windows in residential and commercial applications.",
+    "items": [
+      { "src": "/assets/gallery/gallery-1.webp", "tall": true },
+      { "src": "/assets/gallery/gallery-2.webp", "tall": true },
+      { "src": "/assets/gallery/gallery-3.webp" },
+      { "src": "/assets/gallery/gallery-4.webp" },
+      { "src": "/assets/gallery/gallery-5.webp" },
+      { "src": "/assets/gallery/gallery-6.webp" },
+      { "src": "/assets/gallery/gallery-7.webp" },
+      { "src": "/assets/gallery/gallery-8.webp" }
+    ]
+  },
+  "guides": {
+    "badge": "Resources",
+    "title": "Expert Guides",
+    "items": [
+      {
+        "title": "uPVC vs Aluminum: Full Guide",
+        "desc": "Complete material comparison for your project."
+      },
+      {
+        "title": "Thermal Break Technology",
+        "desc": "How polyamide strips transform aluminum performance."
+      },
+      {
+        "title": "Architect Resources",
+        "desc": "BIM data, specs, and support for professionals."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready for Contemporary Aluminum Windows?",
+    "subtitle": "Get your custom order form, window blueprints, and detailed specification — all prepared for your project.",
+    "btnText": "Get Custom Quote"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "q": "Aren't aluminum windows cold and inefficient?",
+        "a": "Not with thermal breaks. DECA's polyamide breaks achieve U-values of 0.20-0.30 — equivalent to uPVC. The key is specifying thermally-broken systems."
+      },
+      {
+        "q": "Can aluminum handle large, heavy glass?",
+        "a": "Yes — aluminum's primary advantage. Large tempered panes, full-height glass walls are feasible only with aluminum's strength."
+      },
+      {
+        "q": "What about condensation?",
+        "a": "Thermal-break systems keep interior surfaces warm, minimizing condensation. Always specify thermal breaks for heated spaces."
+      },
+      {
+        "q": "Are custom colors available?",
+        "a": "Unlimited RAL colors via powder coating, plus anodized finishes. Two-tone configurations with different interior/exterior colors."
+      },
+      {
+        "q": "What's the cost difference vs uPVC?",
+        "a": "Typically 20-40% more, but slim profiles maximize glass area and architectural impact often justifies the premium."
+      }
+    ]
+  }
+}

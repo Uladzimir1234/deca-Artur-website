@@ -2,9 +2,17 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 
+interface Attachment {
+  name: string;
+  base64: string;
+  mediaType: string;
+  preview: string;
+}
+
 interface Message {
   role: "user" | "assistant" | "system";
   content: string;
+  image?: string; // preview URL for user-attached image
   applied?: boolean;
   changedSections?: string[];
   timestamp: Date;
@@ -72,15 +80,80 @@ function LoginScreen({ onLogin }: { onLogin: (token: string) => void }) {
   );
 }
 
+/* ─── Help Panel ─── */
+function HelpPanel({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto p-6" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-bold text-gray-900">How to Use Content Editor</h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="space-y-4 text-sm text-gray-700">
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-1">1. Select the page</h3>
+            <p>Use the dropdown in the header to choose which page you want to edit (Tilt Turn, Windows, Doors, etc.).</p>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-1">2. Describe the change</h3>
+            <p>Type what you want to change in plain English. Be specific about which section and what the new text should be.</p>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-1">3. Attach a screenshot (optional)</h3>
+            <p>Click the 📎 button or paste an image (Ctrl+V) to attach a screenshot. This helps the AI understand exactly which part of the page you want to change.</p>
+          </div>
+
+          <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+            <h3 className="font-semibold text-gray-900 mb-2">Example requests:</h3>
+            <ul className="space-y-1.5 text-gray-600">
+              <li>• &quot;Change the main heading to &apos;Premium European Windows&apos;&quot;</li>
+              <li>• &quot;Update the FAQ about energy savings — new answer: ...&quot;</li>
+              <li>• &quot;In the hero section, replace the description with: ...&quot;</li>
+              <li>• &quot;Change U-Factor spec from 0.14 to 0.12&quot;</li>
+              <li>• &quot;Replace gallery image #3 with this URL: https://...&quot;</li>
+            </ul>
+          </div>
+
+          <div className="bg-amber-50 rounded-lg p-4 border border-amber-100">
+            <h3 className="font-semibold text-amber-800 mb-2">Limitations:</h3>
+            <ul className="space-y-1.5 text-amber-700">
+              <li>• Text and image URLs only — cannot upload photos directly</li>
+              <li>• Cannot change page layout, colors, or design</li>
+              <li>• Cannot add entirely new sections (only edit existing ones)</li>
+              <li>• Changes take 30-60 seconds to appear on the live site</li>
+              <li>• One edit at a time — wait for confirmation before next request</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-1">After making changes</h3>
+            <p>When you see the green ✓ &quot;Changes applied to site&quot; message, your edit has been saved. Open the website in 30-60 seconds to verify the change looks correct.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Chat Interface ─── */
 function ChatInterface({ token }: { token: string }) {
   const [pages, setPages] = useState<string[]>([]);
   const [selectedPage, setSelectedPage] = useState("tilt-turn");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
+  const [attachment, setAttachment] = useState<Attachment | null>(null);
   const [sending, setSending] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Load available pages
   useEffect(() => {
@@ -99,7 +172,7 @@ function ChatInterface({ token }: { token: string }) {
     setMessages([
       {
         role: "system",
-        content: `Welcome to DECA Content Editor! Select a page and tell me what you want to change. Examples:\n\n• "Change the main heading to 'Premium European Windows'"\n• "Update the FAQ answer about energy savings"\n• "Replace the hero description with new text"\n• "Add a new FAQ question about installation time"`,
+        content: `Welcome to DECA Content Editor!\n\nSelect a page from the dropdown and describe what you want to change. You can also attach a screenshot to show exactly what needs editing.\n\nClick the ❓ button for detailed instructions and examples.`,
         timestamp: new Date(),
       },
     ]);
@@ -110,30 +183,83 @@ function ChatInterface({ token }: { token: string }) {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Handle file selection
+  const handleFileSelect = (file: File) => {
+    if (!file.type.startsWith("image/")) return;
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Image must be under 5 MB");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64Full = reader.result as string;
+      const base64Data = base64Full.split(",")[1];
+      const mediaType = file.type;
+      setAttachment({
+        name: file.name,
+        base64: base64Data,
+        mediaType,
+        preview: base64Full,
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // Handle paste (for screenshots)
+  useEffect(() => {
+    const handlePaste = (e: ClipboardEvent) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      for (const item of Array.from(items)) {
+        if (item.type.startsWith("image/")) {
+          e.preventDefault();
+          const file = item.getAsFile();
+          if (file) handleFileSelect(file);
+          break;
+        }
+      }
+    };
+    document.addEventListener("paste", handlePaste);
+    return () => document.removeEventListener("paste", handlePaste);
+  }, []);
+
   const sendMessage = useCallback(async () => {
-    if (!input.trim() || sending) return;
+    if ((!input.trim() && !attachment) || sending) return;
 
     const userMsg: Message = {
       role: "user",
       content: input.trim(),
+      image: attachment?.preview,
       timestamp: new Date(),
     };
 
+    const currentAttachment = attachment;
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
+    setAttachment(null);
     setSending(true);
 
     try {
+      const body: Record<string, unknown> = {
+        message: userMsg.content,
+        slug: selectedPage,
+      };
+
+      if (currentAttachment) {
+        body.image = {
+          base64: currentAttachment.base64,
+          mediaType: currentAttachment.mediaType,
+        };
+      }
+
       const res = await fetch("/api/admin/chat", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          message: userMsg.content,
-          slug: selectedPage,
-        }),
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
@@ -170,7 +296,7 @@ function ChatInterface({ token }: { token: string }) {
 
     setSending(false);
     inputRef.current?.focus();
-  }, [input, sending, token, selectedPage]);
+  }, [input, attachment, sending, token, selectedPage]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -181,6 +307,8 @@ function ChatInterface({ token }: { token: string }) {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
+      {showHelp && <HelpPanel onClose={() => setShowHelp(false)} />}
+
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -202,6 +330,13 @@ function ChatInterface({ token }: { token: string }) {
           </div>
 
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowHelp(true)}
+              className="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 text-xs font-bold transition-colors"
+              title="Help & Instructions"
+            >
+              ?
+            </button>
             <select
               value={selectedPage}
               onChange={(e) => setSelectedPage(e.target.value)}
@@ -250,6 +385,13 @@ function ChatInterface({ token }: { token: string }) {
                     : "bg-white text-gray-800 border border-gray-200 shadow-sm"
                 }`}
               >
+                {msg.image && (
+                  <img
+                    src={msg.image}
+                    alt="Attached screenshot"
+                    className="rounded-lg mb-2 max-h-48 w-auto border border-white/20"
+                  />
+                )}
                 <p className="text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
                 {msg.applied && (
                   <div className="flex items-center gap-1.5 mt-2 pt-2 border-t border-green-200">
@@ -293,10 +435,50 @@ function ChatInterface({ token }: { token: string }) {
         </div>
       </div>
 
+      {/* Attachment preview */}
+      {attachment && (
+        <div className="bg-gray-50 border-t border-gray-200">
+          <div className="max-w-4xl mx-auto px-4 py-2 flex items-center gap-3">
+            <img src={attachment.preview} alt="Preview" className="h-12 rounded-lg border border-gray-300" />
+            <span className="text-xs text-gray-500 flex-1 truncate">{attachment.name}</span>
+            <button
+              onClick={() => setAttachment(null)}
+              className="text-gray-400 hover:text-red-500"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Input */}
       <div className="bg-white border-t border-gray-200">
         <div className="max-w-4xl mx-auto px-4 py-3">
-          <div className="flex items-end gap-3">
+          <div className="flex items-end gap-2">
+            {/* File upload button */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) handleFileSelect(file);
+                e.target.value = "";
+              }}
+            />
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="w-10 h-10 bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-xl flex items-center justify-center transition-colors shrink-0"
+              title="Attach screenshot"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z" />
+              </svg>
+            </button>
+
             <div className="flex-1 relative">
               <textarea
                 ref={inputRef}
@@ -309,9 +491,10 @@ function ChatInterface({ token }: { token: string }) {
                 style={{ minHeight: "44px", maxHeight: "120px" }}
               />
             </div>
+
             <button
               onClick={sendMessage}
-              disabled={!input.trim() || sending}
+              disabled={(!input.trim() && !attachment) || sending}
               className="w-10 h-10 bg-[#3854AA] hover:bg-[#2a3f7a] text-white rounded-xl flex items-center justify-center transition-colors disabled:opacity-40 shrink-0"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -320,7 +503,7 @@ function ChatInterface({ token }: { token: string }) {
             </button>
           </div>
           <p className="text-[10px] text-gray-400 mt-2 text-center">
-            Changes are applied directly to the website via GitHub. Vercel redeploys in ~30-60 seconds.
+            Attach screenshots with 📎 or paste (Ctrl+V). Changes appear on the site in ~30-60 seconds.
           </p>
         </div>
       </div>

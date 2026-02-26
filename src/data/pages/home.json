@@ -1,0 +1,228 @@
+{
+  "meta": {
+    "title": "DECA Windows & Doors | European Energy-Efficient Windows Made in USA",
+    "description": "Premium European-style tilt & turn windows and doors manufactured in Massachusetts. Industry-leading U-values, soundproofing, and energy efficiency. Factory-direct pricing.",
+    "keywords": "european windows, tilt and turn windows, energy efficient windows, Massachusetts windows, DECA windows"
+  },
+  "hero": {
+    "location": "Westfield, Massachusetts",
+    "heading": "European Energy-Efficient Windows & Doors Built in USA",
+    "subheading": "Factory-direct PVC & Aluminum systems. 15-year warranty, U-value 0.10, noise reduction up to 50 dB.",
+    "ctaPrimary": "Explore Products",
+    "ctaSecondary": "Request a Quote",
+    "badges": [
+      "Energy Star Certified",
+      "NFRC Rated",
+      "Passive House Ready"
+    ]
+  },
+  "heroQuoteForm": {
+    "title": "Get a Free Quote",
+    "subtitle": "Tell us about your project",
+    "nameLabel": "Your name",
+    "emailLabel": "Email address",
+    "phoneLabel": "Phone number",
+    "projectLabel": "Project type",
+    "projectOptions": [
+      "New Construction",
+      "Window Replacement",
+      "Full Renovation",
+      "Commercial Project"
+    ],
+    "submitText": "Get Free Estimate",
+    "responseNote": "Response within 24 hours • No obligation"
+  },
+  "productCards": [
+    {
+      "title": "Tilt & Turn European Windows",
+      "subtitle": "Premium tilt & turn system with triple glazing",
+      "href": "/tilt-turn",
+      "photoDesc": "Фото: поворотно-откидное окно в интерьере, вид на открытое окно в режиме поворота"
+    },
+    {
+      "title": "Sliding Doors",
+      "subtitle": "PSk, Lift & Slide, and DECA Roto systems",
+      "href": "/sliding-doors",
+      "photoDesc": "Фото: панорамная раздвижная дверь с видом на сад/террасу"
+    },
+    {
+      "title": "Swing (French) Doors",
+      "subtitle": "Classic elegance with European hardware",
+      "href": "/doors/french-doors",
+      "photoDesc": "Фото: распашные французские двери в светлом интерьере"
+    },
+    {
+      "title": "Entry Doors",
+      "subtitle": "Secure, insulated, custom-designed entrance",
+      "href": "/doors/entry-doors",
+      "photoDesc": "Фото: парадная входная дверь DECA в фасаде дома"
+    }
+  ],
+  "featureTabs": [
+    {
+      "id": "silence",
+      "label": "Silence",
+      "icon": "volume-mute",
+      "title": "Engineered for Silence",
+      "description": "Our windows reduce noise by up to 95%, turning your home into a peaceful sanctuary. Robust 2.75-inch frames with six internal chambers effectively dampen sound waves, while advanced EPDM seals create a tight barrier against external noise. Multi-layered glass panels with soundproofing properties and multi-point locking systems ensure exceptional noise reduction.",
+      "photoDesc": "Фото: демонстрация шумоизоляции — разрез профиля с 6 камерами, звуковые волны, dB-шкала"
+    },
+    {
+      "id": "warmth",
+      "label": "Warmth",
+      "icon": "sun",
+      "title": "Warmth and Comfort",
+      "description": "Reduce heat loss by up to 35% with triple-pane glass and multi-chambered frames. These innovations maintain a comfortable environment regardless of the weather, ensuring energy efficiency even in extreme climates.",
+      "photoDesc": "Фото: тепловизионный снимок окна, сравнение температур снаружи и внутри"
+    },
+    {
+      "id": "convenience",
+      "label": "Convenience",
+      "icon": "cog",
+      "title": "Convenience Made Simple",
+      "description": "DECA windows and doors are easy to use and require minimal maintenance. Intuitive handles and hardware provide smooth, straightforward operation, while inward-opening windows make cleaning effortless. Ventilation features allow fresh air to flow in while maintaining security and comfort.",
+      "photoDesc": "Фото: демонстрация режимов открывания — поворотно-откидное окно в двух положениях"
+    },
+    {
+      "id": "lifespan",
+      "label": "Lifespan",
+      "icon": "clock",
+      "title": "Built to Last",
+      "description": "uPVC frames reinforced with galvanized steel and durable materials ensure a lifespan of over 50 years. Inspired by the reliability of German-engineered windows still in use since 1972, our thick frames and up to 12 locking points guarantee unmatched strength and longevity.",
+      "photoDesc": "Фото: крупный план усиленного стального армирования внутри uPVC профиля"
+    },
+    {
+      "id": "safety",
+      "label": "Safety",
+      "icon": "shield",
+      "title": "Maximum Protection",
+      "description": "Up to 12 locking points, reinforced frames, and impact-resistant glass provide maximum security for your home. Rest assured, your loved ones are safe, and your home remains protected at all times.",
+      "photoDesc": "Фото: крупный план многоточечного замка с 12 точками запирания"
+    }
+  ],
+  "customerStories": {
+    "badge": "Customer Stories",
+    "title": "Real Homes. Real Results.",
+    "subtitle": "See how DECA windows transform comfort, energy bills, and everyday living.",
+    "viewAllText": "View All Stories"
+  },
+  "serviceSection": {
+    "badge": "Why DECA",
+    "title": "Exceptional Service in Massachusetts",
+    "subtitle": "Local manufacturing, expert support, and a seamless experience from quote to installation."
+  },
+  "questionsSection": {
+    "title": "Got Questions? We're Here to Help!",
+    "subtitle": "Call us directly or request a callback — our team responds within 24 hours.",
+    "ctaPrimary": "Request a Quote",
+    "ctaPhone": "(413) 771-4457"
+  },
+  "warrantySection": {
+    "badge": "Peace of Mind",
+    "title": "Warranty Commitments & Free Technical Support",
+    "subtitle": "Every DECA product comes with a 15-year transferable warranty covering frames, glass units, and all hardware. Our in-house team provides free technical support for the lifetime of your windows.",
+    "stats": [
+      { "value": "15 yr", "label": "Transferable Warranty" },
+      { "value": "Free", "label": "Technical Support" },
+      { "value": "48 hr", "label": "Response Time" },
+      { "value": "100%", "label": "Parts Coverage" }
+    ],
+    "photoDesc": "Фото: сертификат гарантии DECA, или техник на объекте у заказчика"
+  },
+  "professionalsSection": {
+    "badge": "B2B",
+    "title": "Solutions Built for Professionals",
+    "subtitle": "Special programs, pricing, and support for industry professionals.",
+    "items": [
+      {
+        "title": "For Building Contractors",
+        "desc": "Volume pricing, priority delivery, and dedicated project support. Streamline your builds with factory-direct European windows.",
+        "href": "/professionals#contractors",
+        "photoDesc": "Фото: подрядчик/строитель на объекте, монтаж окон DECA"
+      },
+      {
+        "title": "For Architects",
+        "desc": "Custom configurations, CAD drawings, technical specifications, and sample programs. Design without compromise.",
+        "href": "/professionals#architects",
+        "photoDesc": "Фото: архитектор за рабочим столом с чертежами, окно DECA на фоне"
+      },
+      {
+        "title": "For Dealers",
+        "desc": "Become a DECA dealer. Competitive margins, marketing support, showroom displays, and training programs.",
+        "href": "/professionals#dealers",
+        "photoDesc": "Фото: шоурум DECA с образцами окон и дверей"
+      }
+    ]
+  },
+  "founderStory": {
+    "badge": "Our Story",
+    "quote": "We didn't come to America to sell windows. We came to change what American homeowners expect from a window.",
+    "name": "Vladimir",
+    "title": "Founder & CEO, DECA Windows",
+    "bio": "Born and raised in Europe, Vladimir spent 20+ years in the window industry before founding DECA in Westfield, Massachusetts. His mission: bring true European engineering — triple-pane glass, multi-point locks, thermal-break frames — to every home in New England, at a fair price, with a personal touch.",
+    "stats": [
+      { "value": "500+", "label": "Homes Fitted" },
+      { "value": "0.10", "label": "Best U-Value" },
+      { "value": "15 yr", "label": "Full Warranty" },
+      { "value": "50+", "label": "Years Lifespan" }
+    ],
+    "ctaText": "Learn about our story",
+    "photoDesc": "Фото: Владимир, основатель DECA — портрет на фоне производства или шоурума"
+  },
+  "expertGuides": {
+    "badge": "Resources",
+    "title": "Expert Guides and Instructions",
+    "subtitle": "In-depth articles to help you make informed decisions about windows and doors.",
+    "guides": [
+      {
+        "title": "Tilt & Turn vs Double-Hung: Complete Comparison",
+        "desc": "Which window type is right for your home? We compare performance, cost, and lifespan.",
+        "href": "/blog",
+        "photoDesc": "Фото: сравнение двух типов окон рядом — tilt&turn и double-hung"
+      },
+      {
+        "title": "Understanding U-Values and Energy Efficiency",
+        "desc": "What U-value means for your energy bills and comfort. A homeowner's guide.",
+        "href": "/blog",
+        "photoDesc": "Фото: инфографика с диаграммой U-value и стрелками теплопотерь"
+      },
+      {
+        "title": "Window Replacement Guide for Massachusetts",
+        "desc": "When to replace, what to look for, and how to maximize your investment.",
+        "href": "/blog",
+        "photoDesc": "Фото: процесс замены старого окна на новое DECA в доме в Массачусетсе"
+      }
+    ]
+  },
+  "faqSection": {
+    "badge": "FAQ",
+    "title": "Your Questions — Answered",
+    "faqs": [
+      {
+        "q": "What makes DECA windows different from standard American windows?",
+        "a": "DECA windows use European tilt & turn technology with multi-chamber uPVC or aluminum frames, triple glazing, and multi-point locking. This delivers significantly better energy efficiency (U-value 0.10 vs 0.30+ for standard windows), noise reduction (45-50 dB vs 25-30 dB), and security."
+      },
+      {
+        "q": "Do you manufacture in the United States?",
+        "a": "Yes. All DECA windows and doors are manufactured in our facility in Westfield, Massachusetts. We use European engineering principles and hardware (Roto, Siegenia) with American-made profiles."
+      },
+      {
+        "q": "What is a tilt & turn window?",
+        "a": "A tilt & turn window has two opening modes: 'tilt' inward from the top for secure ventilation, and 'turn' fully inward like a door for maximum airflow and easy cleaning. This versatile design is standard across Europe and offers superior performance over traditional American window styles."
+      },
+      {
+        "q": "What areas do you serve?",
+        "a": "We serve all of Massachusetts, Connecticut, Rhode Island, New Hampshire, and the greater New York area. For large commercial projects, we can deliver nationwide."
+      },
+      {
+        "q": "How long does delivery take?",
+        "a": "Standard residential orders are typically delivered in 4-6 weeks from measurement confirmation. Rush orders and commercial projects can be expedited — contact us for specifics."
+      }
+    ]
+  },
+  "ctaWithDocs": {
+    "title": "Let's Work Together to Build Better Spaces",
+    "subtitle": "Get your custom order form, window blueprints, and detailed specification — all prepared for your project.",
+    "btnText": "Get a Free Quote"
+  }
+}

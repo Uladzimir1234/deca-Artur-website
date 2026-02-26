@@ -1,0 +1,269 @@
+{
+  "meta": {
+    "title": "European-Style Doors | Entry, French & Sliding | DECA Doors",
+    "description": "Premium European entry doors, swing (French) doors, and sliding door systems manufactured in Massachusetts. Multi-point locking, thermal break technology, factory-direct pricing.",
+    "canonical": "/doors"
+  },
+  "breadcrumb": [
+    {
+      "label": "Doors"
+    }
+  ],
+  "hero": {
+    "badge": "Our Products",
+    "title": "Style, Warmth, Security.\nDECA Doors for Your Home and Business.",
+    "description": "European engineering meets American manufacturing. Our door systems deliver exceptional thermal performance, multi-point security, and elegant design — all backed by a 15-year warranty and factory-direct pricing.",
+    "photoDescription": "Фото: коллекция дверей DECA — вход, французские, раздвижные в одном кадре",
+    "categories": [
+      {
+        "href": "/sliding-doors",
+        "label": "Sliding Doors",
+        "description": "PSk, Lift & Slide, and DECA Roto systems for panoramic openings.",
+        "photoDescription": "Фото: раздвижная дверь в интерьере"
+      },
+      {
+        "href": "/doors/french-doors",
+        "label": "Swing (French) Doors",
+        "description": "Classic double-leaf doors with European tilt & turn hardware.",
+        "photoDescription": "Фото: распашные французские двери"
+      },
+      {
+        "href": "/doors/entry-doors",
+        "label": "Entry Doors",
+        "description": "Secure, insulated entrance doors with multi-point locking.",
+        "photoDescription": "Фото: входная дверь DECA в фасаде"
+      }
+    ]
+  },
+  "benefits": {
+    "title": "Experience the True Benefits of DECA Doors",
+    "badge": "Technology",
+    "items": [
+      {
+        "icon": "🔒",
+        "title": "Multi-Point Security",
+        "description": "Up to 12 locking points"
+      },
+      {
+        "icon": "🌡️",
+        "title": "Thermal Insulation",
+        "description": "U-value as low as 0.10"
+      },
+      {
+        "icon": "🔇",
+        "title": "Sound Reduction",
+        "description": "Up to 50 dB noise block"
+      },
+      {
+        "icon": "💨",
+        "title": "Weather Resistance",
+        "description": "140 mph wind rated"
+      },
+      {
+        "icon": "🏗️",
+        "title": "Made in USA",
+        "description": "Westfield, MA factory"
+      }
+    ]
+  },
+  "profiles": {
+    "badge": "Technology",
+    "title": "Precision in Every Detail",
+    "subtitle": "Advanced components engineered for decades of reliable performance.",
+    "items": [
+      {
+        "title": "uPVC Door Profile",
+        "description": "Multi-chamber design with galvanized steel reinforcement. Triple EPDM sealing for maximum weather protection. Low-maintenance, UV-resistant exterior.",
+        "image": "https://gealanwindows.com/app/uploads/2024/09/8001-88x8095-88x7162_00163128.webp",
+        "imageAlt": "uPVC door profile cross-section showing multi-chamber design and steel reinforcement"
+      },
+      {
+        "title": "Aluminum Door Profile",
+        "description": "Thermal break technology with polyamide insulation strips. Structural strength for large openings. Available in 200+ RAL colors.",
+        "image": "https://gealanwindows.com/app/uploads/2024/09/7001x7072x7242_00163072_GK-grau.webp",
+        "imageAlt": "Aluminum door profile cross-section with thermal break technology"
+      }
+    ]
+  },
+  "specifications": {
+    "headers": [
+      "Specification",
+      "uPVC Doors",
+      "Aluminum Doors"
+    ],
+    "rows": [
+      [
+        "Frame Depth",
+        "70 mm",
+        "65 mm"
+      ],
+      [
+        "U-Value (frame)",
+        "1.0 W/m²K",
+        "1.4 W/m²K"
+      ],
+      [
+        "U-Value (system)",
+        "0.10 W/m²K",
+        "0.12 W/m²K"
+      ],
+      [
+        "Sound Insulation",
+        "Up to 47 dB",
+        "Up to 45 dB"
+      ],
+      [
+        "Security Class",
+        "RC2 / RC3",
+        "RC2 / RC3"
+      ],
+      [
+        "Max Height",
+        "2,500 mm",
+        "3,000 mm"
+      ],
+      [
+        "Colors Available",
+        "40+ standard",
+        "200+ RAL"
+      ]
+    ]
+  },
+  "catalog": {
+    "badge": "Catalog",
+    "title": "uPVC and Aluminum Doors",
+    "subtitle": "Choose your door type and customize every detail.",
+    "items": [
+      {
+        "title": "Sliding Doors",
+        "description": "PSk, Lift & Slide, DECA Roto. Panoramic glass walls with effortless operation.",
+        "href": "/sliding-doors",
+        "photoDescription": "Фото: раздвижная дверная система в интерьере, вид на террасу"
+      },
+      {
+        "title": "Swing (French) Doors",
+        "description": "Single or double-leaf. Tilt & turn hardware. Classic elegance.",
+        "href": "/doors/french-doors",
+        "photoDescription": "Фото: распашные французские двери открытые внутрь, свет из сада"
+      },
+      {
+        "title": "Entry Doors",
+        "description": "Multi-point locking, thermal insulation, custom panel designs.",
+        "href": "/doors/entry-doors",
+        "photoDescription": "Фото: парадная входная дверь с боковым остеклением"
+      }
+    ]
+  },
+  "colors": {
+    "badge": "Customization",
+    "title": "Colors That Complement Your Style",
+    "subtitle": "Over 40 standard finishes and 200+ RAL custom colors for interior and exterior.",
+    "items": [
+      {
+        "name": "White",
+        "color": "#FFFFFF"
+      },
+      {
+        "name": "Cream",
+        "color": "#F5F0E1"
+      },
+      {
+        "name": "Light Gray",
+        "color": "#C4C4C4"
+      },
+      {
+        "name": "Anthracite",
+        "color": "#3C3C3C"
+      },
+      {
+        "name": "Dark Brown",
+        "color": "#4A2E1C"
+      },
+      {
+        "name": "Golden Oak",
+        "color": "#B8860B"
+      },
+      {
+        "name": "Mahogany",
+        "color": "#6B3A2A"
+      },
+      {
+        "name": "Black",
+        "color": "#1A1A1A"
+      }
+    ]
+  },
+  "gallery": {
+    "badge": "Gallery",
+    "title": "Doors in Real Projects",
+    "images": [
+      {
+        "src": "https://gealanwindows.com/app/uploads/2024/09/49-web-or-mls-16039-Austin-St-NE-49.webp",
+        "alt": "Modern home with large sliding doors opening to terrace"
+      },
+      {
+        "src": "https://gealanwindows.com/app/uploads/2024/09/reference-object-2021-08-01-1.webp",
+        "alt": "Classic facade with French doors and side windows"
+      },
+      {
+        "src": "https://gealanwindows.com/app/uploads/2024/09/reference-object-2023-10-02.webp",
+        "alt": "Elegant entry door in stone portal"
+      },
+      {
+        "src": "https://gealanwindows.com/app/uploads/2024/09/reference-object-2021-08-02-2.webp",
+        "alt": "Loft interior with panoramic sliding doors"
+      }
+    ]
+  },
+  "guides": {
+    "badge": "Resources",
+    "title": "Expert Guides",
+    "items": [
+      {
+        "title": "Entry Door Security Guide",
+        "description": "Understanding RC classes, multi-point locks, and how to protect your home.",
+        "href": "/blog",
+        "photoDescription": "Фото: крупный план системы запирания входной двери"
+      },
+      {
+        "title": "Sliding Door Systems Compared",
+        "description": "PSk vs Lift & Slide vs DECA Roto — which system is right for you?",
+        "href": "/blog",
+        "photoDescription": "Фото: три типа раздвижных систем рядом в сравнении"
+      },
+      {
+        "title": "French Doors: Design Guide",
+        "description": "Indoor vs outdoor, single vs double leaf, glazing and hardware options.",
+        "href": "/blog",
+        "photoDescription": "Фото: дизайн-подборка вариантов французских дверей"
+      }
+    ]
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "q": "What types of doors does DECA manufacture?",
+        "a": "We manufacture three main categories: sliding doors (PSk parallel-slide, Lift & Slide, and DECA Roto tilt & slide), swing/French doors (single and double-leaf with tilt & turn), and entry doors (insulated panel doors with multi-point locking)."
+      },
+      {
+        "q": "How secure are DECA doors?",
+        "a": "All DECA doors feature multi-point locking systems (up to 12 points) and are available in RC2 and RC3 security classes. Entry doors include steel-reinforced frames and anti-drill, anti-pick cylinder locks."
+      },
+      {
+        "q": "Can doors be custom sized?",
+        "a": "Yes. Every door is made to order. Sliding doors can span up to 6 meters wide and 3 meters tall. Entry doors and French doors are available in virtually any dimension within structural limits."
+      },
+      {
+        "q": "What is the thermal performance of DECA doors?",
+        "a": "Our door systems achieve U-values as low as 0.10 W/m²K with triple glazing. This exceeds Passive House requirements and delivers significant energy savings compared to standard American doors."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Let's Work Together to Build Better Spaces",
+    "subtitle": "Get your custom order form, door blueprints, and detailed specification — all prepared for your project.",
+    "buttonText": "Get a Quote"
+  }
+}

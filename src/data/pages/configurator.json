@@ -1,0 +1,260 @@
+{
+  "meta": {
+    "title": "Window & Door Configurator | Design Your DECA Window",
+    "description": "Design your custom European window or door. Choose product type, size, material, glazing, colors, and hardware — see real-time preview and pricing.",
+    "canonical": "/configurator"
+  },
+  "breadcrumb": {
+    "items": [
+      {
+        "label": "Configurator"
+      }
+    ]
+  },
+  "frameTypes": [
+    {
+      "id": "elegance",
+      "label": "Elegance",
+      "warranty": "2 Year",
+      "chambers": 3,
+      "soundProof": 6,
+      "energyEfficiency": 6,
+      "blowProtection": 6,
+      "description": "Classical approach to window and door design. Elegant profiles with proven reliability for residential applications.",
+      "basePrice": 656.77
+    },
+    {
+      "id": "power",
+      "label": "Power",
+      "warranty": "5 Year",
+      "chambers": 5,
+      "soundProof": 8,
+      "energyEfficiency": 8,
+      "blowProtection": 8,
+      "description": "Enhanced thermal and acoustic performance. 5-chamber profile system with superior insulation for demanding climates.",
+      "basePrice": 798.50
+    },
+    {
+      "id": "premium",
+      "label": "Premium",
+      "warranty": "5 Year",
+      "chambers": 6,
+      "soundProof": 10,
+      "energyEfficiency": 10,
+      "blowProtection": 10,
+      "description": "The ultimate in window technology. 6-chamber system delivers maximum energy efficiency and soundproofing.",
+      "basePrice": 945.20
+    }
+  ],
+  "colors": [
+    {
+      "id": "white",
+      "label": "White",
+      "hex": "#F5F5F0",
+      "price": 0,
+      "isWood": false
+    },
+    {
+      "id": "black",
+      "label": "Black",
+      "hex": "#1A1A1A",
+      "price": 108.59,
+      "isWood": false
+    },
+    {
+      "id": "antasit-grey",
+      "label": "Antasit Grey",
+      "hex": "#6B6B6B",
+      "price": 108.59,
+      "isWood": false
+    },
+    {
+      "id": "golden-oak",
+      "label": "Golden Oak",
+      "hex": "#B8860B",
+      "price": 108.59,
+      "isWood": true
+    },
+    {
+      "id": "vizon",
+      "label": "Vizon",
+      "hex": "#8B7355",
+      "price": 108.59,
+      "isWood": true
+    },
+    {
+      "id": "antique-oak",
+      "label": "Antique Oak",
+      "hex": "#5C4033",
+      "price": 108.59,
+      "isWood": true
+    }
+  ],
+  "glassPaneTypes": [
+    {
+      "id": "double",
+      "label": "Double Glass Pane",
+      "price": 0,
+      "isDefault": true
+    },
+    {
+      "id": "triple",
+      "label": "Triple Glass Pane",
+      "price": 40.70,
+      "isDefault": false
+    }
+  ],
+  "glassPanes": [
+    {
+      "id": "regular",
+      "label": "Regular",
+      "price": 0,
+      "isDefault": true,
+      "desc": "Standard glass pane"
+    },
+    {
+      "id": "tempered",
+      "label": "Tempered",
+      "price": 82.70,
+      "isDefault": false,
+      "desc": "7 times stronger than normal glass"
+    }
+  ],
+  "spacerBars": [
+    {
+      "id": "aluminum",
+      "label": "Aluminum",
+      "price": 0,
+      "isDefault": true
+    },
+    {
+      "id": "gray-warm",
+      "label": "Gray Warm",
+      "price": 10.11,
+      "isDefault": false
+    },
+    {
+      "id": "black-warm",
+      "label": "Black Warm",
+      "price": 10.11,
+      "isDefault": false
+    }
+  ],
+  "glassTypes": [
+    {
+      "id": "clear",
+      "label": "Clear",
+      "price": 0,
+      "isDefault": true
+    },
+    {
+      "id": "frosted",
+      "label": "Frosted",
+      "price": 118.15,
+      "isDefault": false
+    }
+  ],
+  "grids": [
+    {
+      "id": "none",
+      "label": "None",
+      "price": 0,
+      "isDefault": true
+    },
+    {
+      "id": "5-8",
+      "label": "5/8\" Grid",
+      "price": 95.00,
+      "isDefault": false
+    }
+  ],
+  "hinges": [
+    {
+      "id": "standard",
+      "label": "Standard",
+      "price": 0,
+      "isDefault": true,
+      "desc": "Colonial or classic style"
+    },
+    {
+      "id": "concealed",
+      "label": "Concealed",
+      "price": 172.19,
+      "isDefault": false,
+      "desc": "Modern and minimalist look"
+    }
+  ],
+  "handleModels": [
+    {
+      "id": "line-t",
+      "label": "Model Line-T",
+      "price": 0,
+      "isDefault": true
+    },
+    {
+      "id": "line-rt",
+      "label": "Model Line-RT",
+      "price": 22.89,
+      "isDefault": false
+    },
+    {
+      "id": "dublin-t",
+      "label": "Model Dublin-T",
+      "price": 35.50,
+      "isDefault": false
+    }
+  ],
+  "handleColors": [
+    {
+      "id": "white",
+      "label": "White",
+      "hex": "#F5F5F0",
+      "price": 0,
+      "isDefault": true
+    },
+    {
+      "id": "black",
+      "label": "Black",
+      "hex": "#1A1A1A",
+      "price": 15.00,
+      "isDefault": false
+    },
+    {
+      "id": "silver",
+      "label": "Silver",
+      "hex": "#C0C0C0",
+      "price": 15.00,
+      "isDefault": false
+    }
+  ],
+  "defaultSpecs": [
+    {
+      "label": "Window Width",
+      "value": "30\" (762 mm)"
+    },
+    {
+      "label": "Rough Opening Width (min)",
+      "value": "30 ¾\" (781 mm)"
+    },
+    {
+      "label": "Window Height",
+      "value": "54\" (1372 mm)"
+    },
+    {
+      "label": "Rough Opening Height (min)",
+      "value": "54 ¾\" (1391 mm)"
+    },
+    {
+      "label": "Window Type",
+      "value": "Single Casement"
+    },
+    {
+      "label": "Window Opening",
+      "value": "RHI"
+    },
+    {
+      "label": "Frame Material",
+      "value": "uPVC"
+    }
+  ]
+}
