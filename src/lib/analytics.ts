@@ -9,7 +9,7 @@
 
 // ─── Configuration (replace with real IDs before launch) ───
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX";
-export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-XXXXXXX";
+export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-5RC2L84X";
 export const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_ID || "XXXXXXX";
 
 // ─── GA4 Event Tracking ───
@@ -79,7 +79,7 @@ export const events = {
 
 // ─── GTM Head Script (inject in layout.tsx <head>) ───
 export function getGTMHeadScript(): string {
-  if (GTM_ID === "GTM-XXXXXXX") return "";
+  if (!GTM_ID || GTM_ID === "GTM-XXXXXXX") return "";
   return `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -89,7 +89,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 // ─── GTM Body Noscript (inject after <body>) ───
 export function getGTMBodyNoscript(): string {
-  if (GTM_ID === "GTM-XXXXXXX") return "";
+  if (!GTM_ID || GTM_ID === "GTM-XXXXXXX") return "";
   return `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
 }
 
