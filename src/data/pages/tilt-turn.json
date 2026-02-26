@@ -1,0 +1,325 @@
+{
+  "slug": "tilt-turn",
+  "meta": {
+    "title": "Tilt & Turn Windows | European Style | DECA Windows",
+    "description": "Premium European tilt & turn windows with two opening modes. GEALAN profiles, U-values as low as 0.14, noise reduction up to 50 dB, manufactured in Massachusetts."
+  },
+  "hero": {
+    "badge": "Most Popular in Europe",
+    "heading": "Tilt & Turn Windows",
+    "subheading": "The most versatile window system in the world. Two opening modes, exceptional performance, and German GEALAN engineering — manufactured in Massachusetts.",
+    "videoTabs": [
+      {
+        "title": "Tilt to Vent",
+        "description": "Just turn handle up to air out your home. Secure, rain-safe airflow perfect for sleep and child safety.",
+        "video": "/assets/videos/ventilation.mp4"
+      },
+      {
+        "title": "Easy to Clean",
+        "description": "Opens inward, making cleaning more convenient. Clean exterior glass from inside your home, on any floor.",
+        "video": "/assets/videos/easy-to-clean.mp4"
+      },
+      {
+        "title": "Air-Tight & Secure",
+        "description": "Up to 12 locking points engage with a single handle turn. Compression seals create an airtight, watertight barrier.",
+        "video": "/assets/videos/airtight-secure.mp4"
+      }
+    ]
+  },
+  "stats": [
+    { "value": 0.14, "label": "Best U-Value (W/m²K)", "decimals": 2 },
+    { "value": 50, "suffix": " dB", "label": "Noise Reduction" },
+    { "value": 12, "label": "Lock Points" },
+    { "value": 50, "suffix": "+", "label": "Year Lifespan" }
+  ],
+  "educational": {
+    "badge": "How It Works",
+    "title": "What Does Tilt & Turn Mean?",
+    "intro": "Tilt & turn is a dual-function window system engineered in Germany and used as the standard across Europe. A single handle controls two distinct opening modes — giving you ventilation, security, and easy maintenance in one design.",
+    "modes": [
+      {
+        "title": "Tilt Position — Secure Ventilation",
+        "description": "Handle up — the window tilts inward from the top, remaining fixed at the base. Opens about 4 inches: enough for fresh air, but too narrow to climb through. Rain-safe, child-safe, and perfect for overnight ventilation."
+      },
+      {
+        "title": "Turn Position — Full Opening",
+        "description": "Handle horizontal — the window swings fully inward like a door. Maximum airflow, and you can clean the exterior glass from inside your home on any floor. No ladders, no hassle."
+      },
+      {
+        "title": "Micro-Ventilation — Subtle Airflow",
+        "description": "A slight handle turn creates a barely perceptible gap — just enough for continuous air exchange without a noticeable draft. Ideal for kitchens, bathrooms, and humid spaces."
+      }
+    ],
+    "footnote": "All three modes are controlled by a single handle with a multi-point locking mechanism — turn it down to lock, up to tilt, sideways to open fully.",
+    "imagePlaceholder": "Diagram: Tilt, Turn & Micro-Ventilation positions"
+  },
+  "benefits": {
+    "badge": "Why European Windows",
+    "title": "Benefits of DECA Tilt & Turn",
+    "subtitle": "Every feature is engineered for comfort, security, and long-term value.",
+    "items": [
+      {
+        "title": "Lower Energy Bills",
+        "text": "Multi-chamber profiles with double or triple gasket seals and argon-filled Low-E glass dramatically reduce heat transfer. Homeowners typically see a 40–50% reduction in heating and cooling costs.",
+        "icon": "flame"
+      },
+      {
+        "title": "Superior Soundproofing",
+        "text": "Glass panels of varying thickness absorb street noise, traffic, and weather sounds. The result: a peaceful, quiet home with acoustic comfort rated up to 50 dB reduction.",
+        "icon": "speaker"
+      },
+      {
+        "title": "Multi-Point Security",
+        "text": "Up to 12 locking points engage simultaneously around the entire frame perimeter. When you turn the handle, all locks push the sash tightly against the frame — creating a barrier that far exceeds standard window security.",
+        "icon": "lock"
+      },
+      {
+        "title": "Safe Ventilation",
+        "text": "In tilt mode, the window opens just 4 inches — providing steady airflow while remaining child-safe and rain-resistant. Ventilate your home during storms or at night without worry.",
+        "icon": "currency"
+      },
+      {
+        "title": "Effortless Cleaning",
+        "text": "Turn the handle to fully open the window inward — clean the exterior glass from inside your home, even on upper floors. No ladders, no professional window cleaners needed.",
+        "icon": "sparkles"
+      },
+      {
+        "title": "Emergency Egress",
+        "text": "In turn mode, the window opens fully inward — making it an excellent emergency exit or fire escape point. Easy to operate even under stress, meeting safety requirements for bedrooms.",
+        "icon": "rocket"
+      }
+    ]
+  },
+  "profileTechnology": {
+    "badge": "GEALAN Engineering",
+    "title": "Profile Technology",
+    "subtitle": "See what's inside every DECA window — German-engineered GEALAN profiles built for decades of performance.",
+    "items": [
+      {
+        "title": "Profile Cross-Section",
+        "description": "Multi-chamber uPVC profile with galvanized steel reinforcement for structural rigidity.",
+        "image": "/assets/components/profile-cross-section.png",
+        "alt": "GEALAN profile cross-section — multi-chamber uPVC window profile"
+      },
+      {
+        "title": "Chamber Structure",
+        "description": "5–6 insulating chambers trap air, creating a thermal barrier that outperforms standard vinyl by 40%.",
+        "image": "/assets/components/chamber-structure.png",
+        "alt": "GEALAN chamber structure — 5-6 insulating chambers highlighted in green"
+      },
+      {
+        "title": "Triple Seal System",
+        "description": "Three continuous EPDM gaskets block air, water, and sound at every point of the frame.",
+        "image": "/assets/components/triple-seal-system.png",
+        "alt": "GEALAN triple seal system — three EPDM gasket contours visible on profile"
+      },
+      {
+        "title": "Glazing Package",
+        "description": "Triple-pane argon-filled glass unit with warm-edge spacer for maximum thermal and acoustic insulation.",
+        "image": "/assets/components/glazing-package.png",
+        "alt": "GEALAN triple-pane glazing package with argon fill and warm-edge spacer"
+      },
+      {
+        "title": "Hardware Detail",
+        "description": "Precision Roto/Siegenia hardware with up to 12 locking points for maximum security.",
+        "image": "/assets/components/hardware-detail.png",
+        "alt": "Tilt & turn window hardware — Roto/Siegenia multi-point locking system"
+      }
+    ]
+  },
+  "specs": {
+    "badge": "Specifications",
+    "title": "Technical Data",
+    "subtitle": "Professional-grade GEALAN profiles with NFRC-certified performance.",
+    "rows": [
+      ["Profile System", "GEALAN-LINEAR® / S 8000"],
+      ["Profile Depth", "74mm – 83mm"],
+      ["Material", "uPVC + galvanized steel reinforcement"],
+      ["Chamber Count", "5–6 chambers"],
+      ["Surface", "GEALAN-acrylcolor® (co-extruded)"],
+      ["Glass Package", "Triple-pane, argon-filled, up to 52mm"],
+      ["U-Factor", "As low as 0.14 W/m²K"],
+      ["Max Size", "Up to 11′6″ × 11′6″"],
+      ["Sound Insulation", "STC 42–50 dB"],
+      ["Lock Points", "8–12 multi-point (Roto/Siegenia)"],
+      ["Security Rating", "RC2 / RC3 certified"],
+      ["Insect Screen", "FlexScreen® (virtually invisible)"]
+    ]
+  },
+  "glazing": {
+    "badge": "Energy-Efficient Glass",
+    "title": "Glazing Configuration",
+    "subtitle": "Compare glass packages side by side — click any type to highlight its performance."
+  },
+  "colors": {
+    "badge": "Customization",
+    "title": "50+ Frame Colors & Wood-Grain Finishes",
+    "subtitle": "Match your windows to any interior or exterior design. Solid colors, textured wood grains, and metallic finishes — all with durable, co-extruded surface technology.",
+    "swatches": [
+      { "name": "White", "color": "#FFFFFF", "border": true },
+      { "name": "Anthracite Gray", "color": "#3E4347" },
+      { "name": "Jet Black", "color": "#1A1A1A" },
+      { "name": "Golden Oak", "color": "#B8860B" },
+      { "name": "Walnut", "color": "#5C4033" },
+      { "name": "Sheffield Oak", "color": "#A0926B" },
+      { "name": "Mahogany", "color": "#4E2728" },
+      { "name": "Natural Oak", "color": "#C4A265" },
+      { "name": "Dark Oak", "color": "#3B2F2F" },
+      { "name": "Rosewood", "color": "#65000B" },
+      { "name": "Douglas Fir", "color": "#8B6914" },
+      { "name": "Basalt Gray", "color": "#4E5754" },
+      { "name": "Steel Blue", "color": "#4682B4" },
+      { "name": "Dark Green", "color": "#1B4332" },
+      { "name": "Bordeaux", "color": "#6C3461" },
+      { "name": "Brushed Alu", "color": "#A8A9AD" },
+      { "name": "Slate Gray", "color": "#708090" },
+      { "name": "Cream", "color": "#FFFDD0", "border": true }
+    ],
+    "dualColorTitle": "Dual-Color Option Available",
+    "dualColorText": "Choose different colors for interior and exterior surfaces. For example, dark anthracite outside to match modern architecture, warm oak wood-grain inside to complement your living space. All finishes use GEALAN-acrylcolor® co-extrusion technology for decades of UV and weather resistance — no painting or recoating needed."
+  },
+  "grids": {
+    "badge": "Design Options",
+    "title": "Window Grids & Patterns",
+    "subtitle": "Add character to your windows with decorative grid patterns. Choose from traditional to contemporary styles, available in multiple colors and widths.",
+    "patterns": [
+      { "name": "No Grid", "desc": "Clean, modern look" },
+      { "name": "Colonial", "desc": "Classic symmetrical panes" },
+      { "name": "Prairie", "desc": "Perimeter border pattern" },
+      { "name": "Heritage", "desc": "Traditional European style" },
+      { "name": "Victorian", "desc": "Ornate period design" },
+      { "name": "Custom", "desc": "Your own pattern" }
+    ],
+    "gridColorsText": "Grids are available in colors that match your frame finish — white, golden oak, walnut, jet black, and more. The grid color is selected to blend seamlessly with your chosen window color.",
+    "gridWidthsText": "Choose between 3/4\" (18mm) narrow grids for a sleek, modern look or 1\" (26mm) standard grids for a more traditional aesthetic. Both options are available for all grid patterns."
+  },
+  "hardware": {
+    "badge": "German Engineering",
+    "title": "Hardware & Fittings",
+    "subtitle": "Every DECA window is equipped with precision hardware from Europe's leading manufacturers — engineered for 40,000+ open/close cycles.",
+    "hinges": [
+      {
+        "title": "Standard Hinges",
+        "description": "Classic visible hinges with a colonial or traditional aesthetic. Robust German-made construction ensures smooth operation and durability for decades."
+      },
+      {
+        "title": "Concealed Hinges",
+        "description": "Hidden within the frame for a clean, minimalist look. All technical features — durability, smooth action, soft closing — are preserved while giving your windows a sleek, modern appearance."
+      }
+    ],
+    "handlesIntro": "The window handle is both a functional element and a design accent. DECA offers multiple handle types in aluminum and high-grade plastic, available in traditional and modern designs to match any interior.",
+    "handles": [
+      { "name": "Quadro", "desc": "Sleek, angular aluminum handle. Modern, minimalist profile." },
+      { "name": "Dublin", "desc": "Ergonomic curved design. Comfortable grip, classic style." },
+      { "name": "Victory", "desc": "Rounded contemporary form. Premium brushed metal finishes." },
+      { "name": "Secustik", "desc": "Anti-break security handle. Built-in locking mechanism." }
+    ],
+    "handleColors": ["White", "Brown", "Caramel", "Cream", "Silver", "Titanium", "Jet Black", "Anthracite", "Gold", "Brushed Bronze"],
+    "partnersTitle": "Trusted Engineering Partners",
+    "partnersText": "All hardware and fittings sourced from Europe's leading manufacturers — lab-tested for 40,000+ opening cycles.",
+    "partners": ["Roto", "Siegenia", "GEALAN", "Deceuninck"]
+  },
+  "comfort": {
+    "badge": "Year-Round Performance",
+    "title": "Comfort in Every Season",
+    "subtitle": "DECA windows are engineered to maintain a consistent, comfortable indoor environment — regardless of what's happening outside.",
+    "cards": [
+      {
+        "title": "Warm in Winter",
+        "text": "Multi-chamber profiles with double and triple gasket seals create an insulating barrier that withstands the coldest New England winters. The triple-pane argon-filled glass and warm-edge spacers prevent cold spots and condensation — keeping your home cozy even when it's below zero outside.",
+        "color": "red"
+      },
+      {
+        "title": "Cool in Summer",
+        "text": "Low-E glass coatings reflect solar heat away from your interior, keeping rooms cool without overworking your AC. Combined with tilt ventilation for natural airflow, your home stays comfortable in peak summer heat — while your energy bills stay low.",
+        "color": "blue"
+      },
+      {
+        "title": "Zero Drafts",
+        "text": "Modern EPDM seals and precision multi-point locking ensure a perfectly hermetic window closure. The result: no drafts, no air leakage, no cold spots near windows. Just warmth and silence throughout your home — with air tightness ratings that exceed passive house requirements.",
+        "color": "green"
+      }
+    ]
+  },
+  "performance": {
+    "badge": "Why Upgrade",
+    "title": "DECA vs. Traditional Windows",
+    "subtitle": "See how European tilt & turn technology outperforms standard American vinyl windows.",
+    "metrics": [
+      { "label": "Thermal Insulation", "deca": 95, "decaLabel": "U-Factor 0.14", "traditional": 40, "traditionalLabel": "U-Factor 0.30" },
+      { "label": "Sound Reduction", "deca": 90, "decaLabel": "42–50 dB", "traditional": 55, "traditionalLabel": "25–30 dB" },
+      { "label": "Air Tightness", "deca": 98, "decaLabel": "12-point lock", "traditional": 35, "traditionalLabel": "2-point lock" },
+      { "label": "Lifespan", "deca": 100, "decaLabel": "50+ years", "traditional": 40, "traditionalLabel": "15–20 years" }
+    ]
+  },
+  "energySavings": {
+    "badge": "Your Investment",
+    "title": "The Economics of Quality Windows",
+    "subtitle": "Energy-efficient windows aren't just better — they pay for themselves."
+  },
+  "gallery": {
+    "badge": "Our Work",
+    "title": "Tilt & Turn in Real Homes",
+    "subtitle": "DECA windows installed across New England.",
+    "items": [
+      { "src": "/assets/gallery/gallery-1.webp", "tall": true },
+      { "src": "/assets/gallery/gallery-2.webp", "tall": true },
+      { "src": "/assets/gallery/gallery-3.webp" },
+      { "src": "/assets/gallery/gallery-4.webp" },
+      { "src": "/assets/gallery/gallery-5.webp" },
+      { "src": "/assets/gallery/gallery-6.webp" },
+      { "src": "/assets/gallery/gallery-7.webp" },
+      { "src": "/assets/gallery/gallery-8.webp" }
+    ]
+  },
+  "service": {
+    "title": "Exceptional Service in Massachusetts",
+    "subtitle": "From consultation to installation, we're with you every step."
+  },
+  "delivery": {
+    "badge": "Nationwide Delivery",
+    "title": "Factory-Direct Shipping Across the U.S.",
+    "text": "Every DECA window is manufactured in Westfield, Massachusetts and shipped directly to your project site. Northeast states enjoy same-day to 5-day delivery, while we reach the entire continental U.S. within 10 days.",
+    "zones": [
+      { "value": "1–2", "label": "days to CT, RI" },
+      { "value": "3–5", "label": "days to PA, NJ" },
+      { "value": "8–10", "label": "days coast-to-coast" }
+    ]
+  },
+  "styles": {
+    "badge": "Configurations",
+    "title": "Available Styles",
+    "subtitle": "Every window is custom-made to your specifications.",
+    "items": [
+      { "src": "style-single-casement.png", "name": "Single Tilt & Turn", "desc": "Classic single-panel operation" },
+      { "src": "style-hopper.png", "name": "Hopper / Awning", "desc": "Top-hinged ventilation window" },
+      { "src": "style-double-casement.png", "name": "Double Section", "desc": "Side-by-side tilt & turn panels" },
+      { "src": "style-triple-casement.png", "name": "Triple Section", "desc": "Panoramic three-panel system" },
+      { "src": "style-arched.png", "name": "Arched / Custom", "desc": "Any shape — curved, round, triangular" }
+    ]
+  },
+  "cta": {
+    "title": "Ready for Tilt & Turn?",
+    "subtitle": "Get your custom order form, window blueprints, and detailed specification — all prepared for your project.",
+    "btnText": "Get Free Quote"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently Asked Questions",
+    "items": [
+      { "q": "How long do tilt and turn windows last?", "a": "With proper maintenance, DECA tilt and turn windows last 50+ years. We back this with a 15-year frame warranty, 10-year glass warranty, and 5-year hardware warranty." },
+      { "q": "Are tilt and turn windows more expensive than double hung?", "a": "Initial cost is typically 15-30% higher, but the energy savings ($1,500-2,500/year for a typical home), durability, and superior performance make them significantly more cost-effective over their lifetime." },
+      { "q": "Can I get custom sizes and shapes?", "a": "Yes. We manufacture every window to order in Massachusetts. Arched, circular, triangular, and any custom dimensions. 50+ RAL colors plus wood-grain laminates." },
+      { "q": "What energy savings can I expect?", "a": "Our triple-glazed tilt & turn windows achieve U-values as low as 0.14 — far exceeding ENERGY STAR requirements. Homeowners typically save 40-50% on heating/cooling. Federal tax credits up to $3,200 available." },
+      { "q": "What about insect screens?", "a": "We offer FlexScreen® — a virtually invisible, spring-steel insect screen that snaps into place without hardware. It doesn't block your view or airflow like traditional screens." },
+      { "q": "Do they meet US building codes?", "a": "Absolutely. All DECA windows are NFRC certified and meet or exceed all US building code requirements, including ENERGY STAR criteria." }
+    ]
+  },
+  "faqSchema": [
+    { "question": "How long do tilt and turn windows last?", "answer": "With proper maintenance, DECA tilt and turn windows have a service life of 50+ years. We back this with a 15-year frame warranty and 10-year glass warranty." },
+    { "question": "Are tilt and turn windows more expensive than double hung?", "answer": "Initial cost is typically 15-30% higher, but the energy savings, durability, and superior performance make them significantly more cost-effective over the window's lifetime." },
+    { "question": "Can I get custom sizes and shapes?", "answer": "Yes. We manufacture every window to order at our Massachusetts factory. Arched, circular, triangular, and any custom dimensions are available." },
+    { "question": "How energy efficient are they?", "answer": "Our triple-glazed tilt and turn windows achieve U-values as low as 0.14 W/m²K — significantly exceeding ENERGY STAR requirements of 0.30." },
+    { "question": "Do they meet US building codes?", "answer": "Absolutely. All DECA windows are NFRC certified and meet or exceed all US building code requirements." }
+  ]
+}
