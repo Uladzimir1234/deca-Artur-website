@@ -497,6 +497,7 @@ function ArticleEditor({
 /* ─── Main Admin Panel ─── */
 export default function AdminPage() {
   const [token, setToken] = useState<string | null>(null);
+  const [view, setView] = useState<"hub" | "articles">("hub");
   const [articles, setArticles] = useState<Article[]>([]);
   const [sha, setSha] = useState("");
   const [loading, setLoading] = useState(false);
@@ -534,8 +535,8 @@ export default function AdminPage() {
   }, [token]);
 
   useEffect(() => {
-    if (token) fetchArticles();
-  }, [token, fetchArticles]);
+    if (token && view === "articles") fetchArticles();
+  }, [token, view, fetchArticles]);
 
   const handleSave = async () => {
     if (!editing) return;
@@ -617,35 +618,134 @@ export default function AdminPage() {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-[#3854AA] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">D</span>
-            </div>
-            <div>
-              <h1 className="font-bold text-gray-900">DECA Admin</h1>
-              <p className="text-xs text-gray-500">Content Management</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <a href="/admin/chat" className="flex items-center gap-1.5 text-sm text-[#3854AA] hover:text-[#2a3f7a] font-medium">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" /></svg>
-              Content Editor
-            </a>
-            <a href="/" className="text-sm text-gray-500 hover:text-gray-700">View Site</a>
-            <button
-              onClick={() => { localStorage.removeItem("admin_token"); setToken(null); }}
-              className="text-sm text-red-500 hover:text-red-700"
-            >
-              Logout
+  /* ─── Shared Header ─── */
+  const AdminHeader = ({ showBack }: { showBack?: boolean }) => (
+    <div className="bg-white border-b border-gray-200">
+      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          {showBack && (
+            <button onClick={() => setView("hub")} className="text-gray-400 hover:text-gray-600 mr-1">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+              </svg>
             </button>
+          )}
+          <div className="w-8 h-8 bg-[#3854AA] rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-sm">D</span>
+          </div>
+          <div>
+            <h1 className="font-bold text-gray-900">DECA Admin</h1>
+            <p className="text-xs text-gray-500">Content Management</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <a href="/" target="_blank" className="text-sm text-gray-500 hover:text-gray-700">View Site</a>
+          <button
+            onClick={() => { localStorage.removeItem("admin_token"); setToken(null); }}
+            className="text-sm text-red-500 hover:text-red-700"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  /* ─── Hub View ─── */
+  if (view === "hub") {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <AdminHeader />
+        <div className="max-w-4xl mx-auto px-4 py-10">
+          {/* Status message */}
+          {message && (
+            <div className={`mb-6 p-4 rounded-lg text-sm ${message.type === "success" ? "bg-green-50 text-green-800 border border-green-200" : "bg-red-50 text-red-800 border border-red-200"}`}>
+              {message.text}
+            </div>
+          )}
+
+          {/* Content Editor — big hero card */}
+          <a
+            href="/admin/chat"
+            className="block mb-8 group"
+          >
+            <div className="bg-gradient-to-br from-[#3854AA] to-[#2a3f7a] rounded-2xl p-8 text-white shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5">
+              <div className="flex items-center gap-5">
+                <div className="w-16 h-16 bg-white/15 backdrop-blur-sm rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-xl font-bold mb-1">AI Content Editor</h2>
+                  <p className="text-white/70 text-sm leading-relaxed">
+                    Edit any page on the site using natural language. Attach a screenshot, describe the change — AI will update the content and deploy automatically.
+                  </p>
+                </div>
+                <svg className="w-6 h-6 text-white/40 group-hover:text-white/70 transition-colors shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          {/* Section cards grid */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            {/* Blog Articles */}
+            <button
+              onClick={() => { setView("articles"); if (!articles.length && !loading) fetchArticles(); }}
+              className="bg-white rounded-xl border border-gray-200 p-6 text-left hover:shadow-md hover:-translate-y-0.5 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-blue-100 transition-colors">
+                  <svg className="w-6 h-6 text-[#3854AA]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6V7.5Z" />
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900 mb-1">Blog Articles</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">Create and edit blog posts, guides, and comparison articles</p>
+                  {articles.length > 0 && (
+                    <span className="inline-block mt-2 text-xs text-gray-400 bg-gray-50 px-2 py-0.5 rounded">{articles.length} articles</span>
+                  )}
+                </div>
+                <svg className="w-5 h-5 text-gray-300 group-hover:text-gray-500 transition-colors shrink-0 mt-1" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+              </div>
+            </button>
+
+            {/* View Site */}
+            <a
+              href="/"
+              target="_blank"
+              className="bg-white rounded-xl border border-gray-200 p-6 text-left hover:shadow-md hover:-translate-y-0.5 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-green-100 transition-colors">
+                  <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5a17.92 17.92 0 0 1-8.716-2.247m0 0A8.966 8.966 0 0 1 3 12c0-1.264.26-2.466.732-3.558" />
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900 mb-1">View Live Site</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">Open decawindows.com to see current state of the website</p>
+                </div>
+                <svg className="w-5 h-5 text-gray-300 group-hover:text-gray-500 transition-colors shrink-0 mt-1" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+              </div>
+            </a>
           </div>
         </div>
       </div>
+    );
+  }
+
+  /* ─── Articles View ─── */
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <AdminHeader showBack />
 
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Status message */}
@@ -657,7 +757,7 @@ export default function AdminPage() {
 
         {/* Actions */}
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-bold text-gray-900">Articles ({articles.length})</h2>
+          <h2 className="text-lg font-bold text-gray-900">Blog Articles ({articles.length})</h2>
           <button
             onClick={() => { setEditing(newArticle()); setEditIndex(-1); }}
             className="flex items-center gap-2 px-4 py-2 bg-[#3854AA] hover:bg-[#2a3f7a] text-white text-sm font-semibold rounded-lg transition-colors"
