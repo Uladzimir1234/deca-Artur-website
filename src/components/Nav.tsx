@@ -29,6 +29,8 @@ const navItems = [
     label: "Doors",
     children: [
       { href: "/doors", label: "All Doors" },
+      { href: "/doors/tilt-turn-doors", label: "Tilt & Turn Doors" },
+      { href: "/doors/aluminium-doors", label: "Aluminium Doors" },
       { href: "/doors/entry-doors", label: "Entry Doors" },
       { href: "/doors/french-doors", label: "Swing (French) Doors" },
       { href: "/sliding-doors", label: "Sliding Doors" },

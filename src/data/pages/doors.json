@@ -16,6 +16,18 @@
     "photoDescription": "Фото: коллекция дверей DECA — вход, французские, раздвижные в одном кадре",
     "categories": [
       {
+        "href": "/doors/tilt-turn-doors",
+        "label": "Tilt & Turn Doors",
+        "description": "European dual-function system — full swing or tilt for ventilation with one handle.",
+        "photoDescription": "Фото: поворотно-откидная дверь DECA"
+      },
+      {
+        "href": "/doors/aluminium-doors",
+        "label": "Aluminium Doors",
+        "description": "Slim profiles, maximum glass, 200+ RAL colors. Ideal for large openings.",
+        "photoDescription": "Фото: алюминиевая дверь с панорамным остеклением"
+      },
+      {
         "href": "/sliding-doors",
         "label": "Sliding Doors",
         "description": "PSk, Lift & Slide, and DECA Roto systems for panoramic openings.",
@@ -72,24 +84,24 @@
     "subtitle": "Advanced components engineered for decades of reliable performance.",
     "items": [
       {
-        "title": "uPVC Door Profile",
-        "description": "Multi-chamber design with galvanized steel reinforcement. Triple EPDM sealing for maximum weather protection. Low-maintenance, UV-resistant exterior.",
+        "title": "Tilt & Turn Door Profile",
+        "description": "European dual-function system with multi-chamber design and steel reinforcement. Triple EPDM sealing, tilt & turn hardware for ventilation and passage.",
         "image": "https://gealanwindows.com/app/uploads/2024/09/8001-88x8095-88x7162_00163128.webp",
-        "imageAlt": "uPVC door profile cross-section showing multi-chamber design and steel reinforcement"
+        "imageAlt": "Tilt & turn door profile cross-section showing multi-chamber design and hardware"
       },
       {
-        "title": "Aluminum Door Profile",
+        "title": "Aluminium Door Profile",
         "description": "Thermal break technology with polyamide insulation strips. Structural strength for large openings. Available in 200+ RAL colors.",
         "image": "https://gealanwindows.com/app/uploads/2024/09/7001x7072x7242_00163072_GK-grau.webp",
-        "imageAlt": "Aluminum door profile cross-section with thermal break technology"
+        "imageAlt": "Aluminium door profile cross-section with thermal break technology"
       }
     ]
   },
   "specifications": {
     "headers": [
       "Specification",
-      "uPVC Doors",
-      "Aluminum Doors"
+      "Tilt & Turn Doors",
+      "Aluminium Doors"
     ],
     "rows": [
       [
@@ -123,6 +135,11 @@
         "3,000 mm"
       ],
       [
+        "Opening Modes",
+        "Tilt + Turn",
+        "Swing only"
+      ],
+      [
         "Colors Available",
         "40+ standard",
         "200+ RAL"
@@ -131,9 +148,21 @@
   },
   "catalog": {
     "badge": "Catalog",
-    "title": "uPVC and Aluminum Doors",
+    "title": "Our Door Collection",
     "subtitle": "Choose your door type and customize every detail.",
     "items": [
+      {
+        "title": "Tilt & Turn Doors",
+        "description": "European dual-function doors — swing open or tilt for ventilation.",
+        "href": "/doors/tilt-turn-doors",
+        "photoDescription": "Фото: поворотно-откидная дверь DECA в двух режимах"
+      },
+      {
+        "title": "Aluminium Doors",
+        "description": "Slim profiles, max glass area, 200+ RAL colors for modern architecture.",
+        "href": "/doors/aluminium-doors",
+        "photoDescription": "Фото: алюминиевая дверь с тонким профилем и панорамным остеклением"
+      },
       {
         "title": "Sliding Doors",
         "description": "PSk, Lift & Slide, DECA Roto. Panoramic glass walls with effortless operation.",

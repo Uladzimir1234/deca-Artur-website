@@ -1,0 +1,289 @@
+{
+  "meta": {
+    "title": "Tilt & Turn Doors | European Dual-Function System | DECA Windows",
+    "description": "European tilt & turn doors with dual opening modes — swing fully open or tilt for ventilation. Multi-point locking, exceptional thermal performance. Made in USA.",
+    "canonical": "/doors/tilt-turn-doors"
+  },
+  "breadcrumb": [
+    {
+      "label": "Doors",
+      "href": "/doors"
+    },
+    {
+      "label": "Tilt & Turn Doors"
+    }
+  ],
+  "hero": {
+    "badge": "European Engineering",
+    "title": "Tilt & Turn Doors",
+    "description": "The European standard in door design. Dual-function hardware allows full swing opening for passage and tilt mode for secure ventilation — all with a single handle turn. Multi-point locking engages automatically.",
+    "photoDescription": "Фото: поворотно-откидная дверь DECA — демонстрация двух режимов открывания",
+    "buttons": [
+      {
+        "text": "Get Custom Quote",
+        "href": "/quote",
+        "variant": "primary"
+      },
+      {
+        "text": "All Doors",
+        "href": "/doors",
+        "variant": "secondary"
+      }
+    ]
+  },
+  "stats": [
+    {
+      "value": 2,
+      "label": "Opening Modes",
+      "icon": "rotate"
+    },
+    {
+      "value": 0.10,
+      "label": "Best U-Value (W/m²K)",
+      "decimals": 2,
+      "icon": "thermometer"
+    },
+    {
+      "value": 12,
+      "label": "Lock Points (Max)",
+      "icon": "lock"
+    },
+    {
+      "value": 50,
+      "suffix": "+",
+      "label": "Year Lifespan",
+      "icon": "clock"
+    }
+  ],
+  "howItWorks": {
+    "badge": "How It Works",
+    "title": "Two Modes, One Handle",
+    "subtitle": "The tilt & turn mechanism is the gold standard in European door design — simple, secure, and endlessly practical.",
+    "modes": [
+      {
+        "title": "Turn Mode — Full Swing",
+        "description": "Turn the handle 90° and the door swings fully open like a traditional door. Provides full passage width for people, furniture, and everyday use. Multi-point locks disengage automatically.",
+        "icon": "turn",
+        "photoDescription": "Фото: дверь полностью открыта в поворотном режиме"
+      },
+      {
+        "title": "Tilt Mode — Secure Ventilation",
+        "description": "Turn the handle 180° and the door tilts inward from the top, creating a gap for fresh air while remaining securely locked at the sides and bottom. Perfect for ventilation without compromising security.",
+        "icon": "tilt",
+        "photoDescription": "Фото: дверь в откидном режиме — приоткрыта сверху для вентиляции"
+      }
+    ]
+  },
+  "benefits": {
+    "badge": "Advantages",
+    "title": "Why Choose Tilt & Turn Doors",
+    "subtitle": "The smartest door system for modern living — combining convenience, security, and energy efficiency.",
+    "items": [
+      {
+        "title": "Dual Functionality",
+        "description": "Full swing for passage, tilt for ventilation — no need for separate vents or windows near the door.",
+        "icon": "M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+      },
+      {
+        "title": "Multi-Point Security",
+        "description": "Up to 12 locking points engage around the entire frame. RC2/RC3 security classes available for maximum protection.",
+        "icon": "M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+      },
+      {
+        "title": "Exceptional Insulation",
+        "description": "Triple EPDM seals and multi-chamber profiles deliver U-values as low as 0.10 W/m²K — exceeding Passive House standards.",
+        "icon": "M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z"
+      },
+      {
+        "title": "Draft-Free Ventilation",
+        "description": "Tilt mode provides controlled airflow without direct drafts. Rain protection maintained even while ventilating.",
+        "icon": "M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+      },
+      {
+        "title": "Child Safety",
+        "description": "In tilt position, the opening is too narrow for children to climb through — safe ventilation for homes with kids.",
+        "icon": "M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
+      },
+      {
+        "title": "Easy Cleaning",
+        "description": "Swing the door fully open for easy access to both sides of the glass — no need for ladders or special tools.",
+        "icon": "M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z"
+      }
+    ]
+  },
+  "materials": {
+    "badge": "Materials",
+    "title": "Available in uPVC & Aluminium",
+    "subtitle": "Choose the material that best fits your project needs and aesthetic preferences.",
+    "items": [
+      {
+        "title": "uPVC Tilt & Turn Doors",
+        "description": "Multi-chamber GEALAN profiles with steel reinforcement. Best thermal insulation values, zero maintenance, and the most affordable option.",
+        "features": ["Best thermal insulation", "Zero maintenance", "40+ color options", "Most affordable"],
+        "image": "https://gealanwindows.com/app/uploads/2024/09/8001-88x8095-88x7162_00163128.webp",
+        "imageAlt": "uPVC tilt & turn door profile"
+      },
+      {
+        "title": "Aluminium Tilt & Turn Doors",
+        "description": "Slim aluminium profiles with thermal break technology. Maximum glass area, superior structural strength, and 200+ RAL color options.",
+        "features": ["Slim sightlines", "Superior strength", "200+ RAL colors", "Ideal for large openings"],
+        "image": "https://gealanwindows.com/app/uploads/2024/09/7001x7072x7242_00163072_GK-grau.webp",
+        "imageAlt": "Aluminium tilt & turn door profile"
+      }
+    ]
+  },
+  "specs": {
+    "badge": "Performance",
+    "title": "Technical Specifications",
+    "specifications": [
+      ["Opening Type", "Tilt (ventilation) + Turn (full swing)"],
+      ["U-Value (uPVC)", "0.10 W/m²K with triple glazing"],
+      ["U-Value (Aluminium)", "0.12 W/m²K with triple glazing"],
+      ["Sound Insulation", "Up to 47 dB"],
+      ["Security Class", "RC2 / RC3"],
+      ["Lock Points", "Up to 12"],
+      ["Max Height", "2,500 mm (uPVC) / 3,000 mm (Alu)"],
+      ["Max Width", "1,200 mm per leaf"],
+      ["Glazing Range", "24–56 mm"],
+      ["Sealing System", "Triple EPDM compression seals"]
+    ],
+    "profileImage": "https://gealanwindows.com/app/uploads/2024/09/8001-88x8095-88x7162_00163128.webp",
+    "profileImageAlt": "Tilt & turn door profile cross-section showing multi-chamber design and sealing system"
+  },
+  "configurations": {
+    "badge": "Configurations",
+    "title": "Door Configurations",
+    "subtitle": "Single leaf, double leaf, and combinations with fixed panels — tailored to your opening.",
+    "items": [
+      {
+        "name": "Single Leaf",
+        "description": "Standard single tilt & turn door. Ideal for balconies, patios, and side entrances.",
+        "photoDescription": "Фото: одностворчатая поворотно-откидная дверь"
+      },
+      {
+        "name": "Double Leaf (French Style)",
+        "description": "Two tilt & turn leaves meeting in the center. Classic elegance with dual functionality.",
+        "photoDescription": "Фото: двустворчатая поворотно-откидная дверь в стиле французских дверей"
+      },
+      {
+        "name": "Door + Fixed Panel",
+        "description": "One operational tilt & turn leaf with adjacent fixed glazing for additional light.",
+        "photoDescription": "Фото: поворотно-откидная дверь с фиксированной стеклянной панелью"
+      },
+      {
+        "name": "Door + Transom",
+        "description": "Tilt & turn door with fixed or opening transom above for extra height and ventilation.",
+        "photoDescription": "Фото: поворотно-откидная дверь с фрамугой сверху"
+      }
+    ]
+  },
+  "gallery": {
+    "badge": "Our Work",
+    "title": "Tilt & Turn Doors in Real Homes",
+    "subtitle": "DECA tilt & turn doors installed across New England.",
+    "items": [
+      {"src": "/assets/gallery/gallery-1.webp", "tall": true},
+      {"src": "/assets/gallery/gallery-2.webp", "tall": true},
+      {"src": "/assets/gallery/gallery-3.webp"},
+      {"src": "/assets/gallery/gallery-4.webp"},
+      {"src": "/assets/gallery/gallery-5.webp"},
+      {"src": "/assets/gallery/gallery-6.webp"},
+      {"src": "/assets/gallery/gallery-7.webp"},
+      {"src": "/assets/gallery/gallery-8.webp"}
+    ],
+    "alt": "DECA tilt & turn door installation"
+  },
+  "guides": {
+    "badge": "Resources",
+    "title": "Expert Guides",
+    "items": [
+      {
+        "title": "Tilt & Turn vs Standard Doors",
+        "description": "Why European tilt & turn technology outperforms traditional American doors.",
+        "href": "/blog",
+        "photoDescription": "Фото: сравнение поворотно-откидной и обычной двери"
+      },
+      {
+        "title": "Entry Doors Guide",
+        "description": "Multi-point locking, security classes, and design options.",
+        "href": "/doors/entry-doors",
+        "photoDescription": "Фото: входная дверь с системой безопасности"
+      },
+      {
+        "title": "Sliding Door Systems",
+        "description": "For wider openings — PSk, Lift & Slide, and multi-panel solutions.",
+        "href": "/sliding-doors",
+        "photoDescription": "Фото: раздвижная дверная система DECA"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Experience the Tilt & Turn Difference",
+    "subtitle": "Get your custom order form, door blueprints, and detailed specification — all prepared for your project.",
+    "buttonText": "Get Custom Quote"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "q": "What is a tilt & turn door?",
+        "a": "A tilt & turn door uses European hardware that allows two opening modes with a single handle: turn for full swing (like a normal door), or tilt for the top to open inward for ventilation while staying locked at the sides."
+      },
+      {
+        "q": "Are tilt & turn doors secure?",
+        "a": "Extremely secure. Multi-point locking (up to 12 points) engages around the entire frame. Available in RC2 and RC3 security classes — RC3 resists over 10 minutes of forced entry attempts."
+      },
+      {
+        "q": "Can I use tilt & turn doors as my main entrance?",
+        "a": "Yes, absolutely. Tilt & turn doors are commonly used as main entrances in European homes. They provide excellent security through multi-point locking and exceptional insulation for energy savings."
+      },
+      {
+        "q": "What's the difference between tilt & turn and French doors?",
+        "a": "Tilt & turn doors offer the additional tilt mode for ventilation that French doors don't have. French doors are typically double-leaf for wide openings, while tilt & turn can be single or double leaf."
+      },
+      {
+        "q": "Are tilt & turn doors available in both uPVC and aluminium?",
+        "a": "Yes. We manufacture tilt & turn doors in both uPVC (GEALAN profiles) and aluminium. uPVC offers better thermal values and lower cost; aluminium provides slimmer profiles and 200+ color options."
+      }
+    ]
+  },
+  "faqSchema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a tilt & turn door?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A tilt & turn door uses European hardware allowing two opening modes: turn for full swing passage, or tilt for the top to open inward for ventilation while the door stays locked at the sides and bottom. This dual functionality is the standard in European homes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How secure are tilt & turn doors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Extremely secure. DECA tilt & turn doors feature multi-point locking with up to 12 lock points engaging around the entire frame. Available in RC2 and RC3 security classes, with RC3 resisting over 10 minutes of forced entry attempts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can tilt & turn doors be used as a main entrance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Tilt & turn doors are commonly used as main entrances throughout Europe. They provide excellent security through multi-point locking and exceptional thermal insulation with U-values as low as 0.10 W/m²K."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are tilt & turn doors available in uPVC and aluminium?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. DECA manufactures tilt & turn doors in both uPVC (GEALAN profiles) and aluminium. uPVC offers better thermal frame values and lower cost, while aluminium provides slimmer sightlines and 200+ RAL color options."
+        }
+      }
+    ]
+  }
+}

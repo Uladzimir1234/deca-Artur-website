@@ -87,9 +87,9 @@ export default function DoorsPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-navy-950 text-white">
-                <th className="text-left py-3 px-4 font-medium">Specification</th>
-                <th className="text-center py-3 px-4 font-medium">uPVC Doors</th>
-                <th className="text-center py-3 px-4 font-medium">Aluminum Doors</th>
+                {d.specifications.headers.map((h) => (
+                  <th key={h} className={h === d.specifications.headers[0] ? "text-left py-3 px-4 font-medium" : "text-center py-3 px-4 font-medium"}>{h}</th>
+                ))}
               </tr>
             </thead>
             <tbody>

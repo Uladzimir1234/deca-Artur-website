@@ -157,6 +157,8 @@ export default function Footer() {
               <div className="flex flex-col items-start gap-2">
                 {[
                   { href: "/doors", label: "All Doors" },
+                  { href: "/doors/tilt-turn-doors", label: "Tilt & Turn Doors" },
+                  { href: "/doors/aluminium-doors", label: "Aluminium Doors" },
                   { href: "/doors/entry-doors", label: "Entry Doors" },
                   { href: "/doors/french-doors", label: "French Doors" },
                   { href: "/sliding-doors", label: "Sliding Doors" },
