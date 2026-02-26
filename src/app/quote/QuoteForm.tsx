@@ -2,6 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Suspense, useState, FormEvent } from "react";
+import pageData from "@/data/pages/quote.json";
 
 function QuoteFormInner() {
   const searchParams = useSearchParams();
@@ -58,20 +59,21 @@ function QuoteFormInner() {
       if (!res.ok) throw new Error("Failed to submit");
       router.push("/thank-you");
     } catch {
-      setError("Something went wrong. Please call us at (413) 771-4457 or try again.");
+      setError(pageData.quoteForm.errorMessage);
     } finally {
       setSubmitting(false);
     }
   }
 
+  const d = pageData;
   /* ══════ Form ══════ */
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
       {/* Form */}
       <div>
-        <h1 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">Get Your Free Quote</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">{d.quoteForm.heading}</h1>
         <p className="text-text-secondary text-lg leading-relaxed mb-8">
-          Tell us about your project and we&rsquo;ll prepare a detailed, no-obligation quote. Custom sizes and configurations welcome.
+          {d.quoteForm.subheading}
         </p>
 
         {/* ── Configuration summary card ── */}
@@ -102,40 +104,38 @@ function QuoteFormInner() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="firstName" className="text-sm font-medium text-text-primary block mb-1.5">First Name *</label>
+              <label htmlFor="firstName" className="text-sm font-medium text-text-primary block mb-1.5">{d.quoteForm.formFields.firstName.label}</label>
               <input id="firstName" name="firstName" required className="w-full border border-border rounded-md px-4 py-2.5 text-sm focus:border-blue-accent focus:outline-none" />
             </div>
             <div>
-              <label htmlFor="lastName" className="text-sm font-medium text-text-primary block mb-1.5">Last Name *</label>
+              <label htmlFor="lastName" className="text-sm font-medium text-text-primary block mb-1.5">{d.quoteForm.formFields.lastName.label}</label>
               <input id="lastName" name="lastName" required className="w-full border border-border rounded-md px-4 py-2.5 text-sm focus:border-blue-accent focus:outline-none" />
             </div>
           </div>
           <div>
-            <label htmlFor="email" className="text-sm font-medium text-text-primary block mb-1.5">Email *</label>
+            <label htmlFor="email" className="text-sm font-medium text-text-primary block mb-1.5">{d.quoteForm.formFields.email.label}</label>
             <input id="email" name="email" type="email" required className="w-full border border-border rounded-md px-4 py-2.5 text-sm focus:border-blue-accent focus:outline-none" />
           </div>
           <div>
-            <label htmlFor="phone" className="text-sm font-medium text-text-primary block mb-1.5">Phone *</label>
+            <label htmlFor="phone" className="text-sm font-medium text-text-primary block mb-1.5">{d.quoteForm.formFields.phone.label}</label>
             <input id="phone" name="phone" type="tel" required className="w-full border border-border rounded-md px-4 py-2.5 text-sm focus:border-blue-accent focus:outline-none" />
           </div>
           <div>
-            <label htmlFor="projectType" className="text-sm font-medium text-text-primary block mb-1.5">Project Type</label>
+            <label htmlFor="projectType" className="text-sm font-medium text-text-primary block mb-1.5">{d.quoteForm.formFields.projectType.label}</label>
             <select id="projectType" name="projectType" className="w-full border border-border rounded-md px-4 py-2.5 text-sm focus:border-blue-accent focus:outline-none bg-white">
-              <option value="residential-replacement">Residential — Window Replacement</option>
-              <option value="residential-new">Residential — New Construction</option>
-              <option value="commercial">Commercial Project</option>
-              <option value="multi-family">Multi-family</option>
-              <option value="dealer">Dealer / Installer Partnership</option>
+              {d.quoteForm.formFields.projectType.options.map((opt) => (
+                <option key={opt} value={opt}>{opt}</option>
+              ))}
             </select>
           </div>
           <div>
-            <label htmlFor="message" className="text-sm font-medium text-text-primary block mb-1.5">Tell us about your project</label>
+            <label htmlFor="message" className="text-sm font-medium text-text-primary block mb-1.5">{d.quoteForm.formFields.message.label}</label>
             <textarea
               id="message"
               name="message"
-              rows={4}
+              rows={d.quoteForm.formFields.message.rows}
               className="w-full border border-border rounded-md px-4 py-2.5 text-sm focus:border-blue-accent focus:outline-none"
-              placeholder="Number of windows/doors, sizes, any special requirements..."
+              placeholder={d.quoteForm.formFields.message.placeholder}
               defaultValue={hasConfig ? `Configuration: ${configItems.map((i) => `${i.step}: ${i.value}`).join(", ")}` : ""}
             />
           </div>
@@ -151,48 +151,43 @@ function QuoteFormInner() {
             disabled={submitting}
             className="w-full bg-blue-accent hover:bg-blue-hover disabled:bg-blue-accent/50 text-white py-3.5 rounded-md font-semibold transition-colors"
           >
-            {submitting ? "Sending..." : "Request a Free Quote"}
+            {submitting ? "Sending..." : d.quoteForm.submitText}
           </button>
-          <p className="text-xs text-text-muted text-center">By submitting, you agree to our Privacy Policy.</p>
+          <p className="text-xs text-text-muted text-center">{d.quoteForm.privacyNote}</p>
         </form>
       </div>
 
       {/* Sidebar info */}
       <div className="space-y-6">
         <div className="bg-warm-gray rounded-xl p-6 border border-border">
-          <h3 className="font-semibold text-text-primary text-lg mb-4">Contact Details</h3>
+          <h3 className="font-semibold text-text-primary text-lg mb-4">{d.contactDetails.heading}</h3>
           <div className="space-y-3 text-sm text-text-secondary">
             <div className="flex items-start gap-3">
               <svg className="w-5 h-5 text-blue-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <p>109 Apremont Way, Westfield, MA 01085</p>
+              <p>{d.contactDetails.address}</p>
             </div>
             <div className="flex items-start gap-3">
               <svg className="w-5 h-5 text-blue-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              <a href="tel:+14137714457" className="hover:text-blue-accent transition-colors">(413) 771-4457</a>
+              <a href={`tel:${d.contactDetails.phone.replace(/\D/g, '').slice(0, -1)}`} className="hover:text-blue-accent transition-colors">{d.contactDetails.phone}</a>
             </div>
             <div className="flex items-start gap-3">
               <svg className="w-5 h-5 text-blue-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              <a href="mailto:info@decawindows.com" className="hover:text-blue-accent transition-colors">info@decawindows.com</a>
+              <a href={`mailto:${d.contactDetails.email}`} className="hover:text-blue-accent transition-colors">{d.contactDetails.email}</a>
             </div>
           </div>
         </div>
 
         <div className="bg-blue-light rounded-xl p-6 border border-blue-accent/10">
-          <h3 className="font-semibold text-text-primary text-lg mb-4">What happens next?</h3>
+          <h3 className="font-semibold text-text-primary text-lg mb-4">{d.processSection.heading}</h3>
           <div className="space-y-4">
-            {[
-              "We review your request within 24 hours",
-              "Our team contacts you to discuss specifications",
-              "You receive a detailed quote within 48 hours",
-              "Custom order completed in 4 weeks or less",
-            ].map((step, i) => (
+            {d.processSection.steps.map((step, i) => (
               <div key={i} className="flex items-start gap-3">
                 <span className="shrink-0 w-6 h-6 rounded-full bg-blue-accent text-white text-xs font-bold flex items-center justify-center">{i + 1}</span>
                 <p className="text-sm text-text-secondary">{step}</p>
@@ -202,14 +197,9 @@ function QuoteFormInner() {
         </div>
 
         <div className="bg-warm-gray rounded-xl p-6 border border-border">
-          <h3 className="font-semibold text-text-primary text-lg mb-4">Our Guarantees</h3>
+          <h3 className="font-semibold text-text-primary text-lg mb-4">{d.guarantees.heading}</h3>
           <div className="space-y-3">
-            {[
-              "15-year transferable warranty",
-              "Factory-direct pricing",
-              "Free consultation",
-              "Custom sizes available",
-            ].map((g) => (
+            {d.guarantees.items.map((g) => (
               <div key={g} className="flex items-center gap-2.5">
                 <svg className="w-5 h-5 text-blue-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />

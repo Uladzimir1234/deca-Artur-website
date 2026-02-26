@@ -5,45 +5,42 @@ import ReviewsSection from "@/components/ReviewsSection";
 import DeliveryMapSection from "@/components/DeliveryMapSection";
 import CTAWithDocs from "@/components/CTAWithDocs";
 import StickyCTA from "@/components/StickyCTA";
+import pageData from "@/data/pages/doors.json";
 
 export const metadata: Metadata = {
-  title: "European-Style Doors | Entry, French & Sliding | DECA Doors",
-  description: "Premium European entry doors, swing (French) doors, and sliding door systems manufactured in Massachusetts. Multi-point locking, thermal break technology, factory-direct pricing.",
-  alternates: { canonical: "/doors" },
+  title: pageData.meta.title,
+  description: pageData.meta.description,
+  alternates: { canonical: pageData.meta.canonical },
 };
 
 export default function DoorsPage() {
+  const d = pageData;
   return (
     <>
-      <Breadcrumb items={[{ label: "Doors" }]} />
+      <Breadcrumb items={d.breadcrumb} />
 
       {/* Hero — matches Figma Doors page layout */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
-              <span className="inline-block text-xs font-semibold tracking-wider uppercase text-blue-accent mb-3">Our Products</span>
+              <span className="inline-block text-xs font-semibold tracking-wider uppercase text-blue-accent mb-3">{d.hero.badge}</span>
               <h1 className="text-4xl md:text-5xl font-bold text-text-primary leading-tight mb-4">
-                Style, Warmth, Security.<br />DECA Doors for Your Home and Business.
+                {d.hero.title}
               </h1>
               <p className="text-lg text-text-secondary leading-relaxed mb-8">
-                European engineering meets American manufacturing. Our door systems deliver exceptional thermal performance,
-                multi-point security, and elegant design — all backed by a 15-year warranty and factory-direct pricing.
+                {d.hero.description}
               </p>
               {/* Subcategory links — matches Figma */}
               <div className="space-y-3">
-                {[
-                  { href: "/sliding-doors", label: "Sliding Doors", desc: "PSk, Lift & Slide, and DECA Roto systems for panoramic openings.", photoDesc: "Фото: раздвижная дверь в интерьере" },
-                  { href: "/doors/french-doors", label: "Swing (French) Doors", desc: "Classic double-leaf doors with European tilt & turn hardware.", photoDesc: "Фото: распашные французские двери" },
-                  { href: "/doors/entry-doors", label: "Entry Doors", desc: "Secure, insulated entrance doors with multi-point locking.", photoDesc: "Фото: входная дверь DECA в фасаде" },
-                ].map((item) => (
+                {d.hero.categories.map((item) => (
                   <Link key={item.href} href={item.href} className="group flex items-center gap-4 p-4 bg-warm-gray rounded-xl border border-border hover:border-blue-accent/30 hover:shadow-md transition-all">
                     <div className="shrink-0 w-20 h-20 rounded-lg overflow-hidden">
-                      <PhotoPlaceholder description={item.photoDesc} height="h-20" className="rounded-lg border-0" />
+                      <PhotoPlaceholder description={item.photoDescription} height="h-20" className="rounded-lg border-0" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h2 className="font-semibold text-text-primary group-hover:text-blue-accent transition-colors mb-0.5">{item.label}</h2>
-                      <p className="text-sm text-text-muted line-clamp-2">{item.desc}</p>
+                      <p className="text-sm text-text-muted line-clamp-2">{item.description}</p>
                     </div>
                     <svg className="w-5 h-5 text-text-muted group-hover:text-blue-accent shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -52,26 +49,20 @@ export default function DoorsPage() {
                 ))}
               </div>
             </div>
-            <PhotoPlaceholder description="Фото: коллекция дверей DECA — вход, французские, раздвижные в одном кадре" height="h-[500px]" />
+            <PhotoPlaceholder description={d.hero.photoDescription} height="h-[500px]" />
           </div>
         </div>
       </section>
 
       {/* Benefits row — matches Figma "Experience the True Benefits" */}
       <Section gray>
-        <SectionTitle title="Experience the True Benefits of DECA Doors" />
+        <SectionTitle title={d.benefits.title} />
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-          {[
-            { icon: "🔒", title: "Multi-Point Security", desc: "Up to 12 locking points" },
-            { icon: "🌡️", title: "Thermal Insulation", desc: "U-value as low as 0.10" },
-            { icon: "🔇", title: "Sound Reduction", desc: "Up to 50 dB noise block" },
-            { icon: "💨", title: "Weather Resistance", desc: "140 mph wind rated" },
-            { icon: "🏗️", title: "Made in USA", desc: "Westfield, MA factory" },
-          ].map((b) => (
+          {d.benefits.items.map((b) => (
             <div key={b.title} className="text-center">
               <div className="text-3xl mb-3">{b.icon}</div>
               <h3 className="font-semibold text-sm text-text-primary mb-1">{b.title}</h3>
-              <p className="text-xs text-text-muted">{b.desc}</p>
+              <p className="text-xs text-text-muted">{b.description}</p>
             </div>
           ))}
         </div>
@@ -79,22 +70,17 @@ export default function DoorsPage() {
 
       {/* Profiles — matches Figma uPVC/Aluminum section */}
       <Section>
-        <SectionTitle badge="Technology" title="Precision in Every Detail" subtitle="Advanced components engineered for decades of reliable performance." />
+        <SectionTitle badge={d.profiles.badge} title={d.profiles.title} subtitle={d.profiles.subtitle} />
         <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-warm-gray rounded-xl border border-border overflow-hidden">
-            <img src="https://gealanwindows.com/app/uploads/2024/09/8001-88x8095-88x7162_00163128.webp" alt="uPVC door profile cross-section showing multi-chamber design and steel reinforcement" className="w-full h-72 object-contain bg-white p-4" loading="lazy" />
+          {d.profiles.items.map((item) => (
+          <div key={item.title} className="bg-warm-gray rounded-xl border border-border overflow-hidden">
+            <img src={item.image} alt={item.imageAlt} className="w-full h-72 object-contain bg-white p-4" loading="lazy" />
             <div className="p-6">
-              <h3 className="font-bold text-lg text-text-primary mb-2">uPVC Door Profile</h3>
-              <p className="text-sm text-text-secondary leading-relaxed">Multi-chamber design with galvanized steel reinforcement. Triple EPDM sealing for maximum weather protection. Low-maintenance, UV-resistant exterior.</p>
+              <h3 className="font-bold text-lg text-text-primary mb-2">{item.title}</h3>
+              <p className="text-sm text-text-secondary leading-relaxed">{item.description}</p>
             </div>
           </div>
-          <div className="bg-warm-gray rounded-xl border border-border overflow-hidden">
-            <img src="https://gealanwindows.com/app/uploads/2024/09/7001x7072x7242_00163072_GK-grau.webp" alt="Aluminum door profile cross-section with thermal break technology" className="w-full h-72 object-contain bg-white p-4" loading="lazy" />
-            <div className="p-6">
-              <h3 className="font-bold text-lg text-text-primary mb-2">Aluminum Door Profile</h3>
-              <p className="text-sm text-text-secondary leading-relaxed">Thermal break technology with polyamide insulation strips. Structural strength for large openings. Available in 200+ RAL colors.</p>
-            </div>
-          </div>
+          ))}
         </div>
         {/* Specs table — matches Figma */}
         <div className="bg-warm-gray rounded-xl border border-border overflow-hidden">
@@ -107,15 +93,7 @@ export default function DoorsPage() {
               </tr>
             </thead>
             <tbody>
-              {[
-                ["Frame Depth", "70 mm", "65 mm"],
-                ["U-Value (frame)", "1.0 W/m²K", "1.4 W/m²K"],
-                ["U-Value (system)", "0.10 W/m²K", "0.12 W/m²K"],
-                ["Sound Insulation", "Up to 47 dB", "Up to 45 dB"],
-                ["Security Class", "RC2 / RC3", "RC2 / RC3"],
-                ["Max Height", "2,500 mm", "3,000 mm"],
-                ["Colors Available", "40+ standard", "200+ RAL"],
-              ].map(([spec, upvc, alu], i) => (
+              {d.specifications.rows.map(([spec, upvc, alu], i) => (
                 <tr key={spec} className={i % 2 === 0 ? "bg-white" : "bg-warm-gray"}>
                   <td className="py-3 px-4 font-medium text-text-primary">{spec}</td>
                   <td className="py-3 px-4 text-center text-text-secondary">{upvc}</td>
@@ -129,19 +107,15 @@ export default function DoorsPage() {
 
       {/* Door product types — matches Figma grid */}
       <Section gray>
-        <SectionTitle badge="Catalog" title="uPVC and Aluminum Doors" subtitle="Choose your door type and customize every detail." />
+        <SectionTitle badge={d.catalog.badge} title={d.catalog.title} subtitle={d.catalog.subtitle} />
         <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { title: "Sliding Doors", desc: "PSk, Lift & Slide, DECA Roto. Panoramic glass walls with effortless operation.", href: "/sliding-doors", photoDesc: "Фото: раздвижная дверная система в интерьере, вид на террасу" },
-            { title: "Swing (French) Doors", desc: "Single or double-leaf. Tilt & turn hardware. Classic elegance.", href: "/doors/french-doors", photoDesc: "Фото: распашные французские двери открытые внутрь, свет из сада" },
-            { title: "Entry Doors", desc: "Multi-point locking, thermal insulation, custom panel designs.", href: "/doors/entry-doors", photoDesc: "Фото: парадная входная дверь с боковым остеклением" },
-          ].map((d) => (
-            <Link key={d.title} href={d.href} className="group block">
+          {d.catalog.items.map((item) => (
+            <Link key={item.title} href={item.href} className="group block">
               <div className="bg-white rounded-xl border border-border overflow-hidden hover:shadow-lg transition-all">
-                <PhotoPlaceholder description={d.photoDesc} height="h-56" className="rounded-none border-0" />
+                <PhotoPlaceholder description={item.photoDescription} height="h-56" className="rounded-none border-0" />
                 <div className="p-6">
-                  <h3 className="font-bold text-lg text-text-primary mb-2 group-hover:text-blue-accent transition-colors">{d.title}</h3>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-3">{d.desc}</p>
+                  <h3 className="font-bold text-lg text-text-primary mb-2 group-hover:text-blue-accent transition-colors">{item.title}</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed mb-3">{item.description}</p>
                   <span className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-accent group-hover:gap-2.5 transition-all">
                     View details <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   </span>
@@ -154,14 +128,9 @@ export default function DoorsPage() {
 
       {/* Colors */}
       <Section>
-        <SectionTitle badge="Customization" title="Colors That Complement Your Style" subtitle="Over 40 standard finishes and 200+ RAL custom colors for interior and exterior." />
+        <SectionTitle badge={d.colors.badge} title={d.colors.title} subtitle={d.colors.subtitle} />
         <div className="grid grid-cols-4 md:grid-cols-8 gap-3 mb-8">
-          {[
-            { name: "White", color: "#FFFFFF" }, { name: "Cream", color: "#F5F0E1" },
-            { name: "Light Gray", color: "#C4C4C4" }, { name: "Anthracite", color: "#3C3C3C" },
-            { name: "Dark Brown", color: "#4A2E1C" }, { name: "Golden Oak", color: "#B8860B" },
-            { name: "Mahogany", color: "#6B3A2A" }, { name: "Black", color: "#1A1A1A" },
-          ].map((c) => (
+          {d.colors.items.map((c) => (
             <div key={c.name} className="text-center">
               <div className="w-full aspect-square rounded-lg border border-border mb-2" style={{ backgroundColor: c.color }} />
               <span className="text-xs text-text-muted">{c.name}</span>
@@ -172,12 +141,11 @@ export default function DoorsPage() {
 
       {/* Gallery */}
       <Section gray>
-        <SectionTitle badge="Gallery" title="Doors in Real Projects" />
+        <SectionTitle badge={d.gallery.badge} title={d.gallery.title} />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <img src="https://gealanwindows.com/app/uploads/2024/09/49-web-or-mls-16039-Austin-St-NE-49.webp" alt="Modern home with large sliding doors opening to terrace" className="w-full h-48 object-cover rounded-xl" loading="lazy" />
-          <img src="https://gealanwindows.com/app/uploads/2024/09/reference-object-2021-08-01-1.webp" alt="Classic facade with French doors and side windows" className="w-full h-48 object-cover rounded-xl" loading="lazy" />
-          <img src="https://gealanwindows.com/app/uploads/2024/09/reference-object-2023-10-02.webp" alt="Elegant entry door in stone portal" className="w-full h-48 object-cover rounded-xl" loading="lazy" />
-          <img src="https://gealanwindows.com/app/uploads/2024/09/reference-object-2021-08-02-2.webp" alt="Loft interior with panoramic sliding doors" className="w-full h-48 object-cover rounded-xl" loading="lazy" />
+          {d.gallery.images.map((img) => (
+            <img key={img.src} src={img.src} alt={img.alt} className="w-full h-48 object-cover rounded-xl" loading="lazy" />
+          ))}
         </div>
       </Section>
 
@@ -191,24 +159,19 @@ export default function DoorsPage() {
 
       {/* Expert Guides */}
       <Section gray>
-        <SectionTitle badge="Resources" title="Expert Guides" />
+        <SectionTitle badge={d.guides.badge} title={d.guides.title} />
         <div className="grid md:grid-cols-3 gap-6">
-          <GuideCard title="Entry Door Security Guide" desc="Understanding RC classes, multi-point locks, and how to protect your home." href="/blog" photoDesc="Фото: крупный план системы запирания входной двери" />
-          <GuideCard title="Sliding Door Systems Compared" desc="PSk vs Lift & Slide vs DECA Roto — which system is right for you?" href="/blog" photoDesc="Фото: три типа раздвижных систем рядом в сравнении" />
-          <GuideCard title="French Doors: Design Guide" desc="Indoor vs outdoor, single vs double leaf, glazing and hardware options." href="/blog" photoDesc="Фото: дизайн-подборка вариантов французских дверей" />
+          {d.guides.items.map((guide) => (
+            <GuideCard key={guide.title} title={guide.title} desc={guide.description} href={guide.href} photoDesc={guide.photoDescription} />
+          ))}
         </div>
       </Section>
 
       {/* FAQ */}
       <Section>
-        <SectionTitle badge="FAQ" title="Frequently Asked Questions" />
+        <SectionTitle badge={d.faq.badge} title={d.faq.title} />
         <div className="max-w-3xl mx-auto space-y-4">
-          {[
-            { q: "What types of doors does DECA manufacture?", a: "We manufacture three main categories: sliding doors (PSk parallel-slide, Lift & Slide, and DECA Roto tilt & slide), swing/French doors (single and double-leaf with tilt & turn), and entry doors (insulated panel doors with multi-point locking)." },
-            { q: "How secure are DECA doors?", a: "All DECA doors feature multi-point locking systems (up to 12 points) and are available in RC2 and RC3 security classes. Entry doors include steel-reinforced frames and anti-drill, anti-pick cylinder locks." },
-            { q: "Can doors be custom sized?", a: "Yes. Every door is made to order. Sliding doors can span up to 6 meters wide and 3 meters tall. Entry doors and French doors are available in virtually any dimension within structural limits." },
-            { q: "What is the thermal performance of DECA doors?", a: "Our door systems achieve U-values as low as 0.10 W/m²K with triple glazing. This exceeds Passive House requirements and delivers significant energy savings compared to standard American doors." },
-          ].map((faq) => (
+          {d.faq.items.map((faq) => (
             <details key={faq.q} className="group bg-warm-gray rounded-xl border border-border">
               <summary className="flex items-center justify-between cursor-pointer px-6 py-5 text-text-primary font-medium">
                 {faq.q}
@@ -221,9 +184,9 @@ export default function DoorsPage() {
       </Section>
 
       <CTAWithDocs
-        title="Let's Work Together to Build Better Spaces"
-        subtitle="Get your custom order form, door blueprints, and detailed specification — all prepared for your project."
-        btnText="Get a Quote"
+        title={d.cta.title}
+        subtitle={d.cta.subtitle}
+        btnText={d.cta.buttonText}
       />
 
       <StickyCTA />

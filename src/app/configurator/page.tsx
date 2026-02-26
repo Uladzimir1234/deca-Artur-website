@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { ConfiguratorContent } from "./configurator-content";
+import pageData from "@/data/pages/configurator.json";
 
 export const metadata: Metadata = {
-  title: "Window & Door Configurator | Design Your DECA Window",
-  description:
-    "Design your custom European window or door. Choose product type, size, material, glazing, colors, and hardware — see real-time preview and pricing.",
-  alternates: { canonical: "/configurator" },
+  title: pageData.meta.title,
+  description: pageData.meta.description,
+  alternates: { canonical: pageData.meta.canonical },
 };
 
 export default function ConfiguratorPage() {
