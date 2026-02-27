@@ -9,7 +9,7 @@
 
 // ─── Configuration (replace with real IDs before launch) ───
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX";
-export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-5RC2L84X";
+export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-KRKVVHBM";
 export const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_ID || "XXXXXXX";
 
 // ─── GA4 Event Tracking ───
