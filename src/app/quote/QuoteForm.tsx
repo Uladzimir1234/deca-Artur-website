@@ -57,6 +57,8 @@ function QuoteFormInner() {
       });
 
       if (!res.ok) throw new Error("Failed to submit");
+      (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer = (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer || [];
+      (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer.push({ event: 'form_submit_success', form_name: 'quote_form' });
       router.push("/thank-you");
     } catch {
       setError(pageData.quoteForm.errorMessage);

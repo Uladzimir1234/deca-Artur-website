@@ -117,6 +117,8 @@ export default function HomeContent() {
                     }),
                   });
                   if (!res.ok) throw new Error("Failed");
+                  (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer = (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer || [];
+                  (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer.push({ event: 'form_submit_success', form_name: 'contact_form' });
                   router.push("/thank-you");
                 } catch { setHeroSubmitting(false); }
               }}>

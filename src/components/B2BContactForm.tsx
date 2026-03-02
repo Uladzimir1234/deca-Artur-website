@@ -45,6 +45,8 @@ export default function B2BContactForm({
         body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error("Failed");
+      (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer = (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer || [];
+      (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer.push({ event: 'form_submit_success', form_name: `b2b_${segment}_form` });
       router.push("/thank-you");
     } catch {
       setError("Something went wrong. Please call (413) 771-4457 or try again.");

@@ -9,6 +9,8 @@ export default function LeadMagnet() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (email.trim()) {
+      (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer = (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer || [];
+      (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer.push({ event: 'form_submit_success', form_name: 'lead_magnet' });
       setSubmitted(true);
       setEmail("");
       // Reset after 5 seconds for demo purposes

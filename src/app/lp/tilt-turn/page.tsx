@@ -36,6 +36,8 @@ export default function TiltTurnLP() {
         }),
       });
       if (!res.ok) throw new Error("Failed");
+      (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer = (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer || [];
+      (window as unknown as { dataLayer: Record<string, string>[] }).dataLayer.push({ event: 'form_submit_success', form_name: 'lp_tilt_turn_form' });
       router.push("/thank-you");
     } catch {
       alert("Something went wrong. Please call (413) 771-4457.");
