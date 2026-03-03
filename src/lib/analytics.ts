@@ -1,27 +1,22 @@
 /**
  * Analytics & Tag Management for DECA Windows
  *
- * Setup:
- * 1. Replace GA_MEASUREMENT_ID with your GA4 ID (G-XXXXXXXXXX)
- * 2. Replace GTM_ID with your GTM container ID (GTM-XXXXXXX)
- * 3. Configure HubSpot portal ID
+ * GA4 (G-HJV2DLQ3FD) is configured INSIDE GTM — no manual gtag.js needed.
+ * Only GTM container script is injected via layout.tsx.
  */
 
-// ─── Configuration (replace with real IDs before launch) ───
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX";
+// ─── Configuration ───
 export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-KRKVVHBM";
-export const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_ID || "XXXXXXX";
 
-// ─── GA4 Event Tracking ───
+// ─── GTM dataLayer event helper ───
 export function trackEvent(
   eventName: string,
   params?: Record<string, string | number | boolean>
 ): void {
   if (typeof window === "undefined") return;
-  const w = window as typeof window & { gtag?: (...args: unknown[]) => void };
-  if (w.gtag) {
-    w.gtag("event", eventName, params);
-  }
+  const w = window as unknown as { dataLayer: Record<string, unknown>[] };
+  w.dataLayer = w.dataLayer || [];
+  w.dataLayer.push({ event: eventName, ...params });
 }
 
 // ─── Pre-built Events for DECA ───
@@ -91,17 +86,4 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 export function getGTMBodyNoscript(): string {
   if (!GTM_ID || GTM_ID === "GTM-XXXXXXX") return "";
   return `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
-}
-
-// ─── GA4 Script (if not using GTM) ───
-export function getGA4Script(): string {
-  if (GA_MEASUREMENT_ID === "G-XXXXXXXXXX") return "";
-  return `
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA_MEASUREMENT_ID}', {
-  send_page_view: true,
-  cookie_flags: 'SameSite=None;Secure'
-});`;
 }

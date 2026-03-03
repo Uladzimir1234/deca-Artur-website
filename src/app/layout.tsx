@@ -3,7 +3,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { ClientProviders } from "@/components/ClientProviders";
-import { GA_MEASUREMENT_ID, GTM_ID, getGTMHeadScript, getGA4Script, getGTMBodyNoscript } from "@/lib/analytics";
+import { GTM_ID, getGTMHeadScript, getGTMBodyNoscript } from "@/lib/analytics";
 
 export const metadata: Metadata = {
   title: "DECA Windows & Doors | European Energy-Efficient Windows Made in USA",
@@ -76,18 +76,12 @@ export default function RootLayout({
 }>) {
   const gtmHead = getGTMHeadScript();
   const gtmBody = getGTMBodyNoscript();
-  const ga4 = getGA4Script();
 
   return (
     <html lang="en">
       <head>
+        {/* GTM — GA4 is configured inside GTM-KRKVVHBM, no manual gtag.js needed */}
         {gtmHead && <script dangerouslySetInnerHTML={{ __html: gtmHead }} />}
-        {ga4 && GA_MEASUREMENT_ID !== "G-XXXXXXXXXX" && (
-          <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
-            <script dangerouslySetInnerHTML={{ __html: ga4 }} />
-          </>
-        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
